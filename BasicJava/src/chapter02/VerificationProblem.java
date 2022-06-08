@@ -17,8 +17,8 @@ public class VerificationProblem {
 		int result2 = (int)(lVar1 + (int)fVar2 + dVar3 + Double.parseDouble(sVar4));
 		System.out.println(result2);
 		
-		//10번문제	틀림
-		String str1 = 2 + 3 + "";	//"5"
+		//10번문제	
+		String str1 = 2 + 3 + "";	//"5"	"틀림"
 		String str2 = 2 + "" + 3;	//"23"
 		String str3 = "" + 2 + 3;	//"23"
 		System.out.println(str1);
@@ -35,6 +35,7 @@ public class VerificationProblem {
 		System.out.println(iValue);
 		System.out.println(fValue);
 		System.out.println(dValue);
+		
 		
 	}
 }
