@@ -36,7 +36,5 @@ public class VerificationProblem {
 		System.out.println(fValue);
 		System.out.println(dValue);
 		
-		
-		
 	}
 }
