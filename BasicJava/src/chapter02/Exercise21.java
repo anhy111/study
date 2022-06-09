@@ -22,6 +22,7 @@ public class Exercise21 {
 		//출력
 		System.out.printf("직사각형의 넓이: %.2f\n", area);
 		System.out.printf("직사각형의 둘레: %.1f", perimeter);
+		scanner.close();
 	}
 
 }
