@@ -1,3 +1,3 @@
-# study
+# Today I Learned(TIL)
 
 TIL
