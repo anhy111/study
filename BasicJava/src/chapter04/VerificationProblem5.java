@@ -7,7 +7,7 @@ public class VerificationProblem5 {
 			for(int i=0; i<j+1; i++) {
 				System.out.print('*');
 			}
-			System.out.println("\n");
+			System.out.println();
 		}
 	}
 }
