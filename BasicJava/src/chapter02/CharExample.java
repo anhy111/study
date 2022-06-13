@@ -16,9 +16,9 @@ public class CharExample {
 		char c5 = 44032;
 		char c6 = '\uac00';
 		
-		//System.out.println(c4);
-		//System.out.println(c5);
-		//System.out.println(c6);
+		System.out.println(c4);
+		System.out.println(c5);
+		System.out.println(c6);
 
 	}
 
