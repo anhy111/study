@@ -1,8 +1,10 @@
 package chapter04;
 
+import java.util.Random;
+
 public class SwitchNoBreakExample {
 	public static void main(String[] args) {
-		int time = (int)(Math.random() * 4) + 8;
+		int time = new Random().nextInt(4) + 8;
 		System.out.println("[현재 시각]: " + time + " 시]");
 		
 		switch(time) {

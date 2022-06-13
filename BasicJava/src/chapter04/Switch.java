@@ -1,8 +1,11 @@
 package chapter04;
 
+import java.util.Random;
+
 public class Switch {
 	public static void main(String[] args) {
-		int num = (int)(Math.random() * 6) + 1;
+		Random random = new Random();
+		int num = random.nextInt(6) + 1;
 		
 		switch(num) {
 		case 1:
