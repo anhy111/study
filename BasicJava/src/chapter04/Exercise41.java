@@ -17,31 +17,27 @@ public class Exercise41 {
 		
 		//처리
 		String result = null;
+		int bigNum, smallNum1, smallNum2;
 		
-		if( (firstSide >= secondSide) && (firstSide >= thirdSide) ){
-			if(firstSide < (secondSide + thirdSide)) {
-				result = "삼각형을 만들 수 있습니다.";
-			}
-		} 
+		bigNum = ((firstSide + secondSide) + Math.abs(firstSide - secondSide)) / 2;
+		smallNum1 = ((firstSide + secondSide) - Math.abs(firstSide - secondSide)) / 2;
 		
-		if( (secondSide >= firstSide) && (secondSide >= thirdSide) ){
-			if(secondSide < (firstSide + thirdSide)) {
-				result = "삼각형을 만들 수 있습니다.";
-			}
+		if(bigNum < thirdSide) {
+			smallNum2 = bigNum;
+			bigNum = thirdSide;
+		} else {
+			smallNum2 = thirdSide;
 		}
 		
-		if( (thirdSide >= firstSide) && (thirdSide >= secondSide) ){
-			if(thirdSide < (firstSide + secondSide)) {
-				result = "삼각형을 만들 수 있습니다.";
-			}
-		}
-		
-		if(result == null) {
+		if( (bigNum - (smallNum1+smallNum2) ) < 0){
+			result = "삼각형을 만들 수 있습니다.";
+		} else {
 			result = "삼각형을 만들 수 없습니다.";
 		}
 		
 		//출력
 		System.out.println(result);
+		
 		scanner.close();
 	}
 }

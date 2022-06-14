@@ -13,7 +13,6 @@ public class Exercise42 {
 		//처리
 		String result = null;
 		if( (month > 12) || (month < 1) ) {
-			
 			result = "잘못된 입력";
 		} else if(month <= 2) {
 			result = "겨울";
