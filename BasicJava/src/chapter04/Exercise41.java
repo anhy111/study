@@ -19,21 +19,27 @@ public class Exercise41 {
 		String result = null;
 		int bigNum, smallNum1, smallNum2;
 		
-		bigNum = ((firstSide + secondSide) + Math.abs(firstSide - secondSide)) / 2;
-		smallNum1 = ((firstSide + secondSide) - Math.abs(firstSide - secondSide)) / 2;
-		
-		if(bigNum < thirdSide) {
-			smallNum2 = bigNum;
-			bigNum = thirdSide;
-		} else {
-			smallNum2 = thirdSide;
-		}
-		
-		if( (bigNum - (smallNum1+smallNum2) ) < 0){
+		if(firstSide < secondSide+thirdSide || secondSide < firstSide+thirdSide ||
+						thirdSide < firstSide + secondSide) {
 			result = "삼각형을 만들 수 있습니다.";
-		} else {
-			result = "삼각형을 만들 수 없습니다.";
-		}
+			} else {
+				result = "삼각형을 만들 수 없습니다.";
+			}
+//		bigNum = ((firstSide + secondSide) + Math.abs(firstSide - secondSide)) / 2;
+//		smallNum1 = ((firstSide + secondSide) - Math.abs(firstSide - secondSide)) / 2;
+//		
+//		if(bigNum < thirdSide) {
+//			smallNum2 = bigNum;
+//			bigNum = thirdSide;
+//		} else {
+//			smallNum2 = thirdSide;
+//		}
+//		
+//		if( (bigNum - (smallNum1+smallNum2) ) < 0){
+//			result = "삼각형을 만들 수 있습니다.";
+//		} else {
+//			result = "삼각형을 만들 수 없습니다.";
+//		}
 		
 		//출력
 		System.out.println(result);
