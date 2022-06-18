@@ -18,18 +18,20 @@ public class Assignment3 {
 		//처리
 		String result = null;
 		if(human.equals(computer) ) {
-			result = "무승부";
+			result = "무승부!";
 		} else if(human.equals("보") && computer.equals("바위") ||
 				human.equals("바위") && computer.equals("가위") ||
 				human.equals("가위") && computer.equals("보")) {
 			result = "게이머 승리!";
 		} else {
-			result = "컴퓨터 승리";
+			result = "컴퓨터 승리!";
 		}
 		
 		//출력
 		System.out.println("게이머: " + human);
 		System.out.println("인공지능 컴퓨터: " + computer);
 		System.out.println(result);
+		
+		scanner.close();
 	}
 }
