@@ -1,17 +1,18 @@
 package chapter06;
 
-public class Car {
+public class NewCar {
+	
 	//필드
 	private double speed;
 	private String color;
-	private static final double MAX_SPEED = 200.0;
+	private static final double MAX_SPEED = 200.0 / 1.6;
 	
 	
 	//생성자
-	public Car() {
+	public NewCar() {
 
 	}
-	public Car(String color) {
+	public NewCar(String color) {
 		this.color = color;
 	}
 	
@@ -19,11 +20,11 @@ public class Car {
 	//메소드
 	public void setSpeed(double speed) {
 		if(0 <= speed ) {
-			this.speed = speed;
+			this.speed = killoToMile(speed);
 		}
 	}
 	public double getSpeed() {
-		return speed;
+		return mileToKillo(speed);
 	}
 	
 	
@@ -36,16 +37,24 @@ public class Car {
 	
 	
 	public boolean speedUp(double speed) {
-		if( 0 <= this.speed + speed
-				&& this.speed + speed <= MAX_SPEED) {
-			setSpeed(this.speed + speed);
+		if( 0 <= this.speed + killoToMile(speed)
+				&& this.speed + killoToMile(speed) <= MAX_SPEED) {
+			this.speed += killoToMile(speed);
 			return true;
 		}
 		return false;
 	}
 	
 	public static double getMaxSpeed() {
-		return MAX_SPEED;
+		return mileToKillo(MAX_SPEED);
+	}
+	
+	public static double killoToMile(double distance) {
+		return distance / 1.6;
+	}
+	
+	public static double mileToKillo(double distance) {
+		return distance * 1.6;
 	}
 	
 	public String toString() {
