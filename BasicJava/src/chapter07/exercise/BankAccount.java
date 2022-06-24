@@ -3,7 +3,7 @@ package chapter07.exercise;
 public class BankAccount {
 	
 	//필드
-	private int balance;
+	protected int balance;
 	
 	
 	//생성자
@@ -35,6 +35,11 @@ public class BankAccount {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("잔액: %,d", balance);
 	}
 	
 }

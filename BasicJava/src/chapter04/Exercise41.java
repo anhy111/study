@@ -17,7 +17,6 @@ public class Exercise41 {
 		
 		//처리
 		String result = null;
-		int bigNum, smallNum1, smallNum2;
 		
 		if(firstSide < secondSide+thirdSide || secondSide < firstSide+thirdSide ||
 						thirdSide < firstSide + secondSide) {
@@ -25,6 +24,7 @@ public class Exercise41 {
 			} else {
 				result = "삼각형을 만들 수 없습니다.";
 			}
+//		int bigNum, smallNum1, smallNum2;
 //		bigNum = ((firstSide + secondSide) + Math.abs(firstSide - secondSide)) / 2;
 //		smallNum1 = ((firstSide + secondSide) - Math.abs(firstSide - secondSide)) / 2;
 //		
