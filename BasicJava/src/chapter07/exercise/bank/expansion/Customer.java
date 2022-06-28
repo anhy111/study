@@ -1,4 +1,4 @@
-package chapter07.exercise;
+package chapter07.exercise.bank.expansion;
 
 public class Customer {
 	//필드
@@ -21,21 +21,17 @@ public class Customer {
 		return firstName;
 	}
 
-
 	public String getLastName() {
 		return lastName;
 	}
-
 
 	public BankAccount getAccount(int index) {
 		return account[index];
 	}
 
-
 	public void addAccount(BankAccount account) {
 		this.account[numberOfAccounts++] = account;
 	}
-	
 
 	public int getNumberOfAccounts() {
 		return numberOfAccounts;

@@ -1,4 +1,4 @@
-package chapter07.exercise;
+package chapter07.exercise.bank.expansion;
 
 public class CheckingAccount extends BankAccount {
 	//필드
@@ -18,13 +18,11 @@ public class CheckingAccount extends BankAccount {
 	//메소드
 	@Override
 	public boolean withdraw(int amount) {
-		if(balance >= amount) {
-			balance -= amount;
+		if(super.withdraw(amount)) {
 			return true;
 		}else if(protectedBy.balance >= amount - balance) {
 			protectedBy.withdraw(amount-balance);
-			super.withdraw(balance);
-			return true;
+			return super.withdraw(balance);
 		}
 		return false;
 		

@@ -15,4 +15,5 @@ public class Child extends Parent {
 		this.name = name;
 		System.out.println("Child(String name) call");
 	}
+	
 }
