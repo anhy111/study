@@ -1,4 +1,4 @@
-package chapter07.exercise;
+package chapter07.exercise.bank.expansion;
 
 public class SavingsAccount extends BankAccount {
 	//필드

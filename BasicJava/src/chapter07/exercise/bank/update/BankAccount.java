@@ -1,26 +1,26 @@
-package chapter07.exercise;
+package chapter07.exercise.bank.update;
 
 public class BankAccount {
-	
+
 	//필드
-	protected int balance;
-	
-	
+	private int balance;
+
+
 	//생성자
 	public BankAccount(int balance) {
 		this.balance = balance;
 	}
 
-	
+
 	//메소드
 	public int getBalance() {
 		return balance;
 	}
-	
+
 	public void deposit(int amount) {
 		this.balance += amount;
 	}
-	
+
 	public boolean withdraw(int amount) {
 		if(balance >= amount) {
 			balance -= amount;
@@ -28,7 +28,7 @@ public class BankAccount {
 		}
 		return false;
 	}
-	
+
 	public boolean transfer(int amount, BankAccount otherAccount) {
 		if(withdraw(amount)) {
 			otherAccount.deposit(amount);
@@ -36,10 +36,5 @@ public class BankAccount {
 		}
 		return false;
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("잔액: %,d", balance);
-	}
-	
+
 }

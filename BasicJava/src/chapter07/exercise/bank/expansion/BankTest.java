@@ -1,4 +1,5 @@
-package chapter07.exercise;
+package chapter07.exercise.bank.expansion;
+
 public class BankTest {
 	public static void main(String[] args) {
 		Bank bank = new Bank();

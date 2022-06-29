@@ -1,4 +1,4 @@
-package chapter07.exercise;
+package chapter08.exercise.bank;
 
 public class CheckingAccount extends BankAccount {
 	//필드
@@ -18,15 +18,18 @@ public class CheckingAccount extends BankAccount {
 	//메소드
 	@Override
 	public boolean withdraw(int amount) {
-		if(balance >= amount) {
-			balance -= amount;
+		if(super.withdraw(amount)) {
 			return true;
-		}else if(protectedBy.balance >= amount - balance) {
-			protectedBy.withdraw(amount-balance);
-			super.withdraw(balance);
+		}else if(protectedBy.balance >= amount - this.balance) {
+			protectedBy.withdraw(amount-this.balance);
+			this.balance = 0;
 			return true;
 		}
 		return false;
-		
+	}
+	
+	@Override
+	String getAccountType() {
+		return "당좌예금";
 	}
 }

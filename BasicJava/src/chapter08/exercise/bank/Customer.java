@@ -1,4 +1,4 @@
-package chapter07.exercise;
+package chapter08.exercise.bank;
 
 public class Customer {
 	//필드
@@ -21,28 +21,23 @@ public class Customer {
 		return firstName;
 	}
 
-
 	public String getLastName() {
 		return lastName;
 	}
-
 
 	public BankAccount getAccount(int index) {
 		return account[index];
 	}
 
-
 	public void addAccount(BankAccount account) {
 		this.account[numberOfAccounts++] = account;
 	}
-	
 
 	public int getNumberOfAccounts() {
 		return numberOfAccounts;
 	}
 	@Override
 	public String toString() {
-		return String.format("이름: %s %s, 계좌의 갯수: %d",
-						firstName, lastName, numberOfAccounts);
+		return firstName + " " + lastName;
 	}
 }
