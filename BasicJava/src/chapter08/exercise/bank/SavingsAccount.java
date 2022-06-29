@@ -15,7 +15,7 @@ public class SavingsAccount extends BankAccount {
 		balance += balance * interestRate * period;
 	}
 	@Override
-	String getAccountType() {
+	public String getAccountType() {
 		return "저축예금";
 	}
 	

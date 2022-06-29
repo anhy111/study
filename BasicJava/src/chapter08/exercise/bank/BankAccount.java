@@ -1,7 +1,6 @@
 package chapter08.exercise.bank;
 
 public abstract class BankAccount {
-	
 	//필드
 	protected int balance;
 	
@@ -11,8 +10,7 @@ public abstract class BankAccount {
 	}
 
 	//메소드
-	abstract String getAccountType();
-	
+	public abstract String getAccountType();
 	public int getBalance() {
 		return balance;
 	}
@@ -41,5 +39,4 @@ public abstract class BankAccount {
 	public String toString() {
 		return String.format("잔액: %,d", balance);
 	}
-	
 }

@@ -28,7 +28,7 @@ public class CheckingAccount extends BankAccount {
 	}
 	
 	@Override
-	String getAccountType() {
+	public String getAccountType() {
 		return "당좌예금";
 	}
 }
