@@ -14,7 +14,6 @@ public class CheckingAccount extends BankAccount {
 		this.protectedBy = protectedBy;
 	}
 	
-	
 	//메소드
 	@Override
 	public boolean withdraw(int amount) {

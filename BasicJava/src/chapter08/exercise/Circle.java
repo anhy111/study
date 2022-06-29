@@ -4,12 +4,10 @@ public class Circle extends Shape {
 	//필드
 	private double radius;
 	
-	
 	//생성자
 	public Circle(double radius) {
 		this.radius = radius;
 	}
-	
 	
 	//메소드
 	@Override

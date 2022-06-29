@@ -5,15 +5,12 @@ public class Bank {
 	private Customer[] customers;
 	private int numberOfCustomers;
 	
-	
 	//생성자
 	public Bank() {
 		customers = new Customer[10];
 	}
 
-	
 	//메소드
-
 	public void addCustomer(Customer customers) {
 		this.customers[numberOfCustomers++] = customers;
 	}

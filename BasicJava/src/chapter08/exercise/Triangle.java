@@ -5,7 +5,6 @@ public class Triangle extends Shape {
 	//필드
 	private double side;
 	
-	
 	//생성자
 	public Triangle(double side) {
 		this.side = side;

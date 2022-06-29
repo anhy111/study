@@ -5,13 +5,11 @@ public abstract class BankAccount {
 	//필드
 	protected int balance;
 	
-	
 	//생성자
 	public BankAccount(int balance) {
 		this.balance = balance;
 	}
 
-	
 	//메소드
 	abstract String getAccountType();
 	
@@ -38,6 +36,7 @@ public abstract class BankAccount {
 		}
 		return false;
 	}
+	
 	@Override
 	public String toString() {
 		return String.format("잔액: %,d", balance);

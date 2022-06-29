@@ -7,15 +7,12 @@ public abstract class Book {
 	private String auther;
 	private static int countOfBooks;
 	
-	
 	//생성자
 	public Book(String title, String auther) {
 		this.title = title;
 		this.auther = auther;
-		this.number = countOfBooks++;
-		
+		this.number = ++countOfBooks;
 	}
-
 
 	//메소드
 	public abstract int getLastFee(int lastDays);
@@ -44,16 +41,21 @@ public abstract class Book {
 	}
 	
 	@Override
-	public boolean equals(Object book) {
-		if(this.hashCode() != book.hashCode() 
-				&& book instanceof Book) {
-			book = (Book)book;
-		}
+	public boolean equals(Object obj) {
+		if( (obj instanceof Book) &&  this.hashCode() != obj.hashCode() ) {
+			Book book = (Book)obj;
+		
+			if(this.title.equals(book.title) 
+					&& this.auther.equals(book.auther)) {
+				return true;
+			}
+		} 
 		return false;
 	}
 	
 	@Override
 	public String toString() {
-		return  String.format("제목: %s, 작가: %s", this.title, this.auther);
+		return  String.format("관리번호 %d번, 제목: %s, 작가: %s(일주일 연체료: %,d원)",
+				this.number,this.title, this.auther,getLastFee(7));
 	}
 }

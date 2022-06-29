@@ -2,6 +2,9 @@ package chapter08.exercise;
 
 public abstract class Shape implements Comparable<Shape> {
 	
+	//필드
+	//생성자
+	//메소드
 	public abstract double area();
 	public abstract double perimeter();
 	

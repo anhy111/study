@@ -7,14 +7,12 @@ public class Customer {
 	private BankAccount[] account;
 	private int numberOfAccounts;
 	
-	
 	//생성자
 	public Customer(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		account = new BankAccount[5];
 	}
-	
 	
 	//메소드
 	public String getFirstName() {
