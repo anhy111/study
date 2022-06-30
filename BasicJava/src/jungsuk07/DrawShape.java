@@ -1,5 +1,6 @@
 package jungsuk07;
 
+
 public class DrawShape {
 	public static void main(String[] args) {
 		Point[] p = {	new Point(100, 100),

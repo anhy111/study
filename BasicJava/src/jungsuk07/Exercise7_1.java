@@ -55,8 +55,8 @@ class SutdaDeck{
 }
 
 class SutdaCard{
-	int num;
-	boolean isKwang;
+	final int num;
+	final boolean isKwang;
 	
 	public SutdaCard() {
 		this(1, true);

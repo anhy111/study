@@ -42,7 +42,7 @@ public abstract class Book {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if( (obj instanceof Book) &&  this.hashCode() != obj.hashCode() ) {
+		if( (obj instanceof Book) && this.hashCode() != obj.hashCode() ) {
 			Book book = (Book)obj;
 		
 			if(this.title.equals(book.title) 
