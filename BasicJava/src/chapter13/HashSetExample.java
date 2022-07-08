@@ -6,6 +6,9 @@ import java.util.Set;
 
 public class HashSetExample {
 	public static void main(String[] args) {
+		
+		// 잘 사용 안함.
+		// 
 		Set<Board> set = new HashSet<>();
 		set.add(new Board("제목1", "내용1", "작성자1"));
 		set.add(new Board("제목2", "내용2", "작성자2"));
@@ -21,7 +24,6 @@ public class HashSetExample {
 		}
 		
 		set.remove(new Board("제목2", "내용2", "작성자2"));
-		set.remove(new Board("제목1", "내용1", "작성자1"));
 		System.out.println(set.size());
 		
 	}
