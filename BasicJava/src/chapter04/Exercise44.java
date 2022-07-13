@@ -16,29 +16,17 @@ public class Exercise44 {
 		//처리
 		String result = null;
 		if(cheol.equals(young) ) {
-			result = "tie";
-		} else if(cheol.equals("보") && young.equals("바위")) {
-			result = "win";
-		} else if(cheol.equals("바위") && young.equals("가위")) {
-			result = "win";
-		} else if(cheol.equals("가위") && young.equals("보")) {
-			result = "win";
+			result = "무승부";
+		} else if(cheol.equals("보") && young.equals("바위") ||
+				cheol.equals("바위") && young.equals("가위") ||
+				cheol.equals("가위") && young.equals("보")) {
+			result = "철수 승리!";
 		} else {
-			result = "lose";
+			result = "영희 승리";
 		}
 		
 		//출력
-		switch(result) {
-		case "win":
-			System.out.println("결과: 철수 승리!");
-			break;
-		case "tie":
-			System.out.println("결과: 무승부!");
-			break;
-		case "lose":
-			System.out.println("결과: 영희 승리!");
-			break;
-		}
+		System.out.println("결과: " + result);
 		
 		scanner.close();
 	}
