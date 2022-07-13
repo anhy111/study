@@ -10,7 +10,7 @@ public class StudentPortalView {
 	}
 	
 	private SignController signController =  SignController.getInstance();
-	 
+	
 	public void home() {
 		System.out.println("------------------------------------------");
 		System.out.println("|\t\t학사관리 시스템\t\t|");
