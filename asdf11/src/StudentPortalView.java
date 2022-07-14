@@ -6,7 +6,7 @@ import sign.SignVO;
 
 public class StudentPortalView {
 	public static void main(String[] args) {
-		System.out.println(LoginMenu.HOME.getMenuString());
+		System.out.println(StudentMenu.STUDENTMAIN.getMenuString());
 	}
 	
 	private SignController signController =  SignController.getInstance();

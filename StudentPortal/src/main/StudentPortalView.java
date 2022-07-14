@@ -21,15 +21,21 @@ public class StudentPortalView {
 		return ScannerUtil.nextInt();
 	}
 	public LoginMenu sign(SignController signController) {
-		
-		System.out.print("ID: ");
-		String id = ScannerUtil.nextLine();
-		System.out.print("PW: ");
-		String pw = ScannerUtil.nextLine();
-		System.out.println();
-		int division = signController.sign(new SignVO(id,pw));
-		return LoginMenu.findMenu(division);
-		
+		while(true) {
+			System.out.println("\n이전화면으로 돌아가려면 ID에 0을 눌러주세요.");
+			System.out.print("ID: ");
+			String id = ScannerUtil.nextLine();
+			if(id.equals("0")) {
+				return LoginMenu.RETURN;
+			}
+			System.out.print("PW: ");
+			String pw = ScannerUtil.nextLine();
+			System.out.println();
+			int division = signController.sign(new SignVO(id,pw));
+			if(division != 0) {
+				return LoginMenu.findMenu(division);
+			}
+		}
 	}
 	
 	public void studentInsert(StudentController studentController) {
@@ -48,14 +54,12 @@ public class StudentPortalView {
 	
 	public AdminMenu getAdminMenu() {
 		int temp = getMenu();
-		if(temp != 0) {
-			AdminMenu findMenu = AdminMenu.findMenu(temp);
-			if(findMenu != null) {
-				return findMenu;
-			}
+		if(temp != 0 && AdminMenu.findMenu(temp) != null) {
+			return AdminMenu.findMenu(temp);
 		} 
 		return AdminMenu.HOME;
 	}
+	
 	
 	
 }
