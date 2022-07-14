@@ -25,7 +25,7 @@ public class Exercise42 {
 		} else {
 			result = "겨울";
 		}
-		
+		 
 		//출력
 		System.out.printf("%d월은 %s입니다.",month, result);
 		
