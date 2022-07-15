@@ -6,7 +6,7 @@ public class ProfessorService {
 	private static ProfessorService professorService = new ProfessorService();
 	private ProfessorDAO professorDAO = ProfessorDAO.getInstance();
 	
-	
+	//세션 getInstance
 	private ProfessorService() {}
 	
 	public static ProfessorService getInstance() {

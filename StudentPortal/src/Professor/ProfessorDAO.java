@@ -42,17 +42,16 @@ public class ProfessorDAO {
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
-
 		while (resultSet.next()) {
 
-			int proNo = resultSet.getInt("pro_no");
-			int proDep = resultSet.getInt("pro_dep");
+			String proNo = resultSet.getString("pro_no");
+			String proDep = resultSet.getString("pro_dep");
 			String proNm = resultSet.getString("pro_nm");
 			String depNm = resultSet.getString("dep_nm");
 			String proPneNo = resultSet.getString("pro_pne_no");
 			String proEm = resultSet.getString("pro_em");
 			String proBir = resultSet.getString("pro_bir");
-			list.add(new ProfessorVO(proNo, proDep, proNm, depNm, proPneNo, proEm, proBir));
+			list.add(new ProfessorVO(proNo, proDep, proNm, depNm, proPneNo, proEm, proBir.substring(0, 9)));
 		}
 
 		resultSet.close();
@@ -102,36 +101,5 @@ public class ProfessorDAO {
 
 	}
 
-//	public int updateProfessor(ProfessorVO vo)  {
-//		int executeUpdate = 0;
-//		
-//		try {
-//			DriverManager.registerDriver(new OracleDriver());
-//			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe",
-//	"StudentPortal", "java");
-//			StringBuilder builder = new StringBuilder();
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			builder.append("  ");
-//			String sql = builder.toString();
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			
-//			// insert, update, delete가 모두 executeUpdate()메소드를 호출
-//			
-//			
-//			statement.close();
-//			connection.close();
-//			return executeUpdate;
-//		} catch (SQLException e) {
-////			e.printStackTrace();
-//		}
-//		return executeUpdate;
-//	}
 
 }
