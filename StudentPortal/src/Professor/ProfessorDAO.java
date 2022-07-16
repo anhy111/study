@@ -99,11 +99,8 @@ public class ProfessorDAO {
 
 	}
 
-<<<<<<< HEAD
 	// 교수 수정
 	public int updateProfessor(ProfessorVO vo) throws Exception {
-=======
->>>>>>> branch 'main' of https://github.com/anhy111/study.git
 
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",

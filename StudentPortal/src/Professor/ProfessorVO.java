@@ -23,10 +23,7 @@ public class ProfessorVO {
 		this.proBir = proBir;
 	}
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'main' of https://github.com/anhy111/study.git
 	public ProfessorVO(String proNo, String proDep, String proNm, String proPneNo, String proEm, String proBir) {
 		super();
 		this.proNo = proNo;

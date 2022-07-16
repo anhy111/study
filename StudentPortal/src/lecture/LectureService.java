@@ -19,7 +19,6 @@ public class LectureService {
 		try {
 			return lectureDAO.selectLecture();
 		} catch (Exception e) {
-<<<<<<< HEAD
 			return null;
 		}
 	}
@@ -49,34 +48,10 @@ public class LectureService {
 	}
 	
 	public int audInsert(String vo, SignVO session) {
-	      try {
-	         return lectureDAO.audInsert(vo,session);
-	      } catch (Exception e) {
-	         return 0;
-	      }
-	   }
-=======
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public int LectureInsert(LectureVO vo) {
 		try {
-			return lectureDAO.insertLecture(vo);
+			return lectureDAO.audInsert(vo,session);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
-	}
-	public List<LectureVO> audSelect(SignVO session) {
-		try {
-			return lectureDAO.audSelect(session);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
->>>>>>> branch 'main' of https://github.com/anhy111/study.git
+   }
 }
