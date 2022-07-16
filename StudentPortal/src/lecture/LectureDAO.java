@@ -237,6 +237,7 @@ public class LectureDAO {
 
 	}
 	
+<<<<<<< HEAD
 	public int audInsert(String vo, SignVO vo1) throws Exception {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
@@ -261,6 +262,32 @@ public class LectureDAO {
 		connection.close();
 		
 		return 	executeQuery;
+=======
+	public int audInsert(LectureVO vo, SignVO vo1) throws Exception {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
+		StringBuilder builder = new StringBuilder();
+		builder.append(" INSERT INTO aud ( ");
+		builder.append("     aud_lec, ");
+		builder.append("     aud_stu, ");
+		builder.append("     aud_no ");
+		builder.append(" ) VALUES ( ");
+		builder.append("     ?, ");
+		builder.append("     ?, ");
+		builder.append("     aud_seq.nextval, ");
+		builder.append(" ) ");
+
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setObject(1, vo.getLecSub());
+		statement.setObject(2, vo1.getId());
+		
+		int executeQuery = statement.executeUpdate();
+		statement.close();
+		connection.close();
+		
+		return 0;
+>>>>>>> branch 'main' of https://github.com/anhy111/study.git
 	}
 	
 }

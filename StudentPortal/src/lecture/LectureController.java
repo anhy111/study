@@ -26,6 +26,7 @@ public class LectureController {
 	public int LectureInsert(LectureVO vo) {
 		return lectureService.LectureInsert(vo);
 	}
+<<<<<<< HEAD
 	
 	public List<LectureVO> audSelect() {
 		return lectureService.audSelect();	
@@ -38,4 +39,11 @@ public class LectureController {
 	}   
 	
 	
+=======
+	public List<LectureVO> audSelect() {
+		return lectureService.audSelect(session);	
+	}	
+		
+		
+>>>>>>> branch 'main' of https://github.com/anhy111/study.git
 }
