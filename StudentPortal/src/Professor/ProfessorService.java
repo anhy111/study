@@ -6,7 +6,7 @@ public class ProfessorService {
 	private static ProfessorService professorService = new ProfessorService();
 	private ProfessorDAO professorDAO = ProfessorDAO.getInstance();
 	
-	
+	//세션 getInstance
 	private ProfessorService() {}
 	
 	public static ProfessorService getInstance() {
@@ -25,6 +25,22 @@ public class ProfessorService {
 	public int insertProfessor(ProfessorVO vo) {
 		try {
 		return professorDAO.insertProfessor(vo);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	public int updateProfessor(ProfessorVO vo) {
+		try {
+			return professorDAO.updateProfessor(vo);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	public int deleteProfessor(ProfessorVO vo) {
+		try {
+			return professorDAO.deleteProfessor(vo);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return 0;

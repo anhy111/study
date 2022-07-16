@@ -1,18 +1,26 @@
 package main;
+import Professor.ProfessorController;
 import common.AdminMenu;
 import common.LoginMenu;
 import common.ProfessorMenu;
 import common.ScannerUtil;
 import common.StudentMenu;
+import lecture.LectureController;
+import record.RecordController;
 import sign.SignController;
 import sign.SignVO;
 import student.StudentController;
+import subject.SubjectController;
 
 public class Main {
 	private static SignVO session = new SignVO();
 	private static StudentPortalView view = StudentPortalView.getInstance();
 	private static SignController signController = SignController.getInstance();
 	private static StudentController studentController = StudentController.getInstance();
+	private static LectureController lectureController = LectureController.getInstance();
+	private static ProfessorController professorController = ProfessorController.getInstance();
+	private static SubjectController subController = SubjectController.getInstance();
+	private static RecordController rcController = RecordController.getInstance();
 	public static void main(String[] args) {
 		new Main().run();
 		ScannerUtil.close();
@@ -32,37 +40,196 @@ public class Main {
 					System.out.println(resultLogin.getMenuString());
 					Logout:
 					while(true) {
-						switch(resultLogin) {
-						case STUDENT:
-							System.out.println(StudentMenu.HOME.getMenuString());
-							intMenu = view.getMenu();
-							StudentMenu stdMenu = StudentMenu.findMenu(intMenu);
-							switch (stdMenu) {
-							case AUDIT_SIGN:
-								break;
-							case ALL_RECORD:
-								break;
-							case AUDIT_HISTORY:
-								break;
-							case LOGOUT:
-								break;
+						try {
+							switch(resultLogin) {
+								case STUDENT:
+									System.out.print(StudentMenu.HOME.getMenuString());
+									intMenu = view.getMenu();
+									StudentMenu stdMenu = StudentMenu.findMenu(intMenu);
+									switch (stdMenu) {
+										case AUDIT_SIGN:
+											stdMenu = view.auditSign(lectureController);
+											break;
+										case ALL_RECORD:
+											stdMenu = view.myLectureRecord(rcController);
+											break;
+										case AUDIT_HISTORY:
+											stdMenu = view.myAuditHistory(lectureController);
+											break;
+										case HOME:
+											break;
+										case LOGOUT:
+											break Logout;
+									}
+									break;
+									
+									
+								case PROFESSOR:
+									System.out.print(ProfessorMenu.HOME.getMenuString());
+									intMenu = view.getMenu();
+									ProfessorMenu pfMenu = ProfessorMenu.findMenu(intMenu);
+									switch(pfMenu) {
+										case RECORD_LIST:
+											pfMenu = view.recordList(rcController);
+											break;
+										case RECORD_ENTER:
+											pfMenu = view.recordEnter(rcController);
+											break;
+										case HOME:
+											break;
+										case LOGOUT:
+											break Logout;
+									}
+									break;
+									
+									
+								case ADMIN:
+									System.out.print(AdminMenu.HOME.getMenuString());
+									intMenu = view.getMenu();
+									AdminMenu adminMenu = AdminMenu.findMenu(intMenu);
+									SubMenu:
+									while(true) {
+										switch(adminMenu) {
+											case STUDENT_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findStudentMenu(intMenu);
+												switch(adminMenu) {
+													case STUDENT_LIST:
+														adminMenu = view.studentList(studentController);
+														break;
+													case STUDENT_INSERT:
+														adminMenu = view.studentInsert(studentController);
+														break;
+													case STUDENT_UPDATE:
+														
+														break;
+													case STUDENT_DELETE:
+														
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+											case PROFESSOR_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findProffesorMenu(intMenu);
+												switch(adminMenu) {
+													case PROFESSOR_LIST:
+														adminMenu = view.professorList(professorController);
+														break;
+													case PROFESSOR_INSERT:
+														adminMenu = view.professorListInsert(professorController);
+														break;
+													case PROFESSOR_UPDATE:
+														adminMenu = view.professorUpdate(professorController);
+														break;
+													case PROFESSOR_DELETE:
+														adminMenu = view.professorDelete(professorController);
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+											case LECTURE_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findLectureMenu(intMenu);
+												switch(adminMenu) {
+													case LECTURE_LIST:
+														adminMenu = view.lectureList(lectureController);
+														break;
+													case LECTURE_INSERT:
+														adminMenu = view.lectureInsert(lectureController);
+														break;
+													case LECTURE_UPDATE:
+														
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+											case SUBJECT_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findSubjectMenu(intMenu);
+												switch(adminMenu) {
+													case SUBJECT_LIST:
+														adminMenu = view.subjectList(subController);
+														break;
+													case SUBJECT_INSERT:
+														adminMenu = view.subjectInsert(subController);
+														break;
+													case SUBJECT_UPDATE:
+														
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+												
+											case DEPARTMENT_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findDepartMentMenu(intMenu);
+												switch(adminMenu) {
+													case DEPARTMENT_LIST:
+														
+														break;
+													case DEPARTMENT_INSERT:
+														
+														break;
+													case DEPARTMENT_UPDATE:
+														
+														break;
+													case DEPARTMENT_DELETE:
+														
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+											case ROOM_MANAGEMENT:
+												System.out.print(adminMenu.getMenuString());
+												intMenu = view.getMenu();
+												adminMenu = AdminMenu.findRoomMenu(intMenu);
+												switch(adminMenu) {
+													case ROOM_LIST:
+														
+														break;
+													case ROOM_INSERT:
+														
+														break;
+													case ROOM_UPDATE:
+														
+														break;
+													case ROOM_DELETE:
+														
+														break;
+													case HOME:
+														break SubMenu;
+												}
+												break;
+											case LOGOUT:
+												System.out.println(adminMenu.getMenuString());
+												break Logout;
+										}
+										System.out.println();
+									}
+									System.out.println();
+									break;
+								case RETURN:
+									System.out.println("이전메뉴로 돌아갑니다");
+									break Logout;
 							}
-							break;
-						case PROFESSOR:
-							System.out.println(ProfessorMenu.HOME.getMenuString());
-							intMenu = view.getMenu();
-							ProfessorMenu pfMenu = ProfessorMenu.findMenu(intMenu);
-							break;
-						case ADMIN:
-							System.out.println(AdminMenu.HOME.getMenuString());
-							intMenu = view.getMenu();
-							AdminMenu adminMenu = AdminMenu.findMenu(intMenu);
-							break;
-						case RETURN:
-							break Logout;
+						}catch(Exception e) {
+							System.out.println("\n잘못된 입력입니다.");
+							System.out.println("메인화면으로 돌아갑니다.");
+							System.out.println();
 						}
 					}
-					
+					break;
 				case EXIT:
 					System.out.println(menu.getMenuString());
 					break MainLoop;
@@ -72,109 +239,10 @@ public class Main {
 			
 			}catch(NullPointerException e) {
 				System.out.println("\n잘못된 입력입니다.");
-				System.out.println("메인화면으로 돌아갑니다.");
+				System.out.println("로그인화면으로 돌아갑니다.");
 				System.out.println();
 			}
 		}
-//			System.out.println(LoginMenu.HOME.getMenuString());
-//			switch(view.getMenu()) {
-//				case 1:
-//				LoginMenu sign = view.sign(signController);
-//				System.out.println(sign.getMenuString());
-//	LoginLabel: switch(sign) {
-//					case STUDENT:
-//						while(true) {
-//							System.out.println(StudentMenu.HOME.getMenuString());
-//							StudentMenu studentMenu = StudentMenu.findMenu(view.getMenu());
-//							switch(studentMenu) {
-//								case AUDIT_SIGN:
-//									break;
-//								case SHOW_RECORD:
-//									break;
-//								case SHOW_HISTORY:
-//									break;
-//								case LOGOUT:
-//									System.out.println(studentMenu.getMenuString());
-//									break LoginLabel;
-//								default:
-//									System.out.println("유효하지 않은 입력입니다.");
-//									break;
-//							}
-//						} 
-//						
-//					case PROFESSOR:
-//						while(true) {
-//							System.out.println(ProfessorMenu.HOME.getMenuString());
-//							ProfessorMenu professorMenu = ProfessorMenu.findMenu(view.getMenu());
-//							switch(professorMenu) {
-//								case RECORD_ENTER:
-//									break;
-//								case RECORD_SEARCH:
-//									break;
-//								case LOGOUT:
-//									System.out.println(professorMenu.getMenuString());
-//									break LoginLabel;
-//								default:
-//									System.out.println("유효하지 않은 입력입니다.");
-//									break;
-//							}
-//						}
-//						
-//					case ADMIN:
-//						while(true) {
-//							System.out.print(AdminMenu.HOME.getMenuString());
-//							AdminMenu adminMenu = AdminMenu.findMenu(view.getMenu());
-//							AdminHome:
-//							switch(adminMenu) {
-//								case STUDENT_MANAGEMENT:
-//									while(true) {
-//										System.out.println(AdminMenu.STUDENT_MANAGEMENT.getMenuString());
-//										AdminMenu adminMenu2 = view.getAdminMenu();
-//										switch(adminMenu2) {
-//											case STUDENT_SEARCH:
-//												view.studentList(studentController);
-//												break;
-//											case STUDENT_INSERT:
-//												view.studentInsert(studentController);
-//												break;
-//											case HOME:
-//												break AdminHome;
-//											default:
-//												System.out.println("유효하지 않은 입력입니다.");
-//												System.out.println("다시 입력해 주세요.");
-//										}
-//									}
-//									
-//								case PROFESSOR_MANAGEMENT:
-//									while(true) {
-//										System.out.println(AdminMenu.PROFESSOR_MANAGEMENT.getMenuString());
-//										
-//										}
-//								case LECTURE_MANAGEMENT:
-//									while(true) {
-//										System.out.println(AdminMenu.LECTURE_MANAGEMENT.getMenuString());
-//										
-//										}
-//								case LOGOUT:
-//									System.out.println(AdminMenu.LOGOUT.getMenuString());
-//									break LoginLabel;
-//								default:
-//									System.out.println("유효하지 않은 입력입니다.");
-//									break;
-//							}
-//						}
-//					default:
-//						System.out.println("다시 입력해 주세요.");
-//						break;
-//					}
-//				case 0:
-//					break;
-//				default:
-//					System.out.println("유효하지 않은 입력입니다.");
-//					System.out.print("번호를 선택하세요: ");
-//			}
-//			System.out.println();
-//		}
 	}
 
 	public static SignVO getSession() {

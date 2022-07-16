@@ -19,4 +19,10 @@ public class ProfessorController {
 	public int insertProfessor(ProfessorVO vo) {
 		return professorService.insertProfessor(vo);
 	}
+	public int updateProfessor(ProfessorVO vo) {
+		return professorService.updateProfessor(vo);
+	}
+	public int deleteProfessor(ProfessorVO vo) {
+		return professorService.deleteProfessor(vo);
+	}
 }

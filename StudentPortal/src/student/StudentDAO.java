@@ -48,11 +48,11 @@ public class StudentDAO {
 			
 			ArrayList<StudentVO> list = new ArrayList<>();
 			while(resultSet.next()) {
-				int stuNo = resultSet.getInt("stu_no");
+				String stuNo = resultSet.getString("stu_no");
 				String stuNm = resultSet.getString("stu_nm");
 				String stuEm = resultSet.getString("stu_em");
 				String stuPneNo = resultSet.getString("stu_pne_no");
-				int stuGrd = resultSet.getInt("stu_grd");
+				String stuGrd = resultSet.getString("stu_grd");
 				String stuAcdSt = resultSet.getString("stu_acd_st");
 				String dep_nm = resultSet.getString("dep_nm");
 				String stuBir = resultSet.getString("stu_bir");
@@ -67,45 +67,45 @@ public class StudentDAO {
 	
 	public int insertStudent(StudentVO vo) throws Exception{
 		
-			DriverManager.registerDriver(new OracleDriver());
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
-			StringBuilder builder = new StringBuilder();
-			builder.append("INSERT INTO stu (");
-			builder.append("    stu_no,");
-			builder.append("    stu_nm,");
-			builder.append("    stu_em,");
-			builder.append("    stu_pne_no,");
-			builder.append("    stu_grd,");
-			builder.append("    stu_acd_st,");
-			builder.append("    stu_dep,");
-			builder.append("    stu_bir");
-			builder.append(") VALUES (");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?,");
-			builder.append("    ?");
-			builder.append(")");
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
+		StringBuilder builder = new StringBuilder();
+		builder.append("INSERT INTO stu (");
+		builder.append("    stu_no,");
+		builder.append("    stu_nm,");
+		builder.append("    stu_em,");
+		builder.append("    stu_pne_no,");
+		builder.append("    stu_grd,");
+		builder.append("    stu_acd_st,");
+		builder.append("    stu_dep,");
+		builder.append("    stu_bir");
+		builder.append(") VALUES (");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?,");
+		builder.append("    ?");
+		builder.append(")");
 
-			String sql = builder.toString();
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, vo.getStuNo());
-			statement.setString(2, vo.getStuNm());
-			statement.setString(3, vo.getStuEm());
-			statement.setString(4, vo.getStuPneNo());
-			statement.setInt(5, vo.getStuGrd());
-			statement.setString(6, vo.getStuAcdSt());
-			statement.setString(7, vo.getStuDep());
-			statement.setString(8, vo.getStuBir());
-			
-			int executeUpdate = statement.executeUpdate();
-			statement.close();
-			connection.close();
-			
-			return executeUpdate;
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, vo.getStuNo());
+		statement.setString(2, vo.getStuNm());
+		statement.setString(3, vo.getStuEm());
+		statement.setString(4, vo.getStuPneNo());
+		statement.setString(5, vo.getStuGrd());
+		statement.setString(6, vo.getStuAcdSt());
+		statement.setString(7, vo.getStuDep());
+		statement.setString(8, vo.getStuBir());
+		
+		int executeUpdate = statement.executeUpdate();
+		statement.close();
+		connection.close();
+		
+		return executeUpdate;
 	}
 	
 }

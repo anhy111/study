@@ -43,7 +43,7 @@ public class SignDAO {
 			statement.setObject(2, vo.getPw());	
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				System.out.println(resultSet.getString("stu_nm"));
+				System.out.print(resultSet.getString("stu_nm"));
 				result = 1;
 			}
 		}catch(Exception e) {
@@ -85,8 +85,8 @@ public class SignDAO {
 			statement.setObject(2, vo.getPw());	
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				System.out.println(resultSet.getString("pro_nm"));
-				result = 2;
+				System.out.print(resultSet.getString("pro_nm"));
+				result = 1;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

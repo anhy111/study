@@ -2,8 +2,8 @@ package Professor;
 
 public class ProfessorVO {
 	//필드
-	private int proNo; 		//교수번호
-	private int proDep;     //학과번호
+	private String proNo; 		//교수번호
+	private String proDep;     //학과번호
 	private String proNm;   //교수명
 	private String depNm;	//학과명
 	private String proPneNo;//교수 전화번호
@@ -11,7 +11,7 @@ public class ProfessorVO {
 	private String proBir;	//교수 생년월일
 	//생성자
 	 
-	public ProfessorVO(int proNo, int proDep, String proNm, String depNm, String proPneNo, String proEm,
+	public ProfessorVO(String proNo, String proDep, String proNm, String depNm, String proPneNo, String proEm,
 			String proBir) {
 		super();
 		this.proNo = proNo;
@@ -23,7 +23,8 @@ public class ProfessorVO {
 		this.proBir = proBir;
 	}
 	
-	public ProfessorVO(int proNo, int proDep, String proNm, String proPneNo, String proEm, String proBir) {
+
+	public ProfessorVO(String proNo, String proDep, String proNm, String proPneNo, String proEm, String proBir) {
 		super();
 		this.proNo = proNo;
 		this.proDep = proDep;
@@ -33,12 +34,17 @@ public class ProfessorVO {
 		this.proBir = proBir;
 	}
 
+	public ProfessorVO(String proNo) {
+		this.proNo = proNo;
+	}
+
+
 	//메소드
-	public int getProNo() {
+	public String getProNo() {
 		return proNo;
 	}
 	
-	public int getProDep() {
+	public String getProDep() {
 		return proDep;
 	}
 	
@@ -50,10 +56,10 @@ public class ProfessorVO {
 		this.proNm = proNm;
 	}
 
-	public void setProDep(int proDep) {
+	public void setProDep(String proDep) {
 		this.proDep = proDep;
 	}
-	public void setProNo(int proNo) {
+	public void setProNo(String proNo) {
 		this.proNo = proNo;
 	}
 	public String getDepNm() {
