@@ -5,8 +5,10 @@ import common.LoginMenu;
 import common.ProfessorMenu;
 import common.ScannerUtil;
 import common.StudentMenu;
+import department.DepartMentController;
 import lecture.LectureController;
 import record.RecordController;
+import room.RoomController;
 import sign.SignController;
 import sign.SignVO;
 import student.StudentController;
@@ -21,6 +23,8 @@ public class Main {
 	private static ProfessorController professorController = ProfessorController.getInstance();
 	private static SubjectController subController = SubjectController.getInstance();
 	private static RecordController recordController = RecordController.getInstance();
+	private static DepartMentController depController = DepartMentController.getInstance();
+	private static RoomController roomController = RoomController.getInstance();
 	public static void main(String[] args) {
 		new Main().run();
 		ScannerUtil.close();
@@ -50,10 +54,10 @@ public class Main {
 											stdMenu = view.auditSign(lectureController);
 											break;
 										case ALL_RECORD:
-											stdMenu = view.myLectureRecord(recordController);
+											stdMenu = view.allRecord(recordController);
 											break;
 										case AUDIT_HISTORY:
-											stdMenu = view.myAuditHistory(lectureController);
+											stdMenu = view.auditHistory(lectureController);
 											break;
 										case HOME:
 											break;
@@ -101,10 +105,10 @@ public class Main {
 														adminMenu = view.studentInsert(studentController);
 														break;
 													case STUDENT_UPDATE:
-														
+														adminMenu = view.studentUpdate(studentController,depController);
 														break;
 													case STUDENT_DELETE:
-														
+														adminMenu = view.studentDelete(studentController);
 														break;
 													case HOME:
 														break SubMenu;
@@ -119,7 +123,7 @@ public class Main {
 														adminMenu = view.professorList(professorController);
 														break;
 													case PROFESSOR_INSERT:
-														adminMenu = view.professorListInsert(professorController);
+														adminMenu = view.professorInsert(professorController);
 														break;
 													case PROFESSOR_UPDATE:
 														adminMenu = view.professorUpdate(professorController);
@@ -143,7 +147,7 @@ public class Main {
 														adminMenu = view.lectureInsert(lectureController);
 														break;
 													case LECTURE_UPDATE:
-														
+														adminMenu = view.lectureUpdate(lectureController);
 														break;
 													case HOME:
 														break SubMenu;
@@ -161,7 +165,7 @@ public class Main {
 														adminMenu = view.subjectInsert(subController);
 														break;
 													case SUBJECT_UPDATE:
-														
+														adminMenu = view.subjectUpdate(subController);
 														break;
 													case HOME:
 														break SubMenu;
@@ -174,16 +178,16 @@ public class Main {
 												adminMenu = AdminMenu.findDepartMentMenu(intMenu);
 												switch(adminMenu) {
 													case DEPARTMENT_LIST:
-														
+														adminMenu = view.departmentList(depController);
 														break;
 													case DEPARTMENT_INSERT:
-														
+														adminMenu = view.departmentInsert(depController);
 														break;
 													case DEPARTMENT_UPDATE:
-														
+														adminMenu = view.departmentUpdate(depController);
 														break;
 													case DEPARTMENT_DELETE:
-														
+														adminMenu = view.departmentDelete(depController);
 														break;
 													case HOME:
 														break SubMenu;
@@ -195,16 +199,16 @@ public class Main {
 												adminMenu = AdminMenu.findRoomMenu(intMenu);
 												switch(adminMenu) {
 													case ROOM_LIST:
-														
+														adminMenu = view.roomList(roomController);
 														break;
 													case ROOM_INSERT:
-														
+														adminMenu = view.roomInsert(roomController);
 														break;
 													case ROOM_UPDATE:
-														
+														adminMenu = view.roomUpdate(roomController);
 														break;
 													case ROOM_DELETE:
-														
+														adminMenu = view.roomDelete(roomController);
 														break;
 													case HOME:
 														break SubMenu;

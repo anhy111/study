@@ -11,19 +11,19 @@ import java.util.List;
 
 import oracle.jdbc.driver.OracleDriver;
 
-public class StudentDAO {
+public class DepartMentDAO {
 	//필드
-	private static StudentDAO studentDAO = new StudentDAO();
+	private static DepartMentDAO studentDAO = new DepartMentDAO();
 	
 	//생성자
-	private StudentDAO() {}
+	private DepartMentDAO() {}
 	
 	//메소드
-	public static StudentDAO getInstance() {
+	public static DepartMentDAO getInstance() {
 		return studentDAO;
 	}
 	
-	public List<StudentVO> selectStudent() throws Exception {
+	public List<DepartMentVO> selectStudent() throws Exception {
 			DriverManager.registerDriver(new OracleDriver());
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
 			Statement statement = connection.createStatement();
@@ -46,7 +46,7 @@ public class StudentDAO {
 			
 			ResultSet resultSet = statement.executeQuery(sql);
 			
-			ArrayList<StudentVO> list = new ArrayList<>();
+			ArrayList<DepartMentVO> list = new ArrayList<>();
 			while(resultSet.next()) {
 				String stuNo = resultSet.getString("stu_no");
 				String stuNm = resultSet.getString("stu_nm");
@@ -56,7 +56,7 @@ public class StudentDAO {
 				String stuAcdSt = resultSet.getString("stu_acd_st");
 				String dep_nm = resultSet.getString("dep_nm");
 				String stuBir = resultSet.getString("stu_bir");
-				list.add(new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, dep_nm, stuBir));
+				list.add(new DepartMentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, dep_nm, stuBir));
 			}
 		resultSet.close();
 		statement.close();
@@ -65,7 +65,7 @@ public class StudentDAO {
 		
 	}
 	
-	public int insertStudent(StudentVO vo) throws Exception{
+	public int insertStudent(DepartMentVO vo) throws Exception{
 		
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");

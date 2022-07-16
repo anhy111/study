@@ -1,6 +1,6 @@
-package department;
+package room;
 
-public class StudentVO {
+public class RoomVO {
 	//필드
 	private String stuNo;
 	private String stuDep;
@@ -12,9 +12,9 @@ public class StudentVO {
 	private String stuBir;
 	
 	//생성자
-	public StudentVO() {}
+	public RoomVO() {}
 	
-	public StudentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt, String stuDep,
+	public RoomVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt, String stuDep,
 			String stuBir) {
 		this.stuNo = stuNo;
 		this.stuNm = stuNm;

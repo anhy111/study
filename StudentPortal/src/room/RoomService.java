@@ -2,20 +2,20 @@ package room;
 
 import java.util.List;
 
-public class StudentService {
+public class RoomService {
 	//필드
-	private static StudentService studentService = new StudentService();
-	private StudentDAO studentDAO = StudentDAO.getInstance();
+	private static RoomService studentService = new RoomService();
+	private RoomDAO studentDAO = RoomDAO.getInstance();
 	
 	//생성자
-	private StudentService() {}
+	private RoomService() {}
 	
 	//메소드
-	public static StudentService getInstance() {
+	public static RoomService getInstance() {
 		return studentService;
 	}
 	
-	public List<StudentVO> selectStudent() {
+	public List<RoomVO> selectStudent() {
 		
 		try {
 			return studentDAO.selectStudent();
@@ -25,7 +25,7 @@ public class StudentService {
 		}
 	}
 	
-	public int insertStudent(StudentVO vo) {
+	public int insertStudent(RoomVO vo) {
 		try {
 			return studentDAO.insertStudent(vo);
 		} catch (Exception e) {

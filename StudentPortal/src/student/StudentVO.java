@@ -3,28 +3,33 @@ package student;
 public class StudentVO {
 	//필드
 	private String stuNo;
-	private String stuDep;
 	private String stuNm;
 	private String stuEm;
 	private String stuPneNo;
 	private String stuGrd;
 	private String stuAcdSt;
+	private String stuDep;
 	private String stuBir;
 	
 	//생성자
 	public StudentVO() {}
 	
-	public StudentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt, String stuDep,
-			String stuBir) {
+	public StudentVO(String stuNo) {
+		this.stuNo = stuNo;
+	}
+	
+	public StudentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt,
+			String stuDep, String stuBir) {
 		this.stuNo = stuNo;
 		this.stuNm = stuNm;
 		this.stuEm = stuEm;
 		this.stuPneNo = stuPneNo;
 		this.stuGrd = stuGrd;
 		this.stuAcdSt = stuAcdSt;
-		this.stuBir = stuBir;
 		this.stuDep = stuDep;
-		}
+		this.stuBir = stuBir;
+	}
+
 
 	//메소드
 	public String getStuNo() {
@@ -34,8 +39,6 @@ public class StudentVO {
 	public void setStuNo(String stuNo) {
 		this.stuNo = stuNo;
 	}
-	
-	
 
 	public String getStuNm() {
 		return stuNm;
@@ -95,8 +98,11 @@ public class StudentVO {
 
 	@Override
 	public String toString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuDep, stuBir); 
+		return String.format(
+				"%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t", stuNo, stuDep, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
 	}
+
+	
 	
 	
 	
