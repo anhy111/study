@@ -1,5 +1,8 @@
 package room;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomVO {
 	//필드
 	private String rmNo;
@@ -7,6 +10,10 @@ public class RoomVO {
 	
 	//생성자
 	public RoomVO() {}
+
+	public RoomVO(String rmNo) {
+		this.rmNo = rmNo;
+	}
 
 	public RoomVO(String rmNo, String rmNm) {
 		this.rmNo = rmNo;
@@ -32,6 +39,12 @@ public class RoomVO {
 	@Override
 	public String toString() {
 		return String.format("RoomVO [rmNo=%s, rmNm=%s]", rmNo, rmNm);
+	}
+
+	public List<String> getUpdateInfo() {
+		List<String> list = new ArrayList<>();
+		list.add(rmNm);
+		return list;
 	}
 	
 	

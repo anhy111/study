@@ -255,6 +255,7 @@ public class StudentPortalView {
 			}else {
 				System.out.println("수정을 취소합니다.");
 				System.out.println();
+				break;
 			}
 		}
 		return AdminMenu.STUDENT_MANAGEMENT;
@@ -345,7 +346,7 @@ public class StudentPortalView {
 			System.out.print("정보 변경을 원하는 교수의 교수번호를 입력하세요>> ");
 			String proNo = ScannerUtil.nextLine();
 			if(cancel(proNo)) {
-				return AdminMenu.PROFESSOR_MANAGEMENT;
+				break;
 			}
 			ProfessorVO selectOneProfessor = professorController.selectOneProfessor(new ProfessorVO(proNo));
 			System.out.println(selectOneProfessor);
@@ -382,6 +383,7 @@ public class StudentPortalView {
 				int updateProfessor = professorController.updateProfessor(updateVO);
 				if (updateProfessor == 1) {
 					System.out.println("교수가 수정되었습니다.");
+					break;
 				} else {
 					System.out.println("유효하지 않은 입력입니다.");
 					System.out.println("입력한 정보를 확인해주세요.");
@@ -389,8 +391,10 @@ public class StudentPortalView {
 			} else {
 				System.out.println("수정을 취소합니다.");
 				System.out.println();
+				break;
 			}
 		}
+		return AdminMenu.PROFESSOR_MANAGEMENT;
 	}
 
 	public AdminMenu professorDelete(ProfessorController professorController) {
@@ -747,7 +751,7 @@ public class StudentPortalView {
 			if(yesOrNo.equalsIgnoreCase("y")) {
 				int deleteProfessor = depController.deleteDepartment(new DepartMentVO(depNo));
 				if(deleteProfessor ==1) {
-					System.out.println("교수가 삭제되었습니다.");
+					System.out.println("학과가 삭제되었습니다.");
 					break;
 				} else {
 					System.out.println("유효하지 않은 입력입니다.");
@@ -773,15 +777,111 @@ public class StudentPortalView {
 		System.out.println();
 		return AdminMenu.ROOM_MANAGEMENT;
 	}
+	
 	public AdminMenu roomInsert(RoomController roomController) {
+		while(true) {
+			System.out.println(AdminMenu.ROOM_INSERT.getMenuString());
+			roomList(roomController);
+			System.out.println("입력을 취소하려면 강의실번호에 0을 입력하세요.");
+			System.out.print("강의실번호를 입력하세요>>");
+			String rmNo = ScannerUtil.nextLine();
+			if (cancel(rmNo)) {
+				break;
+			}
+			System.out.print("강의실명을 입력하세요>>");
+			String rmNm = ScannerUtil.nextLine();
+			int insertRoom = roomController.insertRoom(new RoomVO(rmNo, rmNm));
+			if(insertRoom == 1) {
+				System.out.println("\n강의실이 등록되었습니다.");
+				break;
+			} else {
+				System.out.println("유효하지 않은 입력입니다.");
+				System.out.println("입력한 정보를 확인해주세요.");
+			}
+		}
 		return AdminMenu.ROOM_MANAGEMENT;
 	}
 	public AdminMenu roomUpdate(RoomController roomController) {
-		return AdminMenu.ROOM_MANAGEMENT;
-	}
-	public AdminMenu roomDelete(RoomController roomController) {
+		System.out.println(AdminMenu.ROOM_MANAGEMENT.getMenuString());
+		while(true) {
+			roomList(roomController);
+			System.out.println("수정을 취소하려면 강의실번호에 0을 입력하세요.");
+			System.out.print("정보 변경을 원하는 강의실의 강의실번호를 입력하세요>> ");
+			String rmNo = ScannerUtil.nextLine();
+			if(cancel(rmNo)) {
+				break;
+			}
+			RoomVO selectOneRoom = roomController.selectOneRoom(new RoomVO(rmNo));
+			System.out.println(selectOneRoom);
+			System.out.println("현재 기록된 강의실상태입니다.");
+			System.out.println("변경할 강의실정보를 입력하세요.");
+			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
+			System.out.println();
+			List<String> afterUpdate = new ArrayList<>();
+			System.out.print("변경할 강의실명을 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 전화번호를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			
+			List<String> beforeUpdate = selectOneRoom.getUpdateInfo();
+			for(int i=0; i<afterUpdate.size(); i++) {
+				if(afterUpdate.get(i).equals("0")) {
+					afterUpdate.set(i, beforeUpdate.get(i));
+				}
+			}
+			RoomVO updateVO = new RoomVO(rmNo,afterUpdate.get(0));
+			System.out.println(updateVO);
+			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
+			String yesOrNo = ScannerUtil.nextLine();
+			if(yesOrNo.equalsIgnoreCase("y")) {
+				int updateRoom = roomController.updateRoom(updateVO);
+				if (updateRoom == 1) {
+					System.out.println("강의실이 수정되었습니다.");
+					break;
+				} else {
+					System.out.println("유효하지 않은 입력입니다.");
+					System.out.println("입력한 정보를 확인해주세요.");
+				}
+			} else {
+				System.out.println("수정을 취소합니다.");
+				System.out.println();
+				break;
+			}
+		}
 		return AdminMenu.ROOM_MANAGEMENT;
 	}
 	
+	public AdminMenu roomDelete(RoomController roomController) {
+		while(true) {
+			System.out.println(AdminMenu.ROOM_DELETE.getMenuString());
+			roomList(roomController);
+			System.out.println("삭제를 취소하려면 강의실번호에 0을 입력하세요.");
+			System.out.print("삭제할 강의실의 강의실번호를 입력하세요>> ");
+			String rmNo = ScannerUtil.nextLine();
+			if(cancel(rmNo)) {
+				System.out.println("삭제를 취소합니다.");
+				break;
+			}
+			RoomVO roomVO = roomController.selectOneRoom(new RoomVO(rmNo));
+			System.out.println(roomVO);
+			System.out.print("위 강의실을 삭제하시겠습니까?(y or n) >>");
+			String yesOrNo = ScannerUtil.nextLine();
+			if(yesOrNo.equalsIgnoreCase("y")) {
+				int deleteRoom = roomController.deleteRoom(new RoomVO(rmNo));
+				if(deleteRoom == 1) {
+					System.out.println("강의실이 삭제되었습니다.");
+					break;
+				} else {
+					System.out.println("유효하지 않은 입력입니다.");
+					System.out.println("입력한 정보를 확인해주세요.");
+				}
+			}else {
+				System.out.println("삭제를 취소합니다.");
+				System.out.println();
+				break;
+			}
+		}
+		return AdminMenu.ROOM_MANAGEMENT;
+	}
 	
 }
