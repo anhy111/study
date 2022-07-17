@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,6 @@ import sign.SignVO;
 
 public class RecordDAO {
 	private static RecordDAO rcDAO = new RecordDAO();
-	private List<RecordVO> list = new ArrayList<>();
-	private List<RecordVO> list1 = new ArrayList<>();
 
 	private RecordDAO() {
 	}
@@ -44,7 +43,7 @@ public class RecordDAO {
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, vo.getId());
 		ResultSet resultSet = statement.executeQuery();
-
+		List<RecordVO> list = new ArrayList<>();
 		while (resultSet.next()) {
 			String lecNo = resultSet.getString("lec_no");
 			String subNm = resultSet.getString("sub_nm");
@@ -81,19 +80,19 @@ public class RecordDAO {
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, lecNo);
 		ResultSet resultSet = statement.executeQuery();
-		
+		List<RecordVO> list = new ArrayList<>();
 		while(resultSet.next()) {
 			String stuNm = resultSet.getString("stu_nm");
 			String audNo = resultSet.getString("aud_no");
 			String sc = resultSet.getString("sc");
 			String mk = resultSet.getString("mk");
 			String rk = resultSet.getString("rk");
-			list1.add(new RecordVO(stuNm,audNo, sc, mk, rk));
+			list.add(new RecordVO(stuNm,audNo, sc, mk, rk));
 		}
 		resultSet.close();
 		statement.close();
 		connection.close();
-		return list1;
+		return list;
 	}
 
 	
@@ -178,7 +177,7 @@ public class RecordDAO {
 		
 		ResultSet resultSet = statement.executeQuery();
 		
-		ArrayList<RecordVO> list = new ArrayList<>();
+		List<RecordVO> list = new ArrayList<>();
 		while(resultSet.next()) {
 			String yr = resultSet.getString("yr");
 			String sem = resultSet.getString("sem");
@@ -201,5 +200,26 @@ public class RecordDAO {
 		connection.close();
 		
 		return list;
+	}
+
+	public int insertRecord(String audNo) throws Exception {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
+		StringBuilder builder = new StringBuilder();
+		builder.append("INSERT INTO rc (");
+		builder.append("    aud_no,");
+		builder.append(") VALUES (");
+		builder.append("    ?,");
+		builder.append(")");
+
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, audNo);
+		
+		int executeUpdate = statement.executeUpdate();
+		statement.close();
+		connection.close();
+		
+		return executeUpdate;
 	}
 }

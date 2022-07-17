@@ -6,7 +6,7 @@ import sign.SignVO;
 
 public class RecordService {
 	private static RecordService rcService = new RecordService();
-	private RecordDAO rcDAO = RecordDAO.getInstance();
+	private RecordDAO recordDAO = RecordDAO.getInstance();
 
 	private RecordService() {
 	}
@@ -17,7 +17,7 @@ public class RecordService {
 
 	public List<RecordVO> selectSub(SignVO vo) {	//강의목록
 		try {
-			return rcDAO.selectSub(vo);
+			return recordDAO.selectSub(vo);
 		} catch (Exception e) {
 //			e.printStackTrace();
 			return null;
@@ -26,7 +26,7 @@ public class RecordService {
 
 	public List<RecordVO> selectStu(String lecNo) {	// 학생목록(수강번호)
 		try {
-			return rcDAO.selectStu(lecNo);
+			return recordDAO.selectStu(lecNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -36,7 +36,7 @@ public class RecordService {
 	public int updateRc(RecordVO vo) {
 		
 		try {
-			return rcDAO.updateRc(vo);
+			return recordDAO.updateRc(vo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,10 +46,18 @@ public class RecordService {
 	
 	public List<RecordVO> rcStudentSelect(SignVO session) {	
 		try {
-			return rcDAO.rcStudentSelect(session);
+			return recordDAO.rcStudentSelect(session);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public int insertRecord(String audNo) {
+		try {
+			return recordDAO.insertRecord(audNo);
+		} catch(Exception e) {
+			return 0;
 		}
 	}
 

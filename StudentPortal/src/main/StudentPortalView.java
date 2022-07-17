@@ -75,24 +75,47 @@ public class StudentPortalView {
 		}
 	}
 	// 학생
-	public StudentMenu auditSign(LectureController lectureController) {
-		System.out.println(StudentMenu.AUDIT_SIGN.getMenuString());
-		List<LectureVO> selectLectures = lectureController.audSelect();
-		for (LectureVO vo : selectLectures) {
-			System.out.println(vo.toString());
-		}
-		System.out.println("강의 번호를 입력하시오");
-		String lecNo = ScannerUtil.nextLine();
-		int audInsert = lectureController.audInsert(lecNo);
-		if (audInsert == 1) {
-			System.out.println("수강신청 완료");
-		} else {
-			System.out.println("수강신청 불가");
+	public StudentMenu auditSign(LectureController lectureController,RecordController recordController) {
+		Labal : 
+		while(true) {
+			System.out.println(StudentMenu.AUDIT_SIGN.getMenuString());
+			List<LectureVO> selectLectures = lectureController.audSelect();
+			for(LectureVO vo : selectLectures) {
+				System.out.println(vo.audString());
+			}
+			System.out.println();
+			System.out.println("메인 메뉴로 돌아가려면 강의번호에 0을 입력하세요.");
+			System.out.print("강의 번호를 입력하세요>>");
+			String lecNo = ScannerUtil.nextLine();
+			if(cancel(lecNo)) {
+				break;
+			}
+			List<LectureVO> list = lectureController.audSelectSession();
+			for(LectureVO vo : list) {
+				if(vo.getLecNo().equals(lecNo)) {
+					System.out.println("이미 수강중인 강의입니다.");
+					continue Labal;
+				}
+			}
+			int audInsert = lectureController.audInsert(lecNo);
+			if(audInsert == 1) {
+				String audNo = lectureController.selectOneAud(lecNo);
+				int insertRecord = recordController.insertRecord(audNo);
+				if(insertRecord == 1) {
+					System.out.println("수강신청이 완료되었습니다.");
+				} else {
+					System.out.println("알 수 없는 오류입니다. 수강신청 취소 후 다시 신청해주세요.");
+				}
+			} else {
+				System.out.println("유효하지 않은 입력입니다.");
+				System.out.println("입력한 정보를 확인해주세요.");
+			}
 		}
 		return StudentMenu.HOME;
 	}
 
 	public StudentMenu allRecord(RecordController recordController) {
+		System.out.println(StudentMenu.ALL_RECORD.getMenuString());
 		List<RecordVO> rcStudentSelects = recordController.rcStudentSelect();
 		for(RecordVO vo : rcStudentSelects) {
 			System.out.println(vo.rcStudentToString());
@@ -110,25 +133,27 @@ public class StudentPortalView {
 	}
 	
 	public ProfessorMenu recordList(RecordController rcController) {
-		System.out.println("현재 맡은 강의 목록");
+		System.out.println(ProfessorMenu.RECORD_LIST.getMenuString());
 		List<RecordVO> rcProfessor = rcController.selectSub();
 		for (RecordVO vo : rcProfessor) {
 			System.out.println(vo.recordToString());
 		}
-		rcProfessor.clear();
 		System.out.println();
-		System.out.print("강의를 선택하세요>> ");
+		System.out.println("조회를 취소하려면 강의번호에 0을 입력하세요.");
+		System.out.print("강의번호를 입력하세요(예: 1)>> ");
 		String audLec = ScannerUtil.nextLine();
+		if(cancel(audLec)) {
+			return ProfessorMenu.HOME;
+		}
 		List<RecordVO> stu = rcController.selectStu(audLec);
 		for (RecordVO vo : stu) {
 			System.out.println(vo.allToString());
 		}
-		stu.clear();
 		return ProfessorMenu.HOME;
 	}
 
 	public ProfessorMenu recordEnter(RecordController rcController) {
-		System.out.println("현재 맡은 강의 목록을 출력합니다");
+		System.out.println(ProfessorMenu.RECORD_ENTER.getMenuString());
 		List<RecordVO> rcProfessor = rcController.selectSub();
 		for (RecordVO vo : rcProfessor) {
 			System.out.println(vo.recordToString());
@@ -137,20 +162,26 @@ public class StudentPortalView {
 		System.out.println();
 		System.out.print("강의를 선택하세요>> ");
 		String audLec = ScannerUtil.nextLine();
-		List<RecordVO> stu = rcController.selectStu(audLec);
-		for (RecordVO vo : stu) {
-			System.out.println(vo.allToString());
-		}
-		stu.clear();
-		System.out.print("성적을 입력할 학생을 선택하세요>> ");
-		String audNo = ScannerUtil.nextLine();
-		System.out.print("학생의 원점수를 입력하세요>> ");
-		String sc = ScannerUtil.nextLine();
-		int updateRc = rcController.updateRc(new RecordVO(audNo, sc));
-		if (updateRc == 1) {
-			System.out.println("등록성공");
-		} else {
-			System.out.println("등록실패");
+		while(true) {
+			List<RecordVO> stu = rcController.selectStu(audLec);
+			for (RecordVO vo : stu) {
+				System.out.println(vo.allToString());
+			}
+			System.out.println("성적입력을 취소하려면 학생번호에 0을 입력하세요.");
+			System.out.print("성적을 입력할 학생의 학생번호를 선택하세요>> ");
+			String audNo = ScannerUtil.nextLine();
+			if(cancel(audNo)) {
+				break;
+			}
+			System.out.print("학생의 원점수를 입력하세요>> ");
+			String sc = ScannerUtil.nextLine();
+			int updateRc = rcController.updateRc(new RecordVO(audNo, sc));
+			if (updateRc == 1) {
+				System.out.println("성적이 입력되었습니다.");
+			} else {
+				System.out.println("유효하지 않은 입력입니다.");
+				System.out.println("입력한 정보를 확인해주세요.");
+			}
 		}
 		return ProfessorMenu.HOME;
 	}

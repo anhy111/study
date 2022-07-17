@@ -72,4 +72,12 @@ public class LectureService {
 			return 0;
 		}
 	}
+
+	public String selectOneAud(String lecNo, SignVO session) {
+		try {
+			return lectureDAO.selectOneAud(lecNo,session);
+		} catch(Exception e) {
+			return null;
+		}
+	}
 }

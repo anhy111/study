@@ -154,4 +154,7 @@ public class LectureVO {
 		
 		return list;
 	}
+	public String audString() {
+		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, proNm, rmNm, countAdu);
+	}
 }

@@ -44,5 +44,10 @@ public class LectureController {
 	public int updateLecture(LectureVO vo) {
 		return lectureService.updateStudent(vo);
 	}
+
+	public String selectOneAud(String lecNo) {
+		return lectureService.selectOneAud(lecNo,session);
+		
+	}
 	
 }

@@ -57,7 +57,7 @@ public class Main {
 									StudentMenu stdMenu = StudentMenu.findMenu(intMenu);
 									switch (stdMenu) {
 										case AUDIT_SIGN:
-											stdMenu = view.auditSign(lectureController);
+											stdMenu = view.auditSign(lectureController,recordController);
 											break;
 										case ALL_RECORD:
 											stdMenu = view.allRecord(recordController);

@@ -7,29 +7,33 @@ import sign.SignVO;
 
 public class RecordController {
 	private static SignVO session = Main.getSession();
-	private static RecordController rcController = new RecordController();
-	private RecordService rcService = RecordService.getInstance();
+	private static RecordController instance = new RecordController();
+	private RecordService recordService = RecordService.getInstance();
 
 	private RecordController() {
 	}
 
 	public static RecordController getInstance() {
-		return rcController;
+		return instance;
 	}
 	
 	public List<RecordVO> selectStu(String lecNo) {
-		return rcService.selectStu(lecNo);
+		return recordService.selectStu(lecNo);
 	}
 	public List<RecordVO> selectSub() {
-		return rcService.selectSub(session);
+		return recordService.selectSub(session);
+	}
+	
+	public int insertRecord(String audNo) {
+		return recordService.insertRecord(audNo);
 	}
 	
 	public int updateRc(RecordVO vo) {
-		return rcService.updateRc(vo);
+		return recordService.updateRc(vo);
 	}
 	
 	public List<RecordVO> rcStudentSelect() {
-		return rcService.rcStudentSelect(session);
+		return recordService.rcStudentSelect(session);
 	
 }
 }
