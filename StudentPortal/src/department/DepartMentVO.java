@@ -2,102 +2,42 @@ package department;
 
 public class DepartMentVO {
 	//필드
-	private String stuNo;
-	private String stuDep;
-	private String stuNm;
-	private String stuEm;
-	private String stuPneNo;
-	private String stuGrd;
-	private String stuAcdSt;
-	private String stuBir;
+	private String depNo;
+	private String depNm;
+	private String depPne;
 	
 	//생성자
 	public DepartMentVO() {}
-	
-	public DepartMentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt, String stuDep,
-			String stuBir) {
-		this.stuNo = stuNo;
-		this.stuNm = stuNm;
-		this.stuEm = stuEm;
-		this.stuPneNo = stuPneNo;
-		this.stuGrd = stuGrd;
-		this.stuAcdSt = stuAcdSt;
-		this.stuBir = stuBir;
-		this.stuDep = stuDep;
-		}
 
-	//메소드
-	public String getStuNo() {
-		return stuNo;
+	public DepartMentVO(String depNo, String depNm, String depPne) {
+		this.depNo = depNo;
+		this.depNm = depNm;
+		this.depPne = depPne;
 	}
 
-	public void setStuNo(String stuNo) {
-		this.stuNo = stuNo;
-	}
-	
-	
-
-	public String getStuNm() {
-		return stuNm;
+	public String getDepNo() {
+		return depNo;
 	}
 
-	public void setStuNm(String stuNm) {
-		this.stuNm = stuNm;
+	public void setDepNo(String depNo) {
+		this.depNo = depNo;
 	}
 
-	public String getStuDep() {
-		return stuDep;
+	public String getDepNm() {
+		return depNm;
 	}
 
-	public void setStuDep(String stuDep) {
-		this.stuDep = stuDep;
-	}
-	
-	public String getStuEm() {
-		return stuEm;
+	public void setDepNm(String depNm) {
+		this.depNm = depNm;
 	}
 
-	public void setStuEm(String stuEm) {
-		this.stuEm = stuEm;
+	public String getDepPne() {
+		return depPne;
 	}
 
-	public String getStuPneNo() {
-		return stuPneNo;
+	public void setDepPne(String depPne) {
+		this.depPne = depPne;
 	}
-
-	public void setStuPneNo(String stuPneNo) {
-		this.stuPneNo = stuPneNo;
-	}
-
-	public String getStuGrd() {
-		return stuGrd;
-	}
-
-	public void setStuGrd(String stuGrd) {
-		this.stuGrd = stuGrd;
-	}
-
-	public String getStuAcdSt() {
-		return stuAcdSt;
-	}
-
-	public void setStuAcdSt(String stuAcdSt) {
-		this.stuAcdSt = stuAcdSt;
-	}
-
-	public String getStuBir() {
-		return stuBir;
-	}
-
-	public void setStuBir(String stuBir) {
-		this.stuBir = stuBir;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuDep, stuBir); 
-	}
-	
 	
 	
 }

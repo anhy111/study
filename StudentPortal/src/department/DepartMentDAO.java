@@ -23,41 +23,28 @@ public class DepartMentDAO {
 		return studentDAO;
 	}
 	
-	public List<DepartMentVO> selectStudent() throws Exception {
-			DriverManager.registerDriver(new OracleDriver());
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
-			Statement statement = connection.createStatement();
-			StringBuilder builder = new StringBuilder();
-			builder.append(" SELECT");
-			builder.append("     stu_no,");
-			builder.append("     stu_nm,");
-			builder.append("     stu_em,");
-			builder.append("     stu_pne_no,");
-			builder.append("     stu_grd,");
-			builder.append("     stu_acd_st,");
-			builder.append("     dep_nm,");
-			builder.append("     stu_bir");
-			builder.append(" FROM");
-			builder.append("     stu,");
-			builder.append("     dep");
-			builder.append(" WHERE");
-			builder.append("     stu_dep = dep_no");
-			String sql = builder.toString();
-			
-			ResultSet resultSet = statement.executeQuery(sql);
-			
-			ArrayList<DepartMentVO> list = new ArrayList<>();
-			while(resultSet.next()) {
-				String stuNo = resultSet.getString("stu_no");
-				String stuNm = resultSet.getString("stu_nm");
-				String stuEm = resultSet.getString("stu_em");
-				String stuPneNo = resultSet.getString("stu_pne_no");
-				String stuGrd = resultSet.getString("stu_grd");
-				String stuAcdSt = resultSet.getString("stu_acd_st");
-				String dep_nm = resultSet.getString("dep_nm");
-				String stuBir = resultSet.getString("stu_bir");
-				list.add(new DepartMentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, dep_nm, stuBir));
-			}
+	public List<DepartMentVO> selectDepartment() throws Exception {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
+		Statement statement = connection.createStatement();
+		StringBuilder builder = new StringBuilder();
+		builder.append(" SELECT");
+		builder.append("     dep_no,");
+		builder.append("     dep_nm,");
+		builder.append("     dep_pne");
+		builder.append(" FROM");
+		builder.append("     dep");
+		String sql = builder.toString();
+		
+		ResultSet resultSet = statement.executeQuery(sql);
+		
+		ArrayList<DepartMentVO> list = new ArrayList<>();
+		while(resultSet.next()) {
+			String depNo = resultSet.getString("dep_no");
+			String depNm = resultSet.getString("dep_nm");
+			String depPne = resultSet.getString("dep_pne");
+			list.add(new DepartMentVO(depNo, depNm, depPne));
+		}
 		resultSet.close();
 		statement.close();
 		connection.close();
@@ -65,26 +52,16 @@ public class DepartMentDAO {
 		
 	}
 	
-	public int insertStudent(DepartMentVO vo) throws Exception{
+	public int insertDepartment(DepartMentVO vo) throws Exception{
 		
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
 		StringBuilder builder = new StringBuilder();
 		builder.append("INSERT INTO stu (");
-		builder.append("    stu_no,");
-		builder.append("    stu_nm,");
-		builder.append("    stu_em,");
-		builder.append("    stu_pne_no,");
-		builder.append("    stu_grd,");
-		builder.append("    stu_acd_st,");
-		builder.append("    stu_dep,");
-		builder.append("    stu_bir");
+		builder.append("    dep_no,");
+		builder.append("    dep_nm,");
+		builder.append("    dep_pne");
 		builder.append(") VALUES (");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
 		builder.append("    ?,");
 		builder.append("    ?,");
 		builder.append("    ?");
@@ -92,14 +69,9 @@ public class DepartMentDAO {
 
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, vo.getStuNo());
-		statement.setString(2, vo.getStuNm());
-		statement.setString(3, vo.getStuEm());
-		statement.setString(4, vo.getStuPneNo());
-		statement.setString(5, vo.getStuGrd());
-		statement.setString(6, vo.getStuAcdSt());
-		statement.setString(7, vo.getStuDep());
-		statement.setString(8, vo.getStuBir());
+		statement.setString(1, vo.getDepNo());
+		statement.setString(2, vo.getDepNm());
+		statement.setString(3, vo.getDepPne());
 		
 		int executeUpdate = statement.executeUpdate();
 		statement.close();

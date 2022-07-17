@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,10 @@ public class ProfessorDAO {
 		StringBuilder builder = new StringBuilder();
 		builder.append(" SELECT");
 		builder.append("     pro_no,");
-		builder.append("     pro_dep,");
 		builder.append("     pro_nm,");
-		builder.append("     dep_nm,");
-		builder.append("     pro_pne_no,");
 		builder.append("     pro_em,");
+		builder.append("     pro_pne_no,");
+		builder.append("     dep_nm,");
 		builder.append("     pro_bir");
 		builder.append(" FROM");
 		builder.append("     pro,");
@@ -44,13 +44,12 @@ public class ProfessorDAO {
 		while (resultSet.next()) {
 
 			String proNo = resultSet.getString("pro_no");
-			String proDep = resultSet.getString("pro_dep");
 			String proNm = resultSet.getString("pro_nm");
-			String depNm = resultSet.getString("dep_nm");
-			String proPneNo = resultSet.getString("pro_pne_no");
 			String proEm = resultSet.getString("pro_em");
+			String proPneNo = resultSet.getString("pro_pne_no");
+			String proDep = resultSet.getString("dep_nm");
 			String proBir = resultSet.getString("pro_bir");
-			list.add(new ProfessorVO(proNo, proDep, proNm, depNm, proPneNo, proEm, proBir.substring(0, 9)));
+			list.add(new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9)));
 		}
 
 		resultSet.close();
@@ -59,6 +58,43 @@ public class ProfessorDAO {
 
 		return list;
 
+	}
+	public ProfessorVO selectOneProfessor() throws SQLException {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
+				"java");
+		StringBuilder builder = new StringBuilder();
+		builder.append(" SELECT");
+		builder.append("     pro_no,");
+		builder.append("     pro_nm,");
+		builder.append("     pro_em,");
+		builder.append("     pro_pne_no,");
+		builder.append("     dep_nm,");
+		builder.append("     pro_bir");
+		builder.append(" FROM");
+		builder.append("     pro,");
+		builder.append("     dep");
+		builder.append(" WHERE");
+		builder.append("     pro_dep = dep_no");
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+		ProfessorVO vo = null;
+		if(resultSet.next()) {
+			String proNo = resultSet.getString("pro_no");
+			String proNm = resultSet.getString("pro_nm");
+			String proEm = resultSet.getString("pro_em");
+			String proPneNo = resultSet.getString("pro_pne_no");
+			String proDep = resultSet.getString("dep_nm");
+			String proBir = resultSet.getString("pro_bir");
+			vo = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9));
+		}
+
+		resultSet.close();
+		statement.close();
+		connection.close();
+
+		return vo;
 	}
 
 	// 교수 추가

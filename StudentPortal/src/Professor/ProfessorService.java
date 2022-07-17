@@ -22,6 +22,16 @@ public class ProfessorService {
 			return null;
 		}
 	}
+	
+	public ProfessorVO OneProfessor() {
+		try {
+			return professorDAO.selectOneProfessor();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public int insertProfessor(ProfessorVO vo) {
 		try {
 		return professorDAO.insertProfessor(vo);

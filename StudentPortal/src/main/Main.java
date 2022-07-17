@@ -29,7 +29,13 @@ public class Main {
 		new Main().run();
 		ScannerUtil.close();
 	}
-	
+	// 학번, 교수번호 자동생성 만들기
+	// 학생은 1학년 재학을 필수로 입력.
+	// DB쿼리작성
+	//		학번, 사번 자동입력
+	// 학번은 현재년도 + 학과번호 + 연도와 학과가 같은 개인식별범위에서 max + 1
+	// 학생, 교수의 수정도 동일 학과가 변경되면 학번도 변경됨.
+	// 기본키의 중복제약조건에 걸리지 않으면 기본키도 변경가능
 	public void run() {
 		MainLoop:
 		while(true) {
@@ -102,7 +108,7 @@ public class Main {
 														adminMenu = view.studentList(studentController);
 														break;
 													case STUDENT_INSERT:
-														adminMenu = view.studentInsert(studentController);
+														adminMenu = view.studentInsert(studentController,depController);
 														break;
 													case STUDENT_UPDATE:
 														adminMenu = view.studentUpdate(studentController,depController);
@@ -123,10 +129,10 @@ public class Main {
 														adminMenu = view.professorList(professorController);
 														break;
 													case PROFESSOR_INSERT:
-														adminMenu = view.professorInsert(professorController);
+														adminMenu = view.professorInsert(professorController,depController);
 														break;
 													case PROFESSOR_UPDATE:
-														adminMenu = view.professorUpdate(professorController);
+														adminMenu = view.professorUpdate(professorController,depController);
 														break;
 													case PROFESSOR_DELETE:
 														adminMenu = view.professorDelete(professorController);

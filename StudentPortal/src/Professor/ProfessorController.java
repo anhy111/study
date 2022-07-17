@@ -13,8 +13,11 @@ public class ProfessorController {
 		return professorController;
 	}
 	
-	public List<ProfessorVO> professor() {
+	public List<ProfessorVO> selectProfessor() {
 		return professorService.professor();
+	}
+	public ProfessorVO selectOneProfessor() {
+		return professorService.OneProfessor();
 	}
 	public int insertProfessor(ProfessorVO vo) {
 		return professorService.insertProfessor(vo);

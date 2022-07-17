@@ -15,19 +15,19 @@ public class DepartMentService {
 		return studentService;
 	}
 	
-	public List<DepartMentVO> selectStudent() {
+	public List<DepartMentVO> selectDepartment() {
 		
 		try {
-			return studentDAO.selectStudent();
+			return studentDAO.selectDepartment();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
-	public int insertStudent(DepartMentVO vo) {
+	public int insertDepartment(DepartMentVO vo) {
 		try {
-			return studentDAO.insertStudent(vo);
+			return studentDAO.insertDepartment(vo);
 		} catch (Exception e) {
 			return 0;
 		}

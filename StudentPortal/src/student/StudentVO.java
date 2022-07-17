@@ -1,5 +1,8 @@
 package student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentVO {
 	//필드
 	private String stuNo;
@@ -30,6 +33,25 @@ public class StudentVO {
 		this.stuBir = stuBir;
 	}
 
+
+	public StudentVO( String stuNm, String stuEm, String stuPneNo, String stuDep, String stuBir) {
+		this.stuNm = stuNm;
+		this.stuEm = stuEm;
+		this.stuPneNo = stuPneNo;
+		this.stuDep = stuDep;
+		this.stuBir = stuBir;
+	}
+	
+	public StudentVO(String stuNo, List<String> list) {
+		this.stuNo = stuNo;
+		this.stuNm = list.get(0);
+		this.stuEm = list.get(1);
+		this.stuPneNo = list.get(2);
+		this.stuGrd = list.get(3);
+		this.stuAcdSt = list.get(4);
+		this.stuDep = list.get(5);
+		this.stuBir = list.get(6);
+	}
 
 	//메소드
 	public String getStuNo() {
@@ -102,8 +124,15 @@ public class StudentVO {
 				"%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t", stuNo, stuDep, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
 	}
 
-	
-	
-	
-	
+	public List<String> getUpdateInfo() {
+		List<String> list = new ArrayList<>();
+		list.add(stuNm);
+		list.add(stuEm);
+		list.add(stuPneNo);
+		list.add(stuGrd);
+		list.add(stuAcdSt);
+		list.add(stuDep);
+		list.add(stuBir);
+		return list;
+	}
 }

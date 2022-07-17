@@ -110,6 +110,8 @@ public class StudentDAO {
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
 		StringBuilder builder = new StringBuilder();
 		builder.append("INSERT INTO stu (");
+		
+		//학번 자동생성하도록 쿼리문 수정할 것
 		builder.append("    stu_no,");
 		builder.append("    stu_nm,");
 		builder.append("    stu_em,");
@@ -123,8 +125,8 @@ public class StudentDAO {
 		builder.append("    ?,");
 		builder.append("    ?,");
 		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
+		builder.append("    1,");
+		builder.append("    '재학',");
 		builder.append("    ?,");
 		builder.append("    ?");
 		builder.append(")");
@@ -155,10 +157,12 @@ public class StudentDAO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("  UPDATE pro     ");
 		builder.append("      SET     ");
+		
+		//학과가 변경되면 학번도 변경되도록 수정
 		builder.append("          stu_dep = ?,     ");
 		builder.append("          stu_nm = ?,     ");
 		builder.append("          stu_em = ?,     ");
-		builder.append("          stu_pne_no = ?,     ");
+		builder.append("          stu_pne_no = ?,  ");
 		builder.append("          stu_grd = ?,     ");
 		builder.append("          stu_em = ?,     ");
 		builder.append("          stu_bir = ?     ");
@@ -180,8 +184,7 @@ public class StudentDAO {
 		return executeUpdate;
 	}
 
-	// 교수 제거
-	// 관리자가 교수를 삭제
+	
 	public int deleteStudent(StudentVO vo) throws Exception {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",

@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Professor.ProfessorController;
@@ -10,6 +11,7 @@ import common.ProfessorMenu;
 import common.ScannerUtil;
 import common.StudentMenu;
 import department.DepartMentController;
+import department.DepartMentVO;
 import lecture.LectureController;
 import lecture.LectureVO;
 import record.RecordVO;
@@ -155,39 +157,36 @@ public class StudentPortalView {
 	public AdminMenu studentList(StudentController studentController) {
 		System.out.println(AdminMenu.STUDENT_LIST.getMenuString());
 		List<StudentVO> list = studentController.selectStudent();
+		System.out.println();
 		for (StudentVO vo : list) {
 			System.out.println(vo);
 		}
+		System.out.println();
 		return AdminMenu.STUDENT_MANAGEMENT;
 	}
 	
-	public AdminMenu studentInsert(StudentController studentController) {
+	//1학년 재학만 입력받음.
+	public AdminMenu studentInsert(StudentController studentController, DepartMentController depController) {
 		while (true) {
 			System.out.print(AdminMenu.STUDENT_INSERT.getMenuString());
-			System.out.println("입력을 취소하려면 학생번호에 0을 입력하세요.");
-			//학생번호 자동생성
-			System.out.print("학생번호를 입력하세요(예: 202001001)>>");
-			String stuNo = ScannerUtil.nextLine();
-			if (cancel(stuNo)) {
-				break;
-			}
-			//학과출력
-			System.out.print("학과번호를 입력하세요>>");
-			String stuDep = ScannerUtil.nextLine();
+			studentList(studentController);
+			System.out.println("입력을 취소하려면 학생명에 0을 입력하세요.");
 			System.out.print("이름을 입력하세요>>");
 			String stuNm = ScannerUtil.nextLine();
-			System.out.print("이메일을 입력하세요>>");
+			if (cancel(stuNm)) {
+				break;
+			}
+			System.out.print("E-mail을 입력하세요>>");
 			String stuEm = ScannerUtil.nextLine();
 			System.out.print("전화번호를 입력하세요>>");
 			String stuPneNo = ScannerUtil.nextLine();
-			System.out.print("학년을 입력하세요>>");
-			String stuGrd = ScannerUtil.nextLine();
-			System.out.print("학적을 입력하세요>>");
-			String stuAcdSt = ScannerUtil.nextLine();
+			departmentList(depController);
+			System.out.print("학과번호를 입력하세요>>");
+			String stuDep = ScannerUtil.nextLine();
 			System.out.print("생년월일을 입력하세요(예: 950102)>>");
 			String stuBir = ScannerUtil.nextLine();
 			int insertStudent = studentController
-					.insertStudent(new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuDep, stuBir));
+					.insertStudent(new StudentVO(stuNm, stuEm, stuPneNo, stuDep, stuBir));
 			if (insertStudent == 1) {
 				System.out.println("\n학생이 등록되었습니다.");
 				break;
@@ -201,114 +200,126 @@ public class StudentPortalView {
 
 	public AdminMenu studentUpdate(StudentController studentController, DepartMentController depController) {
 		System.out.print(AdminMenu.STUDENT_UPDATE.getMenuString());
-		List<StudentVO> list = studentController.selectStudent();
-		for(StudentVO vo : list) {
-			System.out.println(vo);
-		}
-		System.out.println("수정을 취소하려면 학생번호에 0을 입력하세요.");
-		System.out.print("정보 변경을 원하는 학생의 학생번호를 입력하세요>> ");
-		String stuNo = ScannerUtil.nextLine();
-		if(cancel(stuNo)) {
-			return AdminMenu.STUDENT_MANAGEMENT;
-		}
-		StudentVO selectOneStudent = studentController.selectOneStudent(new StudentVO(stuNo));
-		System.out.println(selectOneStudent);
-		System.out.println();
-		System.out.print("변경할 학생명를 입력하세요>> ");
-		String stuNm = ScannerUtil.nextLine();
-		System.out.print("변경할 E-mail을 입력하세요>> ");
-		String stuEm = ScannerUtil.nextLine();
-		System.out.print("변경할 전화번호를 입력하세요>> ");
-		String stuPne = ScannerUtil.nextLine();
-		System.out.print("변경할 학년을 입력하세요>> ");
-		String stuGrd = ScannerUtil.nextLine();
-		System.out.print("변경할 학적상태를 입력하세요>>");
-		String stuAcdSt = ScannerUtil.nextLine();
-		//학과출력
-		System.out.print("변경할 학과번호를 입력하세요>> ");
-		String stuDep = ScannerUtil.nextLine();
-		System.out.print("변경할 생년월일을 입력하세요(예: 950102)>> ");
-		String stuBir = ScannerUtil.nextLine();
-		System.out.println("정보를 변경하시겠습니까? (y or n)");
-		String yesOrNo = ScannerUtil.nextLine();
-		if(yesOrNo.equalsIgnoreCase("y")) {
-			int updateStudent = studentController
-					.updateStudent(new StudentVO(stuNo, stuNm, stuEm, stuPne, stuGrd, stuAcdSt, stuDep, stuBir));
-			if (updateStudent == 1) {
-				System.out.println("수정 성공");
-			} else {
-				System.out.println("수정 실패");
+		while(true) {
+			studentList(studentController);
+			System.out.println("수정을 취소하려면 학생번호에 0을 입력하세요.");
+			System.out.print("정보 변경을 원하는 학생의 학생번호를 입력하세요>> ");
+			String stuNo = ScannerUtil.nextLine();
+			if(cancel(stuNo)) {
+				break;
 			}
-		}else {
-			System.out.println("수정을 취소합니다.");
+			StudentVO selectOneStudent = studentController.selectOneStudent(new StudentVO(stuNo));
+			System.out.println(selectOneStudent);
+			System.out.println("현재 기록된 학생상태입니다.");
+			System.out.println("변경할 학생정보를 입력하세요.");
+			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
 			System.out.println();
+			List<String> afterUpdate = new ArrayList<>();
+			System.out.print("변경할 학생명를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 E-mail을 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 전화번호를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 학년을 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 학적상태를 입력하세요>>");
+			afterUpdate.add(ScannerUtil.nextLine());
+			departmentList(depController);
+			System.out.print("변경할 학과번호를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 생년월일을 입력하세요(예: 950102)>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
+			String yesOrNo = ScannerUtil.nextLine();
+			if(yesOrNo.equalsIgnoreCase("y")) {
+				List<String> beforeUpdate = selectOneStudent.getUpdateInfo();
+				for(int i=0; i<afterUpdate.size(); i++) {
+					if(afterUpdate.get(i).equals("0")) {
+						afterUpdate.set(i, beforeUpdate.get(i));
+					}
+				}
+				int updateStudent = studentController
+						.updateStudent(new StudentVO(stuNo, afterUpdate));
+				if (updateStudent == 1) {
+					System.out.println("학생이 수정되었습니다.");
+					break;
+				} else {
+					System.out.println("유효하지 않은 입력입니다.");
+					System.out.println("입력한 정보를 확인해주세요.");
+				}
+			}else {
+				System.out.println("수정을 취소합니다.");
+				System.out.println();
+			}
 		}
-		
 		return AdminMenu.STUDENT_MANAGEMENT;
 	}
 	
 	public AdminMenu studentDelete(StudentController studentController) {
-		System.out.print(AdminMenu.PROFESSOR_DELETE.getMenuString());
-		List<StudentVO> list = studentController.selectStudent();
-		for(StudentVO vo : list) {
-			System.out.println(vo);
-		}
-		System.out.println("삭제를 취소하려면 학생번호에 0을 입력하세요.");
-		System.out.print("삭제할 학생의 학생번호를 입력하세요>> ");
-		String stuNo = ScannerUtil.nextLine();
-		if(cancel(stuNo)) {
-			System.out.println("삭제를 취소합니다.");
-			return AdminMenu.STUDENT_MANAGEMENT;
-		}
-		StudentVO studentVO = studentController.selectOneStudent(new StudentVO(stuNo));
-		System.out.println(studentVO);
-		System.out.println("위 학생을 삭제하시겠습니까?(y or n)");
-		String yesOrNo = ScannerUtil.nextLine();
-		if(yesOrNo.equalsIgnoreCase("y")) {
-			int deleteProfessor = studentController.deleteStudent(studentVO);
-			if(deleteProfessor ==1) {
-				System.out.println("삭제 성공");
-			} else {
-				System.out.println("삭제 실패");
+		while(true) {
+			System.out.print(AdminMenu.STUDENT_DELETE.getMenuString());
+			studentList(studentController);
+			System.out.println("삭제를 취소하려면 학생번호에 0을 입력하세요.");
+			System.out.print("삭제할 학생의 학생번호를 입력하세요>> ");
+			String stuNo = ScannerUtil.nextLine();
+			if(cancel(stuNo)) {
+				System.out.println("삭제를 취소합니다.");
+				return AdminMenu.STUDENT_MANAGEMENT;
 			}
-		} else {
-			System.out.println("삭제를 취소합니다.");
-			System.out.println();
+			StudentVO studentVO = studentController.selectOneStudent(new StudentVO(stuNo));
+			System.out.println(studentVO);
+			System.out.print("위 학생을 삭제하시겠습니까?(y or n) >>");
+			String yesOrNo = ScannerUtil.nextLine();
+			if(yesOrNo.equalsIgnoreCase("y")) {
+				int deleteProfessor = studentController.deleteStudent(studentVO);
+				if(deleteProfessor ==1) {
+					System.out.println("학생이 삭제되었습니다.");
+					return AdminMenu.STUDENT_MANAGEMENT;
+				} else {
+					System.out.println("유효하지 않은 입력입니다.");
+					System.out.println("입력한 정보를 확인해주세요.");
+				}
+			} else {
+				System.out.println("삭제를 취소합니다.");
+				System.out.println();
+			}
 		}
-		return AdminMenu.STUDENT_MANAGEMENT;
 	}
 	
 	public AdminMenu professorList(ProfessorController professorController) {
 		System.out.println(AdminMenu.PROFESSOR_LIST.getMenuString());
-		List<ProfessorVO> list = professorController.professor();
+		List<ProfessorVO> list = professorController.selectProfessor();
+		System.out.println();
 		for (ProfessorVO vo : list) {
 			System.out.println(vo);
 		}
+		System.out.println();
 		return AdminMenu.PROFESSOR_MANAGEMENT;
 	}
 	
-	public AdminMenu professorInsert(ProfessorController professorController) {
+	public AdminMenu professorInsert(ProfessorController professorController, DepartMentController depController) {
 		while (true) {
 			System.out.print(AdminMenu.PROFESSOR_INSERT.getMenuString());
-			System.out.println("입력을 취소하려면 교수번호에 0을 입력하세요.");
-			System.out.print("교수번호를 입력하세요(예: 2101001)>>");
-			String pfNo = ScannerUtil.nextLine();
-			if (cancel(pfNo)) {
-				break;
-			}
-			System.out.print("학과번호를 입력하세요>>");
-			String pfDep = ScannerUtil.nextLine();
+			professorList(professorController);
+			System.out.println("입력을 취소하려면 교수명에 0을 입력하세요.");
 			System.out.print("이름을 입력하세요>>");
 			String pfNm = ScannerUtil.nextLine();
-			System.out.print("이메일을 입력하세요>>");
+			if (cancel(pfNm)) {
+				break;
+			}
+			System.out.print("E-mail을 입력하세요>>");
 			String pfEm = ScannerUtil.nextLine();
 			System.out.print("전화번호를 입력하세요>>");
 			String pfPneNo = ScannerUtil.nextLine();
+			departmentList(depController);
+			System.out.print("학과번호를 입력하세요>>");
+			String pfDep = ScannerUtil.nextLine();
 			System.out.print("생년월일을 입력하세요(예: 950102)>>");
 			String pfBir = ScannerUtil.nextLine();
-			int insertStudent = professorController
-					.insertProfessor(new ProfessorVO(pfNo, pfDep, pfNm, pfEm, pfPneNo, pfBir));
-			if (insertStudent == 1) {
+			int insertProfessor = professorController
+					.insertProfessor(new ProfessorVO( pfNm, pfEm, pfPneNo, pfDep, pfBir));
+			if (insertProfessor == 1) {
 				System.out.println("\n교수가 등록되었습니다.");
 				break;
 			} else {
@@ -320,35 +331,58 @@ public class StudentPortalView {
 	}
 
 
-	public AdminMenu professorUpdate(ProfessorController professorController) {
+	public AdminMenu professorUpdate(ProfessorController professorController, DepartMentController depController) {
 		System.out.print(AdminMenu.PROFESSOR_UPDATE.getMenuString());
-		System.out.print("정보 변경을 원하는 교수의 교수번호를 입력하세요>> ");
-		String proNo = ScannerUtil.nextLine();
-		
-		System.out.print("변경할 학과번호를 입력하세요>> ");
-		String proDep = ScannerUtil.nextLine();
-		
-		System.out.print("변경할 교수명를 입력하세요>> ");
-		String proNm = ScannerUtil.nextLine();
-
-		System.out.print("변경할 전화번호를 입력하세요>> ");
-		String proPne = ScannerUtil.nextLine();
-
-		System.out.print("변경할 E-mail을 입력하세요>> ");
-		String proEm = ScannerUtil.nextLine();
-
-		System.out.print("변경할 생년월일을 입력하세요>> ");
-		String proBir = ScannerUtil.nextLine();
-
-		int updateProfessor = professorController
-				.updateProfessor(new ProfessorVO(proNo, proDep, proNm, proPne, proEm, proBir));
-		if (updateProfessor == 1) {
-			System.out.println("수정 성공");
-		} else {
-			System.out.println("수정 실패");
+		while(true) {
+			professorList(professorController);
+			System.out.println("수정을 취소하려면 교수번호에 0을 입력하세요.");
+			System.out.print("정보 변경을 원하는 교수의 교수번호를 입력하세요>> ");
+			String proNo = ScannerUtil.nextLine();
+			if(cancel(proNo)) {
+				return AdminMenu.PROFESSOR_MANAGEMENT;
+			}
+			ProfessorVO selectOneProfessor = professorController.selectOneProfessor();
+			System.out.println(selectOneProfessor);
+			System.out.println("현재 기록된 교수상태입니다.");
+			System.out.println("변경할 교수정보를 입력하세요.");
+			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
+			System.out.println();
+			List<String> afterUpdate = new ArrayList<>();
+			
+			System.out.print("변경할 교수명를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 E-mail을 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 전화번호를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			departmentList(depController);
+			System.out.print("변경할 학과번호를 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			System.out.print("변경할 생년월일을 입력하세요>> ");
+			afterUpdate.add(ScannerUtil.nextLine());
+			
+			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
+			String yesOrNo = ScannerUtil.nextLine();
+			if(yesOrNo.equalsIgnoreCase("y")) {
+				List<String> beforeUpdate = selectOneProfessor.getUpdateInfo();
+				for(int i=0; i<afterUpdate.size(); i++) {
+					if(afterUpdate.get(i).equals("0")) {
+						afterUpdate.set(i, beforeUpdate.get(i));
+					}
+				}
+				int updateProfessor = professorController
+						.updateProfessor(new ProfessorVO(proNo,afterUpdate));
+				if (updateProfessor == 1) {
+					System.out.println("교수가 수정되었습니다.");
+				} else {
+					System.out.println("유효하지 않은 입력입니다.");
+					System.out.println("입력한 정보를 확인해주세요.");
+				}
+			} else {
+				System.out.println("수정을 취소합니다.");
+				System.out.println();
+			}
 		}
-
-		return AdminMenu.PROFESSOR_MANAGEMENT;
 	}
 
 	public AdminMenu professorDelete(ProfessorController professorController) {
@@ -459,9 +493,18 @@ public class StudentPortalView {
 	}
 	
 	public AdminMenu departmentList(DepartMentController depController) {
-		return null;
+		System.out.println(AdminMenu.DEPARTMENT_LIST.getMenuString());
+		List<DepartMentVO> list = depController.selectDepartment();
+		System.out.println();
+		for (DepartMentVO vo : list) {
+			System.out.println(vo);
+		}
+		System.out.println();
+		return AdminMenu.DEPARTMENT_MANAGEMENT;
 	}
 	public AdminMenu departmentInsert(DepartMentController depController) {
+		
+		depController.insertDepartment(null);
 		return null;
 	}
 	public AdminMenu departmentUpdate(DepartMentController depController) {
