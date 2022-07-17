@@ -1,4 +1,4 @@
-package projectPrint;
+package common;
 
 public class printProject {
 	public static void main(String[] args) {
