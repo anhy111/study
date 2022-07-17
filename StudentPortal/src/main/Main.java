@@ -150,10 +150,11 @@ public class Main {
 														adminMenu = view.lectureList(lectureController);
 														break;
 													case LECTURE_INSERT:
-														adminMenu = view.lectureInsert(lectureController);
+														adminMenu = view.lectureInsert(lectureController,depController);
 														break;
 													case LECTURE_UPDATE:
-														adminMenu = view.lectureUpdate(lectureController);
+														adminMenu = view.lectureUpdate(lectureController,subController
+																							,depController);
 														break;
 													case HOME:
 														break SubMenu;
@@ -168,10 +169,12 @@ public class Main {
 														adminMenu = view.subjectList(subController);
 														break;
 													case SUBJECT_INSERT:
-														adminMenu = view.subjectInsert(subController);
+														adminMenu = view.subjectInsert(subController,professorController
+																						,roomController);
 														break;
 													case SUBJECT_UPDATE:
-														adminMenu = view.subjectUpdate(subController);
+														adminMenu = view.subjectUpdate(subController,professorController
+																						,roomController);
 														break;
 													case HOME:
 														break SubMenu;

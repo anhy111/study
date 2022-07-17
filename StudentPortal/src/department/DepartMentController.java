@@ -18,8 +18,19 @@ public class DepartMentController {
 	public List<DepartMentVO> selectDepartment() {
 		return depService.selectDepartment();
 	}
+	public DepartMentVO selectOneDepartment(DepartMentVO vo) {
+		return depService.selectOneDepartment(vo);
+	}
 	
 	public int insertDepartment(DepartMentVO vo) {
 		return depService.insertDepartment(vo);
+	}
+	
+	public int updateDepartment(DepartMentVO vo) {
+		return depService.updateDepartment(vo);
+	}
+	
+	public int deleteDepartment(DepartMentVO vo) {
+		return depService.deleteDepartment(vo);
 	}
 }

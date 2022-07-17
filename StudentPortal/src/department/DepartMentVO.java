@@ -1,5 +1,8 @@
 package department;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DepartMentVO {
 	//필드
 	private String depNo;
@@ -8,7 +11,9 @@ public class DepartMentVO {
 	
 	//생성자
 	public DepartMentVO() {}
-
+	public DepartMentVO(String depNo) {
+		this.depNo = depNo;
+	}
 	public DepartMentVO(String depNo, String depNm, String depPne) {
 		this.depNo = depNo;
 		this.depNm = depNm;
@@ -37,6 +42,12 @@ public class DepartMentVO {
 
 	public void setDepPne(String depPne) {
 		this.depPne = depPne;
+	}
+	public List<String> getUpdateInfo() {
+		List<String> list = new ArrayList<>();
+		list.add(depNm);
+		list.add(depPne);
+		return list;
 	}
 	
 	

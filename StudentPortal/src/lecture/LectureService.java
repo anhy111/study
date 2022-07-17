@@ -3,6 +3,7 @@ package lecture;
 import java.util.List;
 
 import sign.SignVO;
+import student.StudentVO;
 
 public class LectureService {
 	//필드
@@ -15,9 +16,18 @@ public class LectureService {
 	public static LectureService getInstance() {
 		return lectureService;
 	}
+	
 	public List<LectureVO> selectLecture() {
 		try {
 			return lectureDAO.selectLecture();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public LectureVO selectOneLecture(LectureVO vo) {
+		try {
+			return lectureDAO.selectOneLecture(vo);
 		} catch (Exception e) {
 			return null;
 		}
@@ -54,4 +64,12 @@ public class LectureService {
 			return 0;
 		}
    }
+
+	public int updateStudent(LectureVO vo) {
+		try {
+			return lectureDAO.updateLecture(vo);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }

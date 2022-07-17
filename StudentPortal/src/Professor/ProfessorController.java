@@ -16,8 +16,8 @@ public class ProfessorController {
 	public List<ProfessorVO> selectProfessor() {
 		return professorService.professor();
 	}
-	public ProfessorVO selectOneProfessor() {
-		return professorService.OneProfessor();
+	public ProfessorVO selectOneProfessor(ProfessorVO vo) {
+		return professorService.OneProfessor(vo);
 	}
 	public int insertProfessor(ProfessorVO vo) {
 		return professorService.insertProfessor(vo);

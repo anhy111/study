@@ -1,4 +1,4 @@
-package main;
+package copy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -734,29 +734,10 @@ public class StudentPortalView {
 			System.out.println(AdminMenu.DEPARTMENT_DELETE.getMenuString());
 			departmentList(depController);
 			System.out.println("삭제를 취소하려면 학과번호에 0을 입력하세요.");
-			System.out.print("삭제할 학과의 학과번호를 입력하세요>> ");
-			String depNo = ScannerUtil.nextLine();
-			if(cancel(depNo)) {
+			System.out.print("삭제할 학생의 학과번호를 입력하세요>> ");
+			String stuNo = ScannerUtil.nextLine();
+			if(cancel(stuNo)) {
 				System.out.println("삭제를 취소합니다.");
-				break;
-			}
-			DepartMentVO departMentVO = depController.selectOneDepartment(new DepartMentVO(depNo));
-			System.out.println(departMentVO);
-			System.out.print("위 학과를 삭제하시겠습니까?(y or n) >>");
-			String yesOrNo = ScannerUtil.nextLine();
-			if(yesOrNo.equalsIgnoreCase("y")) {
-				int deleteProfessor = depController.deleteDepartment(new DepartMentVO(depNo));
-				if(deleteProfessor ==1) {
-					System.out.println("교수가 삭제되었습니다.");
-					break;
-				} else {
-					System.out.println("유효하지 않은 입력입니다.");
-					System.out.println("학과에 소속된 학생, 교수 또는 강의의 개설학과가 존재하면 삭제할 수 없습니다.");
-					System.out.println("학과에 소속된 학생, 교수 또는 강의의 개설학과를 수정 후 삭제할 수 있습니다.");
-				}
-			}else {
-				System.out.println("삭제를 취소합니다.");
-				System.out.println();
 				break;
 			}
 		}

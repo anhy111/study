@@ -2,100 +2,36 @@ package room;
 
 public class RoomVO {
 	//필드
-	private String stuNo;
-	private String stuDep;
-	private String stuNm;
-	private String stuEm;
-	private String stuPneNo;
-	private String stuGrd;
-	private String stuAcdSt;
-	private String stuBir;
+	private String rmNo;
+	private String rmNm;
 	
 	//생성자
 	public RoomVO() {}
-	
-	public RoomVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt, String stuDep,
-			String stuBir) {
-		this.stuNo = stuNo;
-		this.stuNm = stuNm;
-		this.stuEm = stuEm;
-		this.stuPneNo = stuPneNo;
-		this.stuGrd = stuGrd;
-		this.stuAcdSt = stuAcdSt;
-		this.stuBir = stuBir;
-		this.stuDep = stuDep;
-		}
 
-	//메소드
-	public String getStuNo() {
-		return stuNo;
+	public RoomVO(String rmNo, String rmNm) {
+		this.rmNo = rmNo;
+		this.rmNm = rmNm;
 	}
 
-	public void setStuNo(String stuNo) {
-		this.stuNo = stuNo;
-	}
-	
-	
-
-	public String getStuNm() {
-		return stuNm;
+	public String getRmNo() {
+		return rmNo;
 	}
 
-	public void setStuNm(String stuNm) {
-		this.stuNm = stuNm;
+	public void setRmNo(String rmNo) {
+		this.rmNo = rmNo;
 	}
 
-	public String getStuDep() {
-		return stuDep;
+	public String getRmNm() {
+		return rmNm;
 	}
 
-	public void setStuDep(String stuDep) {
-		this.stuDep = stuDep;
-	}
-	
-	public String getStuEm() {
-		return stuEm;
-	}
-
-	public void setStuEm(String stuEm) {
-		this.stuEm = stuEm;
-	}
-
-	public String getStuPneNo() {
-		return stuPneNo;
-	}
-
-	public void setStuPneNo(String stuPneNo) {
-		this.stuPneNo = stuPneNo;
-	}
-
-	public String getStuGrd() {
-		return stuGrd;
-	}
-
-	public void setStuGrd(String stuGrd) {
-		this.stuGrd = stuGrd;
-	}
-
-	public String getStuAcdSt() {
-		return stuAcdSt;
-	}
-
-	public void setStuAcdSt(String stuAcdSt) {
-		this.stuAcdSt = stuAcdSt;
-	}
-
-	public String getStuBir() {
-		return stuBir;
-	}
-
-	public void setStuBir(String stuBir) {
-		this.stuBir = stuBir;
+	public void setRmNm(String rmNm) {
+		this.rmNm = rmNm;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuDep, stuBir); 
+		return String.format("RoomVO [rmNo=%s, rmNm=%s]", rmNo, rmNm);
 	}
 	
 	

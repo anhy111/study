@@ -23,9 +23,9 @@ public class ProfessorService {
 		}
 	}
 	
-	public ProfessorVO OneProfessor() {
+	public ProfessorVO OneProfessor(ProfessorVO vo) {
 		try {
-			return professorDAO.selectOneProfessor();
+			return professorDAO.selectOneProfessor(vo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

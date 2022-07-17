@@ -1,5 +1,8 @@
 package lecture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LectureVO {
 	//필드
 	private String lecNo;
@@ -16,7 +19,9 @@ public class LectureVO {
 
 	//생성자
 	public LectureVO() {}
-	
+	public LectureVO(String lecNo) {
+		this.lecNo = lecNo;
+	}
 	public LectureVO(String lecNo, String yr, String sem, String lecSub, String lecDep, String lecTm, String lecWk) {
 		this.lecNo = lecNo;
 		this.lecSub = lecSub;
@@ -41,6 +46,15 @@ public class LectureVO {
 		this.countAdu = countAdu;
 	}
 
+	public LectureVO(String lecNo, List<String> list) {
+		this.lecNo = lecNo;
+		this.yr = list.get(0);
+		this.sem = list.get(1);
+		this.lecSub = list.get(2);
+		this.lecDep = list.get(3);
+		this.lecTm = list.get(4);
+		this.lecWk = list.get(5);
+	}
 	//메소드
 	public String getLecNo() {
 		return lecNo;
@@ -129,5 +143,15 @@ public class LectureVO {
 	public String listToString() {
 		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk);
 	}
-	
+	public List<String> getUpdateInfo(){
+		List<String> list = new ArrayList<>();
+		list.add(yr);
+		list.add(sem);
+		list.add(lecSub);
+		list.add(lecDep);
+		list.add(lecTm);
+		list.add(lecWk);
+		
+		return list;
+	}
 }

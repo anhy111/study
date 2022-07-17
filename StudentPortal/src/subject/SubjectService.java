@@ -23,6 +23,15 @@ public class SubjectService {
 		}
 	}
 	
+	public SubjectVO selectOneSub(SubjectVO vo) {
+		try {
+			return subDAO.selectOneSub(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public int insertSub(SubjectVO vo)   {
 		try {
 			return subDAO.insertSub(vo);

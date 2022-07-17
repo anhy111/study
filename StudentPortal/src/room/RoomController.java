@@ -5,7 +5,7 @@ import java.util.List;
 public class RoomController {
 	//필드
 	private static RoomController studentController = new RoomController();
-	private RoomService studentService = RoomService.getInstance();
+	private RoomService roomService = RoomService.getInstance();
 	
 	//생성자
 	private RoomController() {}
@@ -15,11 +15,23 @@ public class RoomController {
 		return studentController;
 	}
 	
-	public List<RoomVO> selectStudent() {
-		return studentService.selectStudent();
+	public List<RoomVO> selectRoom() {
+		return roomService.selectRoom();
 	}
 	
-	public int insertStudent(RoomVO vo) {
-		return studentService.insertStudent(vo);
+	public RoomVO selectOneRoom(RoomVO vo) {
+		return roomService.selectOneRoom(vo);
+	}
+	
+	public int insertRoom(RoomVO vo) {
+		return roomService.insertRoom(vo);
+	}
+	
+	public int updateRoom(RoomVO vo) {
+		return roomService.updateRoom(vo);
+	}
+	
+	public int deleteRoom(RoomVO vo) {
+		return roomService.deleteRoom(vo);
 	}
 }

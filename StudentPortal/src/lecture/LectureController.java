@@ -4,6 +4,7 @@ import java.util.List;
 
 import main.Main;
 import sign.SignVO;
+import student.StudentVO;
 
 public class LectureController {
 	//필드
@@ -22,6 +23,9 @@ public class LectureController {
 	public List<LectureVO> selectLecture() {
 		return lectureService.selectLecture();
 	}
+	public LectureVO selectOneLecture(LectureVO vo) {
+		return lectureService.selectOneLecture(vo);
+	}
 	
 	public int LectureInsert(LectureVO vo) {
 		return lectureService.LectureInsert(vo);
@@ -36,5 +40,9 @@ public class LectureController {
 	public int audInsert(String vo) {
 		return lectureService.audInsert(vo, session);
 	}   
+	
+	public int updateLecture(LectureVO vo) {
+		return lectureService.updateStudent(vo);
+	}
 	
 }

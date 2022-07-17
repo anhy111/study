@@ -68,7 +68,6 @@ public class StudentDAO {
 	public StudentVO selectOneStudent(StudentVO vo) throws SQLException {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
-		Statement statement = connection.createStatement();
 		StringBuilder builder = new StringBuilder();
 		builder.append(" SELECT");
 		builder.append("     stu_no,");
@@ -84,8 +83,10 @@ public class StudentDAO {
 		builder.append("     dep");
 		builder.append(" WHERE");
 		builder.append("     stu_dep = dep_no");
+		builder.append(" and    stu_no = ?");
 		String sql = builder.toString();
-		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setObject(1,vo.getStuNo());
 		ResultSet resultSet = statement.executeQuery(sql);
 		StudentVO studentVO = null;
 		if(resultSet.next()) {
@@ -155,7 +156,7 @@ public class StudentDAO {
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
 				"java");
 		StringBuilder builder = new StringBuilder();
-		builder.append("  UPDATE pro     ");
+		builder.append("  UPDATE stu     ");
 		builder.append("      SET     ");
 		
 		//학과가 변경되면 학번도 변경되도록 수정

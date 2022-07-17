@@ -59,7 +59,7 @@ public class ProfessorDAO {
 		return list;
 
 	}
-	public ProfessorVO selectOneProfessor() throws SQLException {
+	public ProfessorVO selectOneProfessor(ProfessorVO vo) throws SQLException {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
 				"java");
@@ -76,10 +76,12 @@ public class ProfessorDAO {
 		builder.append("     dep");
 		builder.append(" WHERE");
 		builder.append("     pro_dep = dep_no");
+		builder.append(" and    pro_no = ?");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setObject(1, vo.getProNo());
 		ResultSet resultSet = statement.executeQuery();
-		ProfessorVO vo = null;
+		ProfessorVO result = null;
 		if(resultSet.next()) {
 			String proNo = resultSet.getString("pro_no");
 			String proNm = resultSet.getString("pro_nm");
@@ -87,14 +89,14 @@ public class ProfessorDAO {
 			String proPneNo = resultSet.getString("pro_pne_no");
 			String proDep = resultSet.getString("dep_nm");
 			String proBir = resultSet.getString("pro_bir");
-			vo = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9));
+			result = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9));
 		}
 
 		resultSet.close();
 		statement.close();
 		connection.close();
 
-		return vo;
+		return result;
 	}
 
 	// 교수 추가

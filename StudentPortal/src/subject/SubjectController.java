@@ -18,11 +18,17 @@ public class SubjectController {
 	public List<SubjectVO> selectSub() {
 		return subService.selectSub();
 	}
+	
+	public SubjectVO selectOneSub(SubjectVO vo) {
+		return subService.selectOneSub(vo);
+	}
 	public int updateSub(SubjectVO vo) {
 		return subService.updateSub(vo);
 	}
 	public int insertSub(SubjectVO vo)   {
 		return subService.insertSub(vo);
 	}
+
+	
 
 }

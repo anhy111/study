@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,15 +42,14 @@ public class SubjectDAO {
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
-
 		while (resultSet.next()) {
 			String subNo = resultSet.getString("sub_no");
+			String subNm = resultSet.getString("sub_nm");
+			String comDiv = resultSet.getString("com_div");
 			String cre = resultSet.getString("cre");
 			String subPro = resultSet.getString("sub_pro");
 			String subRm = resultSet.getString("sub_rm");
-			String subNm = resultSet.getString("sub_nm");
-			String comDiv = resultSet.getString("com_div");
-			list.add(new SubjectVO(subNo, cre, subPro, subRm, subNm, comDiv));
+			list.add(new SubjectVO(subNo, subNm, comDiv, cre, subPro, subRm));
 		}
 
 		resultSet.close();
@@ -57,6 +57,42 @@ public class SubjectDAO {
 		connection.close();
 		return list;
 
+	}
+	
+	public SubjectVO selectOneSub(SubjectVO vo) throws Exception {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
+				"java");
+		StringBuilder builder = new StringBuilder();
+		builder.append(" SELECT");
+		builder.append("     sub_no,");
+		builder.append("     sub_nm,");
+		builder.append("     com_div,");
+		builder.append("     cre,");
+		builder.append("     sub_pro,");
+		builder.append("     sub_rm");
+		builder.append(" FROM");
+		builder.append("     sub ");
+		builder.append(" where sub_no = ?");
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setObject(1, vo.getSubNo());
+		ResultSet resultSet = statement.executeQuery();
+		SubjectVO result = null;
+		if (resultSet.next()) {
+			String subNo = resultSet.getString("sub_no");
+			String subNm = resultSet.getString("sub_nm");
+			String comDiv = resultSet.getString("com_div");
+			String cre = resultSet.getString("cre");
+			String subPro = resultSet.getString("sub_pro");
+			String subRm = resultSet.getString("sub_rm");
+			result = new SubjectVO(subNo, subNm, comDiv, cre, subPro, subRm);
+		}
+
+		resultSet.close();
+		statement.close();
+		connection.close();
+		return result;
 	}
 
 	// 과목 등록
@@ -110,8 +146,8 @@ public class SubjectDAO {
 		builder.append("   sub_nm = ?,   ");
 		builder.append("   com_div = ?,   ");
 		builder.append("   cre = ?,   ");
-		builder.append("   sub_rm = ?,   ");
-		builder.append("   sub_pro = ?   ");
+		builder.append("   sub_pro = ?,   ");
+		builder.append("   sub_rm = ?   ");
 		builder.append("   WHERE   ");
 		builder.append("       sub_no = ?   ");
 		String sql = builder.toString();
@@ -119,8 +155,8 @@ public class SubjectDAO {
 		statement.setObject(1, vo.getSubNm());
 		statement.setObject(2, vo.getComDiv());
 		statement.setObject(3, vo.getCre());
-		statement.setObject(4, vo.getSubRm());
-		statement.setObject(5, vo.getSubPro());
+		statement.setObject(4, vo.getSubPro());
+		statement.setObject(5, vo.getSubRm());
 		statement.setObject(6, vo.getSubNo());
 
 		int executeUpdate = statement.executeUpdate();
@@ -129,5 +165,7 @@ public class SubjectDAO {
 		return executeUpdate;
 
 	}
+
+	
 
 }
