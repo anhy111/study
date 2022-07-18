@@ -19,16 +19,14 @@ public class RecordService {
 		try {
 			return recordDAO.selectSub(vo);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public List<RecordVO> selectStu(String lecNo) {	// 학생목록(수강번호)
+	public List<RecordVO> selectStu(String lecNo,SignVO session) {	// 학생목록(수강번호)
 		try {
-			return recordDAO.selectStu(lecNo);
+			return recordDAO.selectStu(lecNo, session);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -38,8 +36,6 @@ public class RecordService {
 		try {
 			return recordDAO.updateRc(vo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -48,7 +44,6 @@ public class RecordService {
 		try {
 			return recordDAO.rcStudentSelect(session);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

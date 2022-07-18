@@ -35,6 +35,8 @@ public class DepartMentDAO {
 		builder.append("     dep_pne");
 		builder.append(" FROM");
 		builder.append("     dep");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 dep_no ");
 		String sql = builder.toString();
 		
 		ResultSet resultSet = statement.executeQuery(sql);

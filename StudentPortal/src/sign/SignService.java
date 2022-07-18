@@ -17,11 +17,19 @@ public class SignService {
 	
 
 	public int studentSign(SignVO vo) {
-		return signDAO.studentSign(vo);
+		try {
+			return signDAO.studentSign(vo);
+		}catch(Exception e) {
+			return 0;
+		}
 	}
 
 	public int professorSign(SignVO vo) {
-		return signDAO.professorSign(vo);
+		try {
+			return signDAO.professorSign(vo);
+		} catch(Exception e) {
+			return 0;
+		}
 	}
 	
 }

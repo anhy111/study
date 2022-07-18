@@ -34,10 +34,11 @@ public class StudentVO {
 	}
 
 
-	public StudentVO( String stuNm, String stuEm, String stuPneNo, String stuDep, String stuBir) {
+	public StudentVO( String stuNm, String stuEm, String stuPneNo,String stuGrd, String stuDep, String stuBir) {
 		this.stuNm = stuNm;
 		this.stuEm = stuEm;
 		this.stuPneNo = stuPneNo;
+		this.stuGrd = stuGrd;
 		this.stuDep = stuDep;
 		this.stuBir = stuBir;
 	}
@@ -120,9 +121,13 @@ public class StudentVO {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t", stuNo, stuDep, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
+		return String.format("%-10s\t%-10s\t%-5s\t\t%-23s\t%-10s\t%3s\t%-5s\t%-11s\t", stuNo, stuDep, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
 	}
+	public static String columnString() {
+		return String.format("%-10s\t%-10s\t%-5s\t\t%-18s\t%-10s\t%3s\t%-5s\t%-7s\t "
+				+"\n------------------------------------------------------------------------------------------------------------------", "학생번호", "학과", "학생이름", "이메일", "전화번호", "학년", "학적", "생년월일");
+	}
+
 
 	public List<String> getUpdateInfo() {
 		List<String> list = new ArrayList<>();

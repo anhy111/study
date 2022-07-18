@@ -29,6 +29,7 @@ public class LectureService {
 		try {
 			return lectureDAO.selectOneLecture(vo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

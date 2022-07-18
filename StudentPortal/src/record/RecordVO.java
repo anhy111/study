@@ -3,6 +3,7 @@ package record;
 public class RecordVO {
 	private String stuNm;//학생이름
 	private String audNo;//수강번호
+	private String lecNo;
 	private String sc;//점수
 	private String mk;//평점
 	private String rk;//등급
@@ -21,11 +22,11 @@ public class RecordVO {
 		this.sc = sc;
 	}
 	
-	public RecordVO(String audNo, String sc, String mk, String rk) {
-		this.audNo = audNo;
-		this.sc = sc;
-		this.mk = mk;
-		this.rk = rk;
+	public RecordVO(String lecNo, String subNm, String cre, String proNm) {
+		this.lecNo = audNo;
+		this.subNm = sc;
+		this.cre = mk;
+		this.proNm = rk;
 	}
 	
 	public RecordVO(String stuNm, String audNo, String sc, String mk, String rk) {
@@ -53,8 +54,12 @@ public class RecordVO {
 	
 	//메서드
 	
-	public String allToString() {
-		return String.format("%s \t %s \t %s \t %s \t %s", stuNm, audNo, sc, mk, rk);
+	public String getLecNo() {
+		return lecNo;
+	}
+
+	public void setLecNo(String lecNo) {
+		this.lecNo = lecNo;
 	}
 	
 	public String getStuNm() {
@@ -153,12 +158,26 @@ public class RecordVO {
 		this.comDiv = comDiv;
 	}
 
+	public String allToString() {
+		return String.format("%s \t %s \t %s \t %s \t %s", audNo, stuNm, sc, mk, rk);
+	}
+	
+	public static String recordListString() {
+		return String.format("%-5s\t%-9s\t%-5s\t%-10s\t"
+				+ "\n-----------------------------------------", "강의번호", "과목", "학점", "교수이름");
+	}
+	
 	public String recordToString() {
-		return String.format("%s \t %s \t %s \t %s", audNo, sc, mk, rk);
+		return String.format("%s\t%s\t\t%s\t%s\t",lecNo, subNm, cre, proNm);
+	}
+	
+	public static String studentRecordList() {
+		return String.format("%s\t%s\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t%s\t\t%s\t%s\t%s\t"
+				+ "\n---------------------------------------------------------------------------------------------------------------------------", "연도","학기","학과","학생이름","과목","교수이름","학점","이수구분","점수","평점","등급");
 	}
 	
 	public String rcStudentToString() {
-		return  String.format("%s %s %s %s %s %s %s %s %s %s %s", yr, sem, depNm, stuNm, subNm, proNm, cre, comDiv, sc, mk, rk);
+		return  String.format("%-5s\t%-3s\t%-10s\t%-10s\t%-10s\t%-10s\t%-5s\t%-5s\t\t%-5s\t%-5s\t%-5s\t", yr, sem, depNm, stuNm, subNm, proNm, cre, comDiv, sc, mk, rk);
 	}
 	
 }

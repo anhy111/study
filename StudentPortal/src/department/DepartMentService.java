@@ -20,7 +20,6 @@ public class DepartMentService {
 		try {
 			return departmentDAO.selectDepartment();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -30,7 +29,6 @@ public class DepartMentService {
 		try {
 			return departmentDAO.selectOneDepartment(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

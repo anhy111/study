@@ -14,7 +14,6 @@ import oracle.jdbc.driver.OracleDriver;
 public class SubjectDAO {
 	// 필드
 	private static SubjectDAO subDAO = new SubjectDAO();
-	List<SubjectVO> list = new ArrayList<>();
 
 	// 생성자
 	private SubjectDAO() {
@@ -36,20 +35,28 @@ public class SubjectDAO {
 		builder.append("     com_div,");
 		builder.append("     cre,");
 		builder.append("     sub_pro,");
+		builder.append("    pro_nm, ");
 		builder.append("     sub_rm");
 		builder.append(" FROM");
 		builder.append("     sub");
+		builder.append("    pro ");
+		builder.append("WHERE ");
+		builder.append("    sub_pro = pro_no ");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 sub_no ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
+		List<SubjectVO> list = new ArrayList<>();
 		while (resultSet.next()) {
 			String subNo = resultSet.getString("sub_no");
 			String subNm = resultSet.getString("sub_nm");
 			String comDiv = resultSet.getString("com_div");
 			String cre = resultSet.getString("cre");
 			String subPro = resultSet.getString("sub_pro");
+			String proNm = resultSet.getString("pro_nm");
 			String subRm = resultSet.getString("sub_rm");
-			list.add(new SubjectVO(subNo, subNm, comDiv, cre, subPro, subRm));
+			list.add(new SubjectVO(subNo, subNm, comDiv, cre, subPro, proNm, subRm));
 		}
 
 		resultSet.close();
@@ -70,10 +77,13 @@ public class SubjectDAO {
 		builder.append("     com_div,");
 		builder.append("     cre,");
 		builder.append("     sub_pro,");
+		builder.append("    pro_nm, ");
 		builder.append("     sub_rm");
 		builder.append(" FROM");
 		builder.append("     sub ");
-		builder.append(" where sub_no = ?");
+		builder.append("    pro ");
+		builder.append(" where  sub_pro = pro_no ");
+		builder.append(" and sub_no = ?");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, vo.getSubNo());
@@ -85,8 +95,9 @@ public class SubjectDAO {
 			String comDiv = resultSet.getString("com_div");
 			String cre = resultSet.getString("cre");
 			String subPro = resultSet.getString("sub_pro");
+			String proNm = resultSet.getString("pro_nm");
 			String subRm = resultSet.getString("sub_rm");
-			result = new SubjectVO(subNo, subNm, comDiv, cre, subPro, subRm);
+			result = new SubjectVO(subNo, subNm, comDiv, cre, subPro,proNm, subRm);
 		}
 
 		resultSet.close();

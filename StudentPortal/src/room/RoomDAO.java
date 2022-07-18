@@ -31,17 +31,19 @@ public class RoomDAO {
 		StringBuilder builder = new StringBuilder();
 		builder.append(" SELECT");
 		builder.append("     rm_no,");
-		builder.append("     rm_nm,");
+		builder.append("     rm_nm ");
 		builder.append(" FROM");
 		builder.append("     rm");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 rm_no ");
 		String sql = builder.toString();
 		
 		ResultSet resultSet = statement.executeQuery(sql);
 		
 		ArrayList<RoomVO> list = new ArrayList<>();
 		while(resultSet.next()) {
-			String rmNo = resultSet.getString("stu_no");
-			String rmNm = resultSet.getString("stu_nm");
+			String rmNo = resultSet.getString("rm_no");
+			String rmNm = resultSet.getString("rm_nm");
 			list.add(new RoomVO(rmNo, rmNm));
 		}
 		resultSet.close();
@@ -87,7 +89,7 @@ public class RoomDAO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("INSERT INTO rm (");
 		builder.append("    rm_no,");
-		builder.append("    rm_nm,");
+		builder.append("    rm_nm");
 		builder.append(") VALUES (");
 		builder.append("    ?,");
 		builder.append("    ?");
@@ -132,7 +134,7 @@ public class RoomDAO {
 				"java");
 		StringBuilder builder = new StringBuilder();
 		builder.append("   DELETE FROM rm WHERE  ");
-		builder.append("       dep_no = ?  ");
+		builder.append("       rm_no = ?  ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, vo.getRmNo());

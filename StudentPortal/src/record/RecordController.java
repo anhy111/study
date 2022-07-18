@@ -18,7 +18,7 @@ public class RecordController {
 	}
 	
 	public List<RecordVO> selectStu(String lecNo) {
-		return recordService.selectStu(lecNo);
+		return recordService.selectStu(lecNo, session);
 	}
 	public List<RecordVO> selectSub() {
 		return recordService.selectSub(session);

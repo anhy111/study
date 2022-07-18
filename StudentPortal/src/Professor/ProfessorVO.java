@@ -14,10 +14,10 @@ public class ProfessorVO {
 	//생성자
 	 
 	public ProfessorVO(String proNm, String proEm, String proPneNo, String proDep, String proBir) {
-		this.proDep = proNm;
-		this.proNm = proEm;
+		this.proNm = proNm;
+		this.proEm = proEm;
 		this.proPneNo = proPneNo;
-		this.proEm = proDep;
+		this.proDep = proDep;
 		this.proBir = proBir;
 	}
 	
@@ -87,11 +87,13 @@ public class ProfessorVO {
 		this.proBir = proBir;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return String.format("ProfessorVO [proNo=%s, proDep=%s, proNm=%s, proPneNo=%s, proEm=%s, proBir=%s]", proNo,
-				proDep, proNm, proPneNo, proEm, proBir);
+		return String.format("%-8s\t%-7s\t%-10s\t%-20s\t%-25s\t%-11s", proNo, proDep, proNm, proPneNo, proEm, proBir);
+	}
+	public static String columnString() {
+		return String.format("%-8s\t%-15s\t%-5s\t\t%-20s\t%-25s\t%4s\t"
+				+"\n------------------------------------------------------------------------------------------------------------------", "교수번호", "학과", "교수이름", "전화번호", "이메일", "생년월일");
 	}
 
 

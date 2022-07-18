@@ -150,7 +150,7 @@ public class Main {
 														adminMenu = view.lectureList(lectureController);
 														break;
 													case LECTURE_INSERT:
-														adminMenu = view.lectureInsert(lectureController,depController);
+														adminMenu = view.lectureInsert(lectureController,depController,subController);
 														break;
 													case LECTURE_UPDATE:
 														adminMenu = view.lectureUpdate(lectureController,subController
@@ -160,6 +160,7 @@ public class Main {
 														break SubMenu;
 												}
 												break;
+												
 											case SUBJECT_MANAGEMENT:
 												System.out.print(adminMenu.getMenuString());
 												intMenu = view.getMenu();

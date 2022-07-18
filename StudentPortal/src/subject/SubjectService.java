@@ -18,7 +18,6 @@ public class SubjectService {
 		try {
 			return subDAO.selectSub();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -27,7 +26,6 @@ public class SubjectService {
 		try {
 			return subDAO.selectOneSub(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -36,8 +34,6 @@ public class SubjectService {
 		try {
 			return subDAO.insertSub(vo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -45,7 +41,6 @@ public class SubjectService {
 		try {
 			return subDAO.updateSub(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}

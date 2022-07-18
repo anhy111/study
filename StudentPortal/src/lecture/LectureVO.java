@@ -136,13 +136,6 @@ public class LectureVO {
 		this.countAdu = countAdu;
 	}
 
-	public String toString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, countAdu);
-	}
-	
-	public String listToString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk);
-	}
 	public List<String> getUpdateInfo(){
 		List<String> list = new ArrayList<>();
 		list.add(yr);
@@ -154,7 +147,26 @@ public class LectureVO {
 		
 		return list;
 	}
+
+	public String toString() {
+		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, countAdu);
+	}
+	
+	public String listToString() {
+		return String.format("%-5s\t%-20s\t%-20s\t%-4s\t%-4s\t%-5s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk);
+	}
+	
+	public static String columnLecture() {
+		return String.format("%s\t%-20s\t%-20s\t%s\t%s\t%s\t%s\t"
+				+ "\n-----------------------------------------------------------------------------------","강의번호","학과","과목","연도","학기","강의시간","요일" );
+	}
+	
 	public String audString() {
-		return String.format("%s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t %s \t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, proNm, rmNm, countAdu);
+		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t%-5s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, proNm, rmNm, countAdu);
+	}
+	
+	public static String audColumnLecture() {
+		return String.format("%s\t%-10s\t%-10s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t"
+				+ "\n-------------------------------------------------------------------------------------------------","강의번호","학과","과목","연도","학기","강의시간","요일", "교수이름", "강의실", "현재수강인원");
 	}
 }

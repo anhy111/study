@@ -22,7 +22,6 @@ public class StudentService {
 		try {
 			return studentDAO.selectStudent();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -30,7 +29,6 @@ public class StudentService {
 		try {
 			return studentDAO.selectOneStudent(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -38,7 +36,6 @@ public class StudentService {
 		try {
 			return studentDAO.insertStudent(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -47,7 +44,6 @@ public class StudentService {
 		try {
 			return studentDAO.updateStudent(vo);
 		}catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -55,7 +51,6 @@ public class StudentService {
 		try {
 			return studentDAO.deleteStudent(vo);
 		}catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}

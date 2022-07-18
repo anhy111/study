@@ -43,6 +43,8 @@ public class LectureDAO {
 		builder.append("WHERE ");
 		builder.append("    sub_no = lec_sub ");
 		builder.append("    AND   lec_dep = dep_no ");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 lec_no ");
 		
 		String sql = builder.toString();
 		ResultSet resultSet = statement.executeQuery(sql);
@@ -88,7 +90,7 @@ public class LectureDAO {
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, vo.getLecNo());
-		ResultSet resultSet = statement.executeQuery(sql);
+		ResultSet resultSet = statement.executeQuery();
 		LectureVO result = null;
 		if(resultSet.next()) {
 			String lecNo = resultSet.getString("lec_no");

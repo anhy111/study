@@ -43,6 +43,8 @@ public class StudentDAO {
 			builder.append("     dep");
 			builder.append(" WHERE");
 			builder.append("     stu_dep = dep_no");
+			builder.append(" ORDER BY ");
+			builder.append(" 	 stu_no ");
 			String sql = builder.toString();
 			
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -87,7 +89,7 @@ public class StudentDAO {
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1,vo.getStuNo());
-		ResultSet resultSet = statement.executeQuery(sql);
+		ResultSet resultSet = statement.executeQuery();
 		StudentVO studentVO = null;
 		if(resultSet.next()) {
 			String stuNo = resultSet.getString("stu_no");
@@ -110,38 +112,49 @@ public class StudentDAO {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
 		StringBuilder builder = new StringBuilder();
-		builder.append("INSERT INTO stu (");
+		builder.append("     INSERT INTO stu (");
+		builder.append("         stu_no,");
+		builder.append("         stu_nm,");
+		builder.append("         stu_em,");
+		builder.append("         stu_pne_no,");
+		builder.append("         stu_grd,");
+		builder.append("         stu_acd_st,");
+		builder.append("         stu_dep,");
+		builder.append("         stu_bir");
+		builder.append("     ) VALUES (");
+		builder.append("         EXTRACT(YEAR FROM SYSDATE) - ? + 1");
+		builder.append("         || TRIM(TO_CHAR(?,'00') )");
+		builder.append("         || (");
+		builder.append("             select");
+		builder.append("                 TRIM(TO_CHAR(nvl(MAX(substr(stu_no,7) ),0) + 1,'000') )");
+		builder.append("             FROM");
+		builder.append("                 stu");
+		builder.append("             WHERE");
+		builder.append("                 substr(stu_no,1,6) = EXTRACT(YEAR FROM SYSDATE) - ? + 1");
+		builder.append("                 || TRIM(TO_CHAR(?,'00') )");
+		builder.append("         ),");
+		builder.append("         ?,");
+		builder.append("         ?,");
+		builder.append("         ?,");
+		builder.append("         TO_CHAR(?,'00'),    ");
+		builder.append("         '재학',");
+		builder.append("         ?,      ");
+		builder.append("         ?");
+		builder.append("     )");
 		
-		//학번 자동생성하도록 쿼리문 수정할 것
-		builder.append("    stu_no,");
-		builder.append("    stu_nm,");
-		builder.append("    stu_em,");
-		builder.append("    stu_pne_no,");
-		builder.append("    stu_grd,");
-		builder.append("    stu_acd_st,");
-		builder.append("    stu_dep,");
-		builder.append("    stu_bir");
-		builder.append(") VALUES (");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    ?,");
-		builder.append("    1,");
-		builder.append("    '재학',");
-		builder.append("    ?,");
-		builder.append("    ?");
-		builder.append(")");
 
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, vo.getStuNo());
-		statement.setString(2, vo.getStuNm());
-		statement.setString(3, vo.getStuEm());
-		statement.setString(4, vo.getStuPneNo());
-		statement.setString(5, vo.getStuGrd());
-		statement.setString(6, vo.getStuAcdSt());
-		statement.setString(7, vo.getStuDep());
-		statement.setString(8, vo.getStuBir());
+		statement.setString(1, vo.getStuGrd());
+		statement.setObject(2,  Integer.valueOf(vo.getStuDep()));
+		statement.setString(3, vo.getStuGrd());
+		statement.setObject(4,  Integer.valueOf(vo.getStuDep()));
+		statement.setString(5, vo.getStuNm());
+		statement.setString(6, vo.getStuEm());
+		statement.setString(7, vo.getStuPneNo());
+		statement.setString(8, vo.getStuGrd());
+		statement.setString(9, vo.getStuDep());
+		statement.setString(10, vo.getStuBir());
 		
 		int executeUpdate = statement.executeUpdate();
 		statement.close();
@@ -158,26 +171,25 @@ public class StudentDAO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("  UPDATE stu     ");
 		builder.append("      SET     ");
-		
-		//학과가 변경되면 학번도 변경되도록 수정
-		builder.append("          stu_dep = ?,     ");
 		builder.append("          stu_nm = ?,     ");
 		builder.append("          stu_em = ?,     ");
 		builder.append("          stu_pne_no = ?,  ");
 		builder.append("          stu_grd = ?,     ");
-		builder.append("          stu_em = ?,     ");
+		builder.append("          stu_acd_st = ?,     ");
+		builder.append("          stu_dep = ?,     ");
 		builder.append("          stu_bir = ?     ");
 		builder.append("  WHERE     ");
-		builder.append("      pro_no = ?     ");
+		builder.append("      stu_no = ?     ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setObject(1, vo.getStuDep());
-		statement.setObject(2, vo.getStuNm());
-		statement.setObject(3, vo.getStuEm());
-		statement.setObject(4, vo.getStuPneNo());
-		statement.setObject(5, vo.getStuGrd());
-		statement.setObject(6, vo.getStuEm());
+		statement.setObject(1, vo.getStuNm());
+		statement.setObject(2, vo.getStuEm());
+		statement.setObject(3, vo.getStuPneNo());
+		statement.setObject(4, vo.getStuGrd());
+		statement.setObject(5, vo.getStuAcdSt());
+		statement.setObject(6, vo.getStuDep());
 		statement.setObject(7, vo.getStuBir());
+		statement.setObject(8, vo.getStuNo());
 
 		int executeUpdate = statement.executeUpdate();
 		statement.close();

@@ -12,7 +12,6 @@ import oracle.jdbc.driver.OracleDriver;
 
 public class ProfessorDAO {
 	private static ProfessorDAO professorDAO = new ProfessorDAO();
-	List<ProfessorVO> list = new ArrayList<>();
 
 	private ProfessorDAO() {
 	} // 싱글톤
@@ -38,9 +37,12 @@ public class ProfessorDAO {
 		builder.append("     dep");
 		builder.append(" WHERE");
 		builder.append("     pro_dep = dep_no");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 pro_no ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
+		List<ProfessorVO> list = new ArrayList<>();
 		while (resultSet.next()) {
 
 			String proNo = resultSet.getString("pro_no");
@@ -49,7 +51,7 @@ public class ProfessorDAO {
 			String proPneNo = resultSet.getString("pro_pne_no");
 			String proDep = resultSet.getString("dep_nm");
 			String proBir = resultSet.getString("pro_bir");
-			list.add(new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9)));
+			list.add(new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir));
 		}
 
 		resultSet.close();
@@ -89,7 +91,7 @@ public class ProfessorDAO {
 			String proPneNo = resultSet.getString("pro_pne_no");
 			String proDep = resultSet.getString("dep_nm");
 			String proBir = resultSet.getString("pro_bir");
-			result = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir.substring(0, 9));
+			result = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir);
 		}
 
 		resultSet.close();
@@ -105,29 +107,42 @@ public class ProfessorDAO {
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
 				"java");
 		StringBuilder builder = new StringBuilder();
-		builder.append("  INSERT INTO pro (");
-		builder.append("         pro_no,");
-		builder.append("         pro_nm,");
-		builder.append("         pro_pne_no,");
-		builder.append("         pro_em,");
-		builder.append("         pro_dep,");
-		builder.append("         pro_bir");
-		builder.append("     ) VALUES (");
-		builder.append("         ?,");
-		builder.append("         ?,");
-		builder.append("         ?,");
-		builder.append("         ?,");
-		builder.append("         ?,");
-		builder.append("         ?");
-		builder.append("     )");
+		builder.append(" INSERT");
+		builder.append("     INTO pro");
+		builder.append(" ( ");
+		builder.append("        pro_no,  ");
+		builder.append("        pro_nm,  ");
+		builder.append("        pro_pne_no,");
+		builder.append("        pro_em,  ");
+		builder.append("        pro_dep, ");
+		builder.append("        pro_bir  ");
+		builder.append("    ) VALUES (   ");
+		builder.append("        to_char( SYSDATe,'YY')                           ");
+		builder.append("  || TRIM(TO_CHAR(?,'00') )                                    ");
+		builder.append("  || (                                                         ");
+		builder.append("      select                                                   ");
+		builder.append("          TRIM(TO_CHAR(nvl(MAX(substr(pro_no,5) ),0) + 1,'000') )");
+		builder.append("      FROM                                                     ");
+		builder.append("          pro                                                  ");
+		builder.append("      WHERE                                                    ");
+		builder.append("          substr(pro_no,1,4) = to_char(SYSDATE,'YY')");
+		builder.append("          || TRIM(TO_CHAR(?,'00') )                            ");
+		builder.append("  ),       ");
+		builder.append("        ?,       ");
+		builder.append("        ?,       ");
+		builder.append("        ?,       ");
+		builder.append("        ?,       ");
+		builder.append("        ?       ");
+		builder.append("    )     ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setObject(1, vo.getProNo());
-		statement.setObject(2, vo.getProNm());
-		statement.setObject(3, vo.getProPneNo());
-		statement.setObject(4, vo.getProEm());
-		statement.setObject(5, vo.getProDep());
-		statement.setObject(6, vo.getProBir());
+		statement.setObject(1, Integer.valueOf(vo.getProDep()));
+		statement.setObject(2, Integer.valueOf(vo.getProDep()));
+		statement.setObject(3, vo.getProNm());
+		statement.setObject(4, vo.getProPneNo());
+		statement.setObject(5, vo.getProEm());
+		statement.setObject(6, vo.getProDep());
+		statement.setObject(7, vo.getProBir());
 
 		int executeUpdate = statement.executeUpdate();
 		statement.close();

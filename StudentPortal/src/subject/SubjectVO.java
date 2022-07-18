@@ -10,14 +10,24 @@ public class SubjectVO {
 	private String comDiv;
 	private String cre;
 	private String subPro;
+	private String proNm;
 	private String subRm;
 
 	// 생성자
 	public SubjectVO(String subNo) {
 		this.subNo = subNo;
 	}
+	public SubjectVO(String subNo, String subNm, String comDiv, String cre, String subPro, String proNm, String subRm) {
+		this.subNo = subNo;
+		this.subNm = subNm;
+		this.comDiv = comDiv;
+		this.cre = cre;
+		this.subPro = subPro;
+		this.proNm = proNm;
+		this.subRm = subRm;
+	}
+	
 	public SubjectVO(String subNo, String subNm, String comDiv, String cre, String subPro, String subRm) {
-		super();
 		this.subNo = subNo;
 		this.subNm = subNm;
 		this.comDiv = comDiv;
@@ -80,9 +90,14 @@ public class SubjectVO {
 
 	@Override
 	public String toString() {
-		return String.format("SubjectVO [subNo=%s, subNm=%s, comDiv=%s, cre=%s, subPro=%s, subRm=%s]", subNo, subNm,
-				comDiv, cre, subPro, subRm);
+		return String.format("%s\t%s\t\t%s\t%s\t%s\t\t%s\t%s\t", subNo, subNm, comDiv, cre, subPro, proNm, subRm);
 	}
+	
+	public static String columnString() {
+		return String.format("%s\t%s\t\t%s\t%s\t%s\t\t%s\t%s\t"
+				+"\n-----------------------------------------------------------------------------------------------", "과목번호", "과목", "이수구분", "학점", "교수번호","교수이름", "강의실");
+	}
+	
 	public List<String> getUpdateInfo() {
 		List<String> list = new ArrayList<>();
 		list.add(subNm);

@@ -78,7 +78,10 @@ public class StudentPortalView {
 	public StudentMenu auditSign(LectureController lectureController,RecordController recordController) {
 		Labal : 
 		while(true) {
+			System.out.println();
 			System.out.println(StudentMenu.AUDIT_SIGN.getMenuString());
+			System.out.println();
+			System.out.println(LectureVO.audColumnLecture());
 			List<LectureVO> selectLectures = lectureController.audSelect();
 			for(LectureVO vo : selectLectures) {
 				System.out.println(vo.audString());
@@ -116,24 +119,32 @@ public class StudentPortalView {
 
 	public StudentMenu allRecord(RecordController recordController) {
 		System.out.println(StudentMenu.ALL_RECORD.getMenuString());
+		System.out.println();
 		List<RecordVO> rcStudentSelects = recordController.rcStudentSelect();
+		System.out.println(RecordVO.studentRecordList());
 		for(RecordVO vo : rcStudentSelects) {
 			System.out.println(vo.rcStudentToString());
 		}
+		System.out.println();
 		return StudentMenu.HOME;
 	}
 
 	public StudentMenu auditHistory(LectureController lectureController) {
 		System.out.println(StudentMenu.AUDIT_HISTORY.getMenuString());
+		System.out.println();
+		System.out.println(LectureVO.audColumnLecture());
 		List<LectureVO> list = lectureController.audSelectSession();
 		for (LectureVO vo : list) {
-			System.out.println(vo);
+			System.out.println(vo.audString());
 		}
+		System.out.println();
 		return StudentMenu.HOME;
 	}
 	
 	public ProfessorMenu recordList(RecordController rcController) {
 		System.out.println(ProfessorMenu.RECORD_LIST.getMenuString());
+		System.out.println();
+		System.out.println(RecordVO.recordListString());
 		List<RecordVO> rcProfessor = rcController.selectSub();
 		for (RecordVO vo : rcProfessor) {
 			System.out.println(vo.recordToString());
@@ -154,21 +165,27 @@ public class StudentPortalView {
 
 	public ProfessorMenu recordEnter(RecordController rcController) {
 		System.out.println(ProfessorMenu.RECORD_ENTER.getMenuString());
+		System.out.println("");
+		System.out.println(RecordVO.recordListString());
 		List<RecordVO> rcProfessor = rcController.selectSub();
 		for (RecordVO vo : rcProfessor) {
 			System.out.println(vo.recordToString());
 		}
 		rcProfessor.clear();
 		System.out.println();
-		System.out.print("강의를 선택하세요>> ");
+		System.out.println("이전메뉴 이동은 강의번호에 0을 입력하세요.");
+		System.out.print("강의번호를 입력하세요>> ");
 		String audLec = ScannerUtil.nextLine();
+		if(cancel(audLec)) {
+			return ProfessorMenu.HOME;
+		}
 		while(true) {
 			List<RecordVO> stu = rcController.selectStu(audLec);
 			for (RecordVO vo : stu) {
 				System.out.println(vo.allToString());
 			}
-			System.out.println("성적입력을 취소하려면 학생번호에 0을 입력하세요.");
-			System.out.print("성적을 입력할 학생의 학생번호를 선택하세요>> ");
+			System.out.println("성적입력을 취소하려면 수강번호에 0을 입력하세요.");
+			System.out.print("성적을 입력할 학생의 수강번호를 선택하세요>> ");
 			String audNo = ScannerUtil.nextLine();
 			if(cancel(audNo)) {
 				break;
@@ -188,8 +205,8 @@ public class StudentPortalView {
 	
 	public AdminMenu studentList(StudentController studentController) {
 		System.out.println(AdminMenu.STUDENT_LIST.getMenuString());
+		System.out.println(StudentVO.columnString());
 		List<StudentVO> list = studentController.selectStudent();
-		System.out.println();
 		for (StudentVO vo : list) {
 			System.out.println(vo);
 		}
@@ -212,13 +229,15 @@ public class StudentPortalView {
 			String stuEm = ScannerUtil.nextLine();
 			System.out.print("전화번호를 입력하세요>>");
 			String stuPneNo = ScannerUtil.nextLine();
+			System.out.print("학년을 입력하세요>>");
+			String stuGrd = ScannerUtil.nextLine();
 			departmentList(depController);
 			System.out.print("학과번호를 입력하세요>>");
 			String stuDep = ScannerUtil.nextLine();
 			System.out.print("생년월일을 입력하세요(예: 950102)>>");
 			String stuBir = ScannerUtil.nextLine();
 			int insertStudent = studentController
-					.insertStudent(new StudentVO(stuNm, stuEm, stuPneNo, stuDep, stuBir));
+					.insertStudent(new StudentVO(stuNm, stuEm, stuPneNo,stuGrd, stuDep, stuBir));
 			if (insertStudent == 1) {
 				System.out.println("\n학생이 등록되었습니다.");
 				break;
@@ -241,11 +260,11 @@ public class StudentPortalView {
 				break;
 			}
 			StudentVO selectOneStudent = studentController.selectOneStudent(new StudentVO(stuNo));
+			System.out.println("현재 선택된 학생");
+			System.out.println(StudentVO.columnString());
 			System.out.println(selectOneStudent);
-			System.out.println("현재 기록된 학생상태입니다.");
 			System.out.println("변경할 학생정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
-			System.out.println();
 			List<String> afterUpdate = new ArrayList<>();
 			System.out.print("변경할 학생명를 입력하세요>> ");
 			afterUpdate.add(ScannerUtil.nextLine());
@@ -271,6 +290,7 @@ public class StudentPortalView {
 			}
 			StudentVO updateVO = new StudentVO(stuNo,  afterUpdate.get(0), afterUpdate.get(1), afterUpdate.get(2),
 							afterUpdate.get(3), afterUpdate.get(4), afterUpdate.get(5),afterUpdate.get(6));
+			System.out.println(StudentVO.columnString());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
@@ -308,8 +328,8 @@ public class StudentPortalView {
 			System.out.print("위 학생을 삭제하시겠습니까?(y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
 			if(yesOrNo.equalsIgnoreCase("y")) {
-				int deleteProfessor = studentController.deleteStudent(studentVO);
-				if(deleteProfessor ==1) {
+				int deleteStudent = studentController.deleteStudent(studentVO);
+				if(deleteStudent ==1) {
 					System.out.println("학생이 삭제되었습니다.");
 					break;
 				} else {
@@ -328,7 +348,7 @@ public class StudentPortalView {
 	public AdminMenu professorList(ProfessorController professorController) {
 		System.out.println(AdminMenu.PROFESSOR_LIST.getMenuString());
 		List<ProfessorVO> list = professorController.selectProfessor();
-		System.out.println();
+		System.out.println(ProfessorVO.columnString());
 		for (ProfessorVO vo : list) {
 			System.out.println(vo);
 		}
@@ -346,17 +366,17 @@ public class StudentPortalView {
 			if (cancel(pfNm)) {
 				break;
 			}
-			System.out.print("E-mail을 입력하세요>>");
-			String pfEm = ScannerUtil.nextLine();
 			System.out.print("전화번호를 입력하세요>>");
 			String pfPneNo = ScannerUtil.nextLine();
+			System.out.print("E-mail을 입력하세요>>");
+			String pfEm = ScannerUtil.nextLine();
 			departmentList(depController);
 			System.out.print("학과번호를 입력하세요>>");
 			String pfDep = ScannerUtil.nextLine();
 			System.out.print("생년월일을 입력하세요(예: 950102)>>");
 			String pfBir = ScannerUtil.nextLine();
 			int insertProfessor = professorController
-					.insertProfessor(new ProfessorVO( pfNm, pfEm, pfPneNo, pfDep, pfBir));
+					.insertProfessor(new ProfessorVO( pfNm, pfPneNo, pfEm, pfDep, pfBir));
 			if (insertProfessor == 1) {
 				System.out.println("\n교수가 등록되었습니다.");
 				break;
@@ -380,8 +400,10 @@ public class StudentPortalView {
 				break;
 			}
 			ProfessorVO selectOneProfessor = professorController.selectOneProfessor(new ProfessorVO(proNo));
+			System.out.println();
+			System.out.println("현재 선택된 교수");
+			System.out.println(ProfessorVO.columnString());
 			System.out.println(selectOneProfessor);
-			System.out.println("현재 기록된 교수상태입니다.");
 			System.out.println("변경할 교수정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
 			System.out.println();
@@ -407,6 +429,7 @@ public class StudentPortalView {
 			}
 			ProfessorVO updateVO = new ProfessorVO(proNo, afterUpdate.get(0), afterUpdate.get(1), afterUpdate.get(2),
 							afterUpdate.get(3), afterUpdate.get(4));
+			System.out.println(ProfessorVO.columnString());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
@@ -444,7 +467,7 @@ public class StudentPortalView {
 			System.out.print("위 교수를 삭제하시겠습니까?(y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
 			if(yesOrNo.equalsIgnoreCase("y")) {
-				int deleteProfessor = professorController.deleteProfessor(new ProfessorVO(proNo));
+				int deleteProfessor = professorController.deleteProfessor(professorVO);
 				if(deleteProfessor ==1) {
 					System.out.println("교수가 삭제되었습니다.");
 					break;
@@ -465,7 +488,7 @@ public class StudentPortalView {
 	public AdminMenu lectureList(LectureController lectureController) {
 		System.out.println(AdminMenu.LECTURE_LIST.getMenuString());
 		List<LectureVO> list = lectureController.selectLecture();
-		System.out.println();
+		System.out.println(LectureVO.columnLecture());
 		for (LectureVO vo : list) {
 			System.out.println(vo.listToString());
 		}
@@ -473,7 +496,8 @@ public class StudentPortalView {
 		return AdminMenu.LECTURE_MANAGEMENT;
 	}
 
-	public AdminMenu lectureInsert(LectureController lectureController, DepartMentController depController) {
+	public AdminMenu lectureInsert(LectureController lectureController, DepartMentController depController,
+									SubjectController subController) {
 		while (true) {
 			System.out.print(AdminMenu.LECTURE_INSERT.getMenuString());
 			lectureList(lectureController);
@@ -483,7 +507,8 @@ public class StudentPortalView {
 			if (cancel(ltcNo)) {
 				break;
 			}
-			System.out.print("교과목을 입력하세요>>");
+			subjectList(subController);
+			System.out.print("과목번호를 입력하세요>>");
 			String lecSub = ScannerUtil.nextLine();
 			departmentList(depController);
 			System.out.print("학과번호를 입력하세요>>");
@@ -521,11 +546,12 @@ public class StudentPortalView {
 				break;
 			}
 			LectureVO selectOneLecture = lectureController.selectOneLecture(new LectureVO(lecNo));
-			System.out.println(selectOneLecture);
-			System.out.println("현재 기록된 강의상태입니다.");
+			System.out.println();
+			System.out.println("현재 선택된 강의");
+			System.out.println(LectureVO.columnLecture());
+			System.out.println(selectOneLecture.listToString());
 			System.out.println("변경할 강의정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
-			System.out.println();
 			List<String> afterUpdate = new ArrayList<>();
 			System.out.print("변경할 강의 연도를 입력하세요>>");
 			afterUpdate.add(ScannerUtil.nextLine());
@@ -549,6 +575,7 @@ public class StudentPortalView {
 			}
 			LectureVO updateVO = new LectureVO(lecNo, afterUpdate.get(0), afterUpdate.get(1), afterUpdate.get(2),
 							afterUpdate.get(3), afterUpdate.get(4), afterUpdate.get(5));
+			System.out.println(LectureVO.columnLecture());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
@@ -572,6 +599,7 @@ public class StudentPortalView {
 
 	public AdminMenu subjectList(SubjectController subController) {
 		System.out.println(AdminMenu.SUBJECT_LIST.getMenuString());
+		System.out.println(SubjectVO.columnString());
 		List<SubjectVO> list = subController.selectSub();
 		System.out.println();
 		for (SubjectVO vo : list) {
@@ -628,11 +656,12 @@ public class StudentPortalView {
 				break;
 			}
 			SubjectVO selectOneSub = subController.selectOneSub(new SubjectVO(subNo));
+			System.out.println();
+			System.out.println("현재 선택된 과목");
+			System.out.println(SubjectVO.columnString());
 			System.out.println(selectOneSub);
-			System.out.println("현재 기록된 과목상태입니다.");
 			System.out.println("변경할 과목정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
-			System.out.println();
 			List<String> afterUpdate = new ArrayList<>();
 			System.out.print("변경할 과목명을 입력하세요>>");
 			afterUpdate.add(ScannerUtil.nextLine());
@@ -654,6 +683,7 @@ public class StudentPortalView {
 			}
 			SubjectVO updateVO = new SubjectVO(subNo, afterUpdate.get(0), afterUpdate.get(1), afterUpdate.get(2),
 								afterUpdate.get(3), afterUpdate.get(4));
+			System.out.println(SubjectVO.columnString());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
@@ -678,8 +708,8 @@ public class StudentPortalView {
 	
 	public AdminMenu departmentList(DepartMentController depController) {
 		System.out.println(AdminMenu.DEPARTMENT_LIST.getMenuString());
+		System.out.println(DepartMentVO.columnString());
 		List<DepartMentVO> list = depController.selectDepartment();
-		System.out.println();
 		for (DepartMentVO vo : list) {
 			System.out.println(vo);
 		}
@@ -724,11 +754,12 @@ public class StudentPortalView {
 				break;
 			}
 			DepartMentVO selectOneDepartment = depController.selectOneDepartment(new DepartMentVO(depNo));
+			System.out.println();
+			System.out.println("현재 선택된 학과");
+			System.out.println(DepartMentVO.columnString());
 			System.out.println(selectOneDepartment);
-			System.out.println("현재 기록된 학과상태입니다.");
 			System.out.println("변경할 학과정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
-			System.out.println();
 			List<String> afterUpdate = new ArrayList<>();
 			System.out.print("변경할 학과명를 입력하세요>> ");
 			afterUpdate.add(ScannerUtil.nextLine());
@@ -742,6 +773,7 @@ public class StudentPortalView {
 				}
 			}
 			DepartMentVO updateVO = new DepartMentVO(depNo, afterUpdate.get(0), afterUpdate.get(1));
+			System.out.println(DepartMentVO.columnString());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
@@ -780,8 +812,8 @@ public class StudentPortalView {
 			System.out.print("위 학과를 삭제하시겠습니까?(y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
 			if(yesOrNo.equalsIgnoreCase("y")) {
-				int deleteProfessor = depController.deleteDepartment(new DepartMentVO(depNo));
-				if(deleteProfessor ==1) {
+				int deleteDepartment = depController.deleteDepartment(new DepartMentVO(depNo));
+				if(deleteDepartment ==1) {
 					System.out.println("학과가 삭제되었습니다.");
 					break;
 				} else {
@@ -800,6 +832,7 @@ public class StudentPortalView {
 	
 	public AdminMenu roomList(RoomController roomController) {
 		System.out.println(AdminMenu.ROOM_LIST.getMenuString());
+		System.out.println(RoomVO.columnString());
 		List<RoomVO> list = roomController.selectRoom();
 		System.out.println();
 		for(RoomVO vo : list) {
@@ -843,15 +876,13 @@ public class StudentPortalView {
 				break;
 			}
 			RoomVO selectOneRoom = roomController.selectOneRoom(new RoomVO(rmNo));
+			System.out.println("현재 선택된 강의실");
+			System.out.println(RoomVO.columnString());
 			System.out.println(selectOneRoom);
-			System.out.println("현재 기록된 강의실상태입니다.");
+			List<String> afterUpdate = new ArrayList<>();
 			System.out.println("변경할 강의실정보를 입력하세요.");
 			System.out.println("변경을 원하지 않는 항목은 0을 입력하세요.");
-			System.out.println();
-			List<String> afterUpdate = new ArrayList<>();
 			System.out.print("변경할 강의실명을 입력하세요>> ");
-			afterUpdate.add(ScannerUtil.nextLine());
-			System.out.print("변경할 전화번호를 입력하세요>> ");
 			afterUpdate.add(ScannerUtil.nextLine());
 			
 			List<String> beforeUpdate = selectOneRoom.getUpdateInfo();
@@ -861,6 +892,7 @@ public class StudentPortalView {
 				}
 			}
 			RoomVO updateVO = new RoomVO(rmNo,afterUpdate.get(0));
+			System.out.println(RoomVO.columnString());
 			System.out.println(updateVO);
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();

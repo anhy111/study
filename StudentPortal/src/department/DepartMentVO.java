@@ -36,12 +36,23 @@ public class DepartMentVO {
 		this.depNm = depNm;
 	}
 
+	
 	public String getDepPne() {
 		return depPne;
 	}
 
 	public void setDepPne(String depPne) {
 		this.depPne = depPne;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%-10s\t%-10s\t%-15s\t", depNo, depNm, depPne );
+	}
+	
+	public static String columnString() {
+		return String.format("%-10s\t%-10s\t%-10s\t"
+				+ "\n---------------------------------------------", "학과번호", "학과", "전화번호");
 	}
 	public List<String> getUpdateInfo() {
 		List<String> list = new ArrayList<>();

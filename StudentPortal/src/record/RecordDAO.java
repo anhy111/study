@@ -39,6 +39,8 @@ public class RecordDAO {
 		builder.append("     pro_no = sub_pro ");
 		builder.append("     AND   sub_no = lec_sub ");
 		builder.append("     AND   pro_no = ?");
+		builder.append(" ORDER BY ");
+		builder.append(" 	 lec_no ");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setObject(1, vo.getId());
@@ -57,7 +59,7 @@ public class RecordDAO {
 		return list;
 	}
 
-	public List<RecordVO> selectStu(String lecNo) throws Exception {
+	public List<RecordVO> selectStu(String lecNo, SignVO session) throws Exception {
 		DriverManager.registerDriver(new OracleDriver());
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal",
 				"java");
@@ -73,12 +75,28 @@ public class RecordDAO {
 		builder.append("     rc r,");
 		builder.append("     aud a");
 		builder.append(" WHERE");
-		builder.append("     s.stu_no = a.aud_stu");
-		builder.append("     AND   r.aud_no = a.aud_no");
-		builder.append("     AND   aud_lec =?");
+		builder.append("     r.aud_no = a.aud_no");
+		builder.append("     AND   s.stu_no = a.aud_stu");
+		builder.append("     AND   aud_lec = (");
+		builder.append("         SELECT");
+		builder.append("             lec_no");
+		builder.append("         FROM");
+		builder.append("             lec");
+		builder.append("         WHERE");
+		builder.append("             lec_sub = (");
+		builder.append("                 SELECT");
+		builder.append("                     sub_no");
+		builder.append("                 FROM");
+		builder.append("                     sub");
+		builder.append("                 WHERE");
+		builder.append("                     sub_pro =?");
+		builder.append("                     AND   sub_no =?");
+		builder.append("             )");
+		builder.append("     )");
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setObject(1, lecNo);
+		statement.setObject(1, session.getId());
+		statement.setObject(2, lecNo);
 		ResultSet resultSet = statement.executeQuery();
 		List<RecordVO> list = new ArrayList<>();
 		while(resultSet.next()) {

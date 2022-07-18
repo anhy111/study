@@ -20,7 +20,6 @@ public class RoomService {
 		try {
 			return roomDAO.selectRoom();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -29,7 +28,6 @@ public class RoomService {
 		try {
 			return roomDAO.selectOneRoom(vo);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
