@@ -12,6 +12,7 @@ public class StudentVO {
 	private String stuGrd;
 	private String stuAcdSt;
 	private String stuDep;
+	private String depNm;
 	private String stuBir;
 	
 	//생성자
@@ -19,6 +20,19 @@ public class StudentVO {
 	
 	public StudentVO(String stuNo) {
 		this.stuNo = stuNo;
+	}
+	
+	public StudentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt,
+			String stuDep,String depNm, String stuBir) {
+		this.stuNo = stuNo;
+		this.stuNm = stuNm;
+		this.stuEm = stuEm;
+		this.stuPneNo = stuPneNo;
+		this.stuGrd = stuGrd;
+		this.stuAcdSt = stuAcdSt;
+		this.stuDep = stuDep;
+		this.depNm = depNm;
+		this.stuBir = stuBir;
 	}
 	
 	public StudentVO(String stuNo, String stuNm, String stuEm, String stuPneNo, String stuGrd, String stuAcdSt,
@@ -32,6 +46,7 @@ public class StudentVO {
 		this.stuDep = stuDep;
 		this.stuBir = stuBir;
 	}
+
 
 
 	public StudentVO( String stuNm, String stuEm, String stuPneNo,String stuGrd, String stuDep, String stuBir) {
@@ -55,6 +70,9 @@ public class StudentVO {
 	}
 
 	//메소드
+	
+
+	
 	public String getStuNo() {
 		return stuNo;
 	}
@@ -71,14 +89,6 @@ public class StudentVO {
 		this.stuNm = stuNm;
 	}
 
-	public String getStuDep() {
-		return stuDep;
-	}
-
-	public void setStuDep(String stuDep) {
-		this.stuDep = stuDep;
-	}
-	
 	public String getStuEm() {
 		return stuEm;
 	}
@@ -111,6 +121,22 @@ public class StudentVO {
 		this.stuAcdSt = stuAcdSt;
 	}
 
+	public String getStuDep() {
+		return stuDep;
+	}
+
+	public void setStuDep(String stuDep) {
+		this.stuDep = stuDep;
+	}
+
+	public String getDepNm() {
+		return depNm;
+	}
+
+	public void setDepNm(String depNm) {
+		this.depNm = depNm;
+	}
+
 	public String getStuBir() {
 		return stuBir;
 	}
@@ -118,11 +144,16 @@ public class StudentVO {
 	public void setStuBir(String stuBir) {
 		this.stuBir = stuBir;
 	}
-
+	
 	@Override
 	public String toString() {
+		return String.format("%-10s\t%-10s\t%-5s\t\t%-23s\t%-10s\t%3s\t%-5s\t%-11s\t", stuNo, depNm, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
+	}
+	
+	public String updateToString() {
 		return String.format("%-10s\t%-10s\t%-5s\t\t%-23s\t%-10s\t%3s\t%-5s\t%-11s\t", stuNo, stuDep, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stuBir);
 	}
+
 	public static String columnString() {
 		return String.format("%-10s\t%-10s\t%-5s\t\t%-18s\t%-10s\t%3s\t%-5s\t%-7s\t "
 				+"\n------------------------------------------------------------------------------------------------------------------", "학생번호", "학과", "학생이름", "이메일", "전화번호", "학년", "학적", "생년월일");
@@ -138,6 +169,7 @@ public class StudentVO {
 		list.add(stuAcdSt);
 		list.add(stuDep);
 		list.add(stuBir);
+		list.add(depNm);
 		return list;
 	}
 }

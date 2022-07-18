@@ -28,10 +28,11 @@ public class ProfessorDAO {
 		builder.append(" SELECT");
 		builder.append("     pro_no,");
 		builder.append("     pro_nm,");
-		builder.append("     pro_em,");
 		builder.append("     pro_pne_no,");
+		builder.append("     pro_em,");
 		builder.append("     dep_nm,");
-		builder.append("     pro_bir");
+		builder.append("     pro_dep,");
+		builder.append("     TO_CHAR(pro_bir,'YYYY-MM-DD') bir");
 		builder.append(" FROM");
 		builder.append("     pro,");
 		builder.append("     dep");
@@ -47,11 +48,12 @@ public class ProfessorDAO {
 
 			String proNo = resultSet.getString("pro_no");
 			String proNm = resultSet.getString("pro_nm");
-			String proEm = resultSet.getString("pro_em");
 			String proPneNo = resultSet.getString("pro_pne_no");
-			String proDep = resultSet.getString("dep_nm");
-			String proBir = resultSet.getString("pro_bir");
-			list.add(new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir));
+			String proEm = resultSet.getString("pro_em");
+			String depNm = resultSet.getString("dep_nm");
+			String proDep = resultSet.getString("pro_dep");
+			String proBir = resultSet.getString("bir");
+			list.add(new ProfessorVO(proNo, proNm, proEm, proPneNo,depNm, proDep, proBir));
 		}
 
 		resultSet.close();
@@ -69,10 +71,11 @@ public class ProfessorDAO {
 		builder.append(" SELECT");
 		builder.append("     pro_no,");
 		builder.append("     pro_nm,");
-		builder.append("     pro_em,");
 		builder.append("     pro_pne_no,");
+		builder.append("     pro_em,");
 		builder.append("     dep_nm,");
-		builder.append("     pro_bir");
+		builder.append("     pro_dep,");
+		builder.append("     TO_CHAR(pro_bir,'YYYY-MM-DD') bir");
 		builder.append(" FROM");
 		builder.append("     pro,");
 		builder.append("     dep");
@@ -87,11 +90,12 @@ public class ProfessorDAO {
 		if(resultSet.next()) {
 			String proNo = resultSet.getString("pro_no");
 			String proNm = resultSet.getString("pro_nm");
-			String proEm = resultSet.getString("pro_em");
 			String proPneNo = resultSet.getString("pro_pne_no");
-			String proDep = resultSet.getString("dep_nm");
-			String proBir = resultSet.getString("pro_bir");
-			result = new ProfessorVO(proNo, proNm, proEm, proPneNo, proDep, proBir);
+			String proEm = resultSet.getString("pro_em");
+			String depNm = resultSet.getString("dep_nm");
+			String proDep = resultSet.getString("pro_dep");
+			String proBir = resultSet.getString("bir");
+			result = new ProfessorVO(proNo, proNm, proEm, proPneNo, depNm, proDep, proBir);
 		}
 
 		resultSet.close();

@@ -107,6 +107,14 @@ public class SubjectVO {
 		list.add(subRm);
 		return list;
 	}
+	
+	public static String updateColumnString() {
+		return String.format("%s\t%s\t\t%s\t%s\t%s\t\t%s\t"
+				+"\n----------------------------------------------------------------------", "과목번호", "과목", "이수구분", "학점", "교수번호", "강의실");
+	}
+	public String updateToString() {
+		return String.format("%s\t%s\t\t%s\t%s\t%s\t\t%s\t", subNo, subNm, comDiv, cre, subPro, subRm);
+	}
 
 	
 

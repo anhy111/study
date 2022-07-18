@@ -44,6 +44,7 @@ public class StudentService {
 		try {
 			return studentDAO.updateStudent(vo);
 		}catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		}
 	}

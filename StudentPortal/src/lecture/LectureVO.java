@@ -7,7 +7,9 @@ public class LectureVO {
 	//필드
 	private String lecNo;
 	private String lecSub;
+	private String subNm;
 	private String lecDep;
+	private String depNm;
 	private String yr;
 	private String sem;
 	private String lecTm;
@@ -31,11 +33,49 @@ public class LectureVO {
 		this.lecTm = lecTm;
 		this.lecWk = lecWk;
 	}
-
-	public LectureVO(String lecNo, String lecSub, String lecDep, String proNm, String yr, String sem, String lecTm, String lecWk,
-			 String rmNm, String countAdu) {
+	
+	public LectureVO(String lecNo, String yr, String sem,String subNm, String lecSub, String depNm,String lecDep, String lecTm, String lecWk) {
+		this.lecNo = lecNo;
+		this.subNm = subNm;
+		this.lecSub = lecSub;
+		this.lecDep = lecDep;
+		this.depNm = depNm;
+		this.yr = yr;
+		this.sem = sem;
+		this.lecTm = lecTm;
+		this.lecWk = lecWk;
+	}
+	
+	public LectureVO(String lecNo, String yr, String sem, String lecSub, String depNm,String lecDep, String lecTm, String lecWk) {
 		this.lecNo = lecNo;
 		this.lecSub = lecSub;
+		this.lecDep = lecDep;
+		this.depNm = depNm;
+		this.yr = yr;
+		this.sem = sem;
+		this.lecTm = lecTm;
+		this.lecWk = lecWk;
+	}
+	
+	public LectureVO(String lecNo,String subNm, String depNm,  String proNm, String yr, String sem, String lecTm, String lecWk,
+			 String rmNm, String countAdu) {
+		this.lecNo = lecNo;
+		this.subNm = subNm;
+		this.depNm = depNm;
+		this.yr = yr;
+		this.sem = sem;
+		this.lecTm = lecTm;
+		this.lecWk = lecWk;
+		this.proNm = proNm;
+		this.rmNm = rmNm;
+		this.countAdu = countAdu;
+	}
+	public LectureVO(String lecNo,String subNm, String lecSub,String depNm, String lecDep, String proNm, String yr, String sem, String lecTm, String lecWk,
+			 String rmNm, String countAdu) {
+		this.lecNo = lecNo;
+		this.subNm = subNm;
+		this.lecSub = lecSub;
+		this.depNm = depNm;
 		this.lecDep = lecDep;
 		this.yr = yr;
 		this.sem = sem;
@@ -135,7 +175,24 @@ public class LectureVO {
 	public void setCountAdu(String countAdu) {
 		this.countAdu = countAdu;
 	}
-
+	
+	public String getDepNm() {
+		return depNm;
+	}
+	
+	public void setDepNm(String depNm) {
+		this.depNm = depNm;
+	}
+	
+	
+	public String getSubNm() {
+		return subNm;
+	}
+	
+	public void setSubNm(String subNm) {
+		this.subNm = subNm;
+	}
+	
 	public List<String> getUpdateInfo(){
 		List<String> list = new ArrayList<>();
 		list.add(yr);
@@ -144,15 +201,19 @@ public class LectureVO {
 		list.add(lecDep);
 		list.add(lecTm);
 		list.add(lecWk);
-		
 		return list;
 	}
 
 	public String toString() {
-		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, countAdu);
+		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t", lecNo, subNm, depNm, yr, sem, lecTm, lecWk, countAdu);
 	}
 	
+	
 	public String listToString() {
+		return String.format("%-5s\t%-20s\t%-20s\t%-4s\t%-4s\t%-5s\t%-5s\t", lecNo, depNm, lecDep, yr, sem, lecTm, lecWk);
+	}
+	
+	public String updateToString() {
 		return String.format("%-5s\t%-20s\t%-20s\t%-4s\t%-4s\t%-5s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk);
 	}
 	
@@ -162,7 +223,7 @@ public class LectureVO {
 	}
 	
 	public String audString() {
-		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t%-5s\t%-5s\t", lecNo, lecSub, lecDep, yr, sem, lecTm, lecWk, proNm, rmNm, countAdu);
+		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t%-5s\t%-5s\t", lecNo, subNm, depNm, yr, sem, lecTm, lecWk, proNm, rmNm, countAdu);
 	}
 	
 	public static String audColumnLecture() {

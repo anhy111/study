@@ -6,29 +6,39 @@ import java.util.List;
 public class ProfessorVO {
 	//필드
 	private String proNo; 		//교수번호
-	private String proDep;     //학과번호
-	private String proNm;   //교수명
-	private String proPneNo;//교수 전화번호
+	private String depNm;	//학과명
 	private String proEm;	//교수 이메일
+	private String proPneNo;//교수 전화번호
+	private String proNm;   //교수명
+	private String proDep;     //학과번호
 	private String proBir;	//교수 생년월일
 	//생성자
 	 
-	public ProfessorVO(String proNm, String proEm, String proPneNo, String proDep, String proBir) {
+	public ProfessorVO(String proNm, String proPneNo, String proEm, String proDep, String proBir) {
 		this.proNm = proNm;
-		this.proEm = proEm;
 		this.proPneNo = proPneNo;
+		this.proEm = proEm;
 		this.proDep = proDep;
 		this.proBir = proBir;
 	}
 	
-
-	public ProfessorVO(String proNo, String proNm, String proEm, String proPneNo, String proDep, String proBir) {
+	public ProfessorVO(String proNo, String proNm, String proPneNo, String proEm, String proDep, String proBir) {
 		super();
 		this.proNo = proNo;
-		this.proDep = proDep;
 		this.proNm = proNm;
 		this.proPneNo = proPneNo;
 		this.proEm = proEm;
+		this.proDep = proDep;
+		this.proBir = proBir;
+	}
+	public ProfessorVO(String proNo, String proNm, String proEm, String proPneNo,String depNm, String proDep, String proBir) {
+		super();
+		this.proNo = proNo;
+		this.proNm = proNm;
+		this.proEm = proEm;
+		this.proPneNo = proPneNo;
+		this.depNm = depNm;
+		this.proDep = proDep;
 		this.proBir = proBir;
 	}
 
@@ -86,9 +96,22 @@ public class ProfessorVO {
 	public void setProBir(String proBir) {
 		this.proBir = proBir;
 	}
-	
+	public String getDepNm() {
+		return depNm;
+	}
+
+
+	public void setDepNm(String depNm) {
+		this.depNm = depNm;
+	}
+
+
 	@Override
 	public String toString() {
+		return String.format("%-8s\t%-7s\t%-10s\t%-20s\t%-25s\t%-11s", proNo, depNm, proNm, proPneNo, proEm, proBir);
+	}
+	
+	public String updateToString() {
 		return String.format("%-8s\t%-7s\t%-10s\t%-20s\t%-25s\t%-11s", proNo, proDep, proNm, proPneNo, proEm, proBir);
 	}
 	public static String columnString() {

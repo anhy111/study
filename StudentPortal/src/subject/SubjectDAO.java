@@ -38,7 +38,7 @@ public class SubjectDAO {
 		builder.append("    pro_nm, ");
 		builder.append("     sub_rm");
 		builder.append(" FROM");
-		builder.append("     sub");
+		builder.append("     sub,");
 		builder.append("    pro ");
 		builder.append("WHERE ");
 		builder.append("    sub_pro = pro_no ");
@@ -80,7 +80,7 @@ public class SubjectDAO {
 		builder.append("    pro_nm, ");
 		builder.append("     sub_rm");
 		builder.append(" FROM");
-		builder.append("     sub ");
+		builder.append("     sub, ");
 		builder.append("    pro ");
 		builder.append(" where  sub_pro = pro_no ");
 		builder.append(" and sub_no = ?");

@@ -37,6 +37,9 @@ public class LectureController {
 	public List<LectureVO> audSelectSession() {
 		return lectureService.audSelect(session);	
 	}	
+    public LectureVO audSelectOneSession(LectureVO vo) {
+	      return lectureService.audOneSelect(vo, session);   
+    }
 	public int audInsert(String vo) {
 		return lectureService.audInsert(vo, session);
 	}   
@@ -49,5 +52,11 @@ public class LectureController {
 		return lectureService.selectOneAud(lecNo,session);
 		
 	}
-	
+	  public List<LectureVO> beforeDelete() {
+	      return lectureService.beforeDelete(session);
+	   }
+	   
+	   public int audDelete(LectureVO vo) {
+	      return lectureService.audDelete(vo);
+	   }
 }

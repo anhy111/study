@@ -59,6 +59,9 @@ public class Main {
 										case AUDIT_SIGN:
 											stdMenu = view.auditSign(lectureController,recordController);
 											break;
+										case AUDIT_CANCEL:
+			                                 stdMenu = view.auditSignCancel(lectureController);
+			                                 break;
 										case ALL_RECORD:
 											stdMenu = view.allRecord(recordController);
 											break;

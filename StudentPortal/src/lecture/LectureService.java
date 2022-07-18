@@ -81,4 +81,31 @@ public class LectureService {
 			return null;
 		}
 	}
+	
+	  public List<LectureVO> beforeDelete(SignVO session) {
+	      try {
+	         return lectureDAO.beforeAudDelete(session);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         return null;
+	      }
+	   }
+	   
+	   public int audDelete(LectureVO vo) {
+	      try {
+	         return lectureDAO.studentAudDelete(vo);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         return 0;
+	      }
+	   }
+	   
+	   public LectureVO audOneSelect(LectureVO vo, SignVO session) {
+	      try {
+	         return lectureDAO.selectOneAud(vo, session);
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         return null;
+	      }
+	   }
 }

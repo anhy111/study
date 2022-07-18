@@ -36,8 +36,9 @@ public class StudentDAO {
 			builder.append("     stu_pne_no,");
 			builder.append("     stu_grd,");
 			builder.append("     stu_acd_st,");
+			builder.append("     stu_dep,");
 			builder.append("     dep_nm,");
-			builder.append("     stu_bir");
+			builder.append("     TO_CHAR(stu_bir,'YYYY-MM-DD') bir");
 			builder.append(" FROM");
 			builder.append("     stu,");
 			builder.append("     dep");
@@ -57,9 +58,10 @@ public class StudentDAO {
 				String stuPneNo = resultSet.getString("stu_pne_no");
 				String stuGrd = resultSet.getString("stu_grd");
 				String stuAcdSt = resultSet.getString("stu_acd_st");
+				String stu_dep = resultSet.getString("stu_dep");
 				String dep_nm = resultSet.getString("dep_nm");
-				String stuBir = resultSet.getString("stu_bir");
-				list.add(new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, dep_nm, stuBir));
+				String stuBir = resultSet.getString("bir");
+				list.add(new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt,stu_dep, dep_nm, stuBir));
 			}
 		resultSet.close();
 		statement.close();
@@ -78,8 +80,9 @@ public class StudentDAO {
 		builder.append("     stu_pne_no,");
 		builder.append("     stu_grd,");
 		builder.append("     stu_acd_st,");
+		builder.append("     stu_dep,");
 		builder.append("     dep_nm,");
-		builder.append("     stu_bir");
+		builder.append("     TO_CHAR(stu_bir,'YYYY-MM-DD') bir");
 		builder.append(" FROM");
 		builder.append("     stu,");
 		builder.append("     dep");
@@ -98,9 +101,10 @@ public class StudentDAO {
 			String stuPneNo = resultSet.getString("stu_pne_no");
 			String stuGrd = resultSet.getString("stu_grd");
 			String stuAcdSt = resultSet.getString("stu_acd_st");
+			String stu_dep = resultSet.getString("stu_dep");
 			String dep_nm = resultSet.getString("dep_nm");
-			String stuBir = resultSet.getString("stu_bir");
-			studentVO = new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, dep_nm, stuBir);
+			String stuBir = resultSet.getString("bir");
+			studentVO = new StudentVO(stuNo, stuNm, stuEm, stuPneNo, stuGrd, stuAcdSt, stu_dep, dep_nm, stuBir);
 		}
 		resultSet.close();
 		statement.close();
@@ -177,7 +181,7 @@ public class StudentDAO {
 		builder.append("          stu_grd = ?,     ");
 		builder.append("          stu_acd_st = ?,     ");
 		builder.append("          stu_dep = ?,     ");
-		builder.append("          stu_bir = ?     ");
+		builder.append("          stu_bir = substr(?,1,10)     ");
 		builder.append("  WHERE     ");
 		builder.append("      stu_no = ?     ");
 		String sql = builder.toString();
