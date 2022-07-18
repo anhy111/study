@@ -117,44 +117,44 @@ public class StudentPortalView {
 		return StudentMenu.HOME;
 	}
 	
-	public StudentMenu auditSignCancel (LectureController lectureController) {
+	public StudentMenu auditSignCancel (LectureController lectureController,RecordController recordController) {
 	      while(true) {
-	      System.out.println(StudentMenu.AUDIT_CANCEL.getMenuString());
-	      System.out.println("");
-	      System.out.println(LectureVO.audColumnLecture());
-	      List<LectureVO> list = lectureController.beforeDelete();
-	      for(LectureVO vo : list) {
-	         System.out.println(vo.audString());
+		      System.out.println(StudentMenu.AUDIT_CANCEL.getMenuString());
+		      System.out.println("");
+		      System.out.println(LectureVO.audColumnLecture());
+		      List<LectureVO> list = lectureController.beforeDelete();
+		      for(LectureVO vo : list) {
+		         System.out.println(vo.audString());
+		      }
+		      System.out.println("");
+		      System.out.print("수강 번호를 입력하세요>>");
+		      String audNo = ScannerUtil.nextLine();
+		      if(cancel(audNo)) {
+		         System.out.println("삭제를 취소합니다.");
+		         break;
+		      }
+		      LectureVO lectureVO = lectureController.audSelectOneSession(new LectureVO(audNo));
+		      System.out.println(lectureVO);
+		      System.out.print("위 수강을 삭제하시겠습니까?(y or n) >>");
+		      String yesOrNo = ScannerUtil.nextLine();
+		      if(yesOrNo.equalsIgnoreCase("y")) {
+		         int deleteAudSign = lectureController.audDelete(lectureVO);
+		         if(deleteAudSign ==1) {
+		        	 int deleteRecord = recordController.deleteRecord(lectureVO.getLecNo());
+		        	 if(deleteRecord == 1) {
+		        		 System.out.println("수강신청이 취소되었습니다.");
+		        		 break;
+		        	 } else {
+		        		 System.out.println("알 수 없는 오류입니다. 수강신청 후 다시 취소해주세요.");
+		        	 }
+		         } else {
+		         		System.out.println("삭제를 취소합니다.");
+		         		System.out.println();
+		         		break;
+		         }
+		      }
 	      }
-	      System.out.println("");
-	      System.out.print("수강 번호를 입력하세요>>");
-	      String audNo = ScannerUtil.nextLine();
-	      if(cancel(audNo)) {
-	         System.out.println("삭제를 취소합니다.");
-	         break;
-	      }
-	      LectureVO lectureVO = lectureController.audSelectOneSession(new LectureVO(audNo));
-	      System.out.println(lectureVO);
-	      System.out.print("위 학생을 삭제하시겠습니까?(y or n) >>");
-	      String yesOrNo = ScannerUtil.nextLine();
-	      if(yesOrNo.equalsIgnoreCase("y")) {
-	         int deleteAudSign = lectureController.audDelete(lectureVO);
-	         if(deleteAudSign ==1) {
-	            System.out.println("수강신청이 취소되었습니다.");
-	            break;
-	         } else {
-	            System.out.println("유효하지 않은 입력입니다.");
-	            System.out.println("입력한 정보를 확인해주세요.");
-	         }
-	      } else {
-	         System.out.println("삭제를 취소합니다.");
-	         System.out.println();
-	         break;
-	      }
-	   }
-	      
 	      return StudentMenu.HOME;
-	      
 	   }
 
 
@@ -332,7 +332,7 @@ public class StudentPortalView {
 			StudentVO updateVO = new StudentVO(stuNo,  afterUpdate.get(0), afterUpdate.get(1), afterUpdate.get(2),
 							afterUpdate.get(3), afterUpdate.get(4), afterUpdate.get(5),afterUpdate.get(6));
 			System.out.println(StudentVO.columnString());
-			System.out.println(updateVO);
+			System.out.println(updateVO.updateToString());
 			System.out.print("정보를 변경하시겠습니까? (y or n) >>");
 			String yesOrNo = ScannerUtil.nextLine();
 			if(yesOrNo.equalsIgnoreCase("y")) {

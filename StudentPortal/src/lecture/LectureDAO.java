@@ -63,7 +63,7 @@ public class LectureDAO {
 			String lecDep = resultSet.getString("lec_dep");
 			String lecTm = resultSet.getString("lec_tm");
 			String lecWk = resultSet.getString("lec_wk");
-			list.add(new LectureVO(lecNo, yr, sem, depNm,lecDep,subNm, lecSub, lecTm, lecWk));
+			list.add(new LectureVO(lecNo, yr, sem,subNm, lecSub, depNm, lecDep, lecTm, lecWk));
 		}
 		resultSet.close();
 		statement.close();
@@ -102,17 +102,17 @@ public class LectureDAO {
 			String lecNo = resultSet.getString("lec_no");
 			String yr = resultSet.getString("yr");
 			String sem = resultSet.getString("sem");
+			String subNm = resultSet.getString("sub_nm");
 			String lecSub = resultSet.getString("sub_nm");
 			String depNm = resultSet.getString("dep_nm");
 			String lecDep = resultSet.getString("lec_dep");
 			String lecTm = resultSet.getString("lec_tm");
 			String lecWk = resultSet.getString("lec_wk");
-			result = new LectureVO(lecNo, yr, sem, lecDep, depNm, lecSub, lecTm, lecWk);
+			result = new LectureVO(lecNo, yr, sem,subNm, lecSub, depNm, lecDep, lecTm, lecWk);
 		}
 		resultSet.close();
 		statement.close();
 		connection.close();
-		
 		return result;
 	}
 	

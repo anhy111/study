@@ -225,10 +225,28 @@ public class RecordDAO {
 		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
 		StringBuilder builder = new StringBuilder();
 		builder.append("INSERT INTO rc (");
-		builder.append("    aud_no,");
+		builder.append("    aud_no");
 		builder.append(") VALUES (");
 		builder.append("    ?,");
 		builder.append(")");
+
+		String sql = builder.toString();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, audNo);
+		
+		int executeUpdate = statement.executeUpdate();
+		statement.close();
+		connection.close();
+		
+		return executeUpdate;
+	}
+	
+	public int deleteRecord(String audNo) throws Exception {
+		DriverManager.registerDriver(new OracleDriver());
+		Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.142.15:1521:xe", "StudentPortal", "java");
+		StringBuilder builder = new StringBuilder();
+		builder.append("   DELETE FROM rc WHERE  ");
+		builder.append("       aud_no = ?  ");
 
 		String sql = builder.toString();
 		PreparedStatement statement = connection.prepareStatement(sql);

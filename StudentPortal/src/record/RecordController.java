@@ -36,4 +36,8 @@ public class RecordController {
 		return recordService.rcStudentSelect(session);
 	
 }
+
+	public int deleteRecord(String audNo) {
+		return recordService.deleteRecord(audNo);
+	}
 }

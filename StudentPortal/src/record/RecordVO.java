@@ -23,10 +23,10 @@ public class RecordVO {
 	}
 	
 	public RecordVO(String lecNo, String subNm, String cre, String proNm) {
-		this.lecNo = audNo;
-		this.subNm = sc;
-		this.cre = mk;
-		this.proNm = rk;
+		this.lecNo = lecNo;
+		this.subNm = subNm;
+		this.cre = cre;
+		this.proNm = proNm;
 	}
 	
 	public RecordVO(String stuNm, String audNo, String sc, String mk, String rk) {

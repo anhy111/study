@@ -60,7 +60,7 @@ public class Main {
 											stdMenu = view.auditSign(lectureController,recordController);
 											break;
 										case AUDIT_CANCEL:
-			                                 stdMenu = view.auditSignCancel(lectureController);
+			                                 stdMenu = view.auditSignCancel(lectureController, recordController);
 			                                 break;
 										case ALL_RECORD:
 											stdMenu = view.allRecord(recordController);

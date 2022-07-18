@@ -56,4 +56,12 @@ public class RecordService {
 		}
 	}
 
+	public int deleteRecord(String audNo) {
+		try {
+			return recordDAO.deleteRecord(audNo);
+		} catch(Exception e) {
+			return 0;
+		}
+	}
+
 }

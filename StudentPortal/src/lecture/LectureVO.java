@@ -46,6 +46,8 @@ public class LectureVO {
 		this.lecWk = lecWk;
 	}
 	
+	
+	
 	public LectureVO(String lecNo, String yr, String sem, String lecSub, String depNm,String lecDep, String lecTm, String lecWk) {
 		this.lecNo = lecNo;
 		this.lecSub = lecSub;
@@ -208,9 +210,8 @@ public class LectureVO {
 		return String.format("%-5s\t%-10s\t%-10s\t%-5s\t%-3s\t%-3s\t%-3s\t%-5s\t", lecNo, subNm, depNm, yr, sem, lecTm, lecWk, countAdu);
 	}
 	
-	
 	public String listToString() {
-		return String.format("%-5s\t%-20s\t%-20s\t%-4s\t%-4s\t%-5s\t%-5s\t", lecNo, depNm, lecDep, yr, sem, lecTm, lecWk);
+		return String.format("%-5s\t%-20s\t%-20s\t%-4s\t%-4s\t%-5s\t%-5s\t", lecNo, depNm, subNm, yr, sem, lecTm, lecWk);
 	}
 	
 	public String updateToString() {
