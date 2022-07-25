@@ -1,4 +1,11 @@
-/record/
-/main/
-/student/
+/.metadata/
+/Professor/
+/common/
+/department/
 /lecture/
+/main/
+/record/
+/room/
+/sign/
+/student/
+/subject/

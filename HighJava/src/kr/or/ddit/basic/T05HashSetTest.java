@@ -93,5 +93,15 @@ public class T05HashSetTest {
 	   for(Integer num : intRndList) {
 		   System.out.print(num + " ");
 	   }
+	   
+	   for(int i=0; i< 1000; i++) {
+		   int num = (int) (Math.random() * 100 + 1);
+		   intRndList.add(num);
+	   }
+	   Set<Integer> set = new HashSet<Integer>(intRndList);
+	   Iterator<Integer> iterator = set.iterator();
+	   while(iterator.hasNext()) {
+		   System.out.print(iterator.next() + " ");
+	   }
    }
 }

@@ -1,4 +1,4 @@
-package test;
+package kr.or.ddit.basic.exercise;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class StudentExercise {
 		list.add(new Student(220009,"안똥이",10,10,10));
 		list.add(new Student(220007,"돼똥이",0,0,100));
 		
-		Collections.sort(list);
+		StudentCompare.rank(list);
 		for(Student s : list) {
 			System.out.println(s);
 		}
