@@ -1,4 +1,4 @@
-package kr.or.ddit.basic;
+package collectionframwork;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

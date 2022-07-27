@@ -1,4 +1,4 @@
-package kr.or.ddit.basic;
+package collectionframwork;
 
 public class T07EqualsHashcodeTest {
 

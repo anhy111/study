@@ -1,4 +1,4 @@
-package kr.or.ddit.basic;
+package collectionframwork;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

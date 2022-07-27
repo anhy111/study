@@ -1,4 +1,4 @@
-package kr.or.ddit.basic.exercise;
+package collectionframwork.exercise;
 
 import java.util.ArrayList;
 import java.util.Collections;
