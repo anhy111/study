@@ -35,6 +35,6 @@ enum Planet{
 	}
 
 	public static double getArea(Planet planet) {
-		return Math.PI * planet.radius * planet.radius;
+		return 4*Math.PI * planet.radius * planet.radius;
 	}
 }
