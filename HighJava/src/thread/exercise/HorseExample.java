@@ -22,6 +22,11 @@ public class HorseExample {
 		}
 		
 		for(int i=1; i<=maxSection; i++) {
+			
+			if(rank > list.size()) {		// 모든말의 순위가 매겨지면 경기 종료
+				break;
+			}
+			
 			System.out.println("------------------------- " + i + "/50구간 -------------------------\n");
 			for(HorseRacing hr : list) {
 				if(hr.isFinish() && hr.getRank() == 0) {		
@@ -86,10 +91,6 @@ class HorseRacing extends Thread implements Comparable<HorseRacing>{
 
 	public int getLocation() {
 		return location;
-	}
-
-	public void setLocation(int location) {
-		this.location = location;
 	}
 
 	public Horse getHorse() {
