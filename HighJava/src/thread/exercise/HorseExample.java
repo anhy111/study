@@ -119,7 +119,7 @@ class HorseRacing extends Thread implements Comparable<HorseRacing>{
 	
 	@Override
 	public int compareTo(HorseRacing hr) {
-		return this.horse.compareTo(hr.getHorse());
+		return this.horse.compareTo(hr.horse);
 	}
 }
 
@@ -149,8 +149,8 @@ class Horse implements Comparable<Horse>{
 	}
 	
 	@Override
-	public int compareTo(Horse o) {
-		return new Integer(rank).compareTo(o.getRank());
+	public int compareTo(Horse hs) {
+		return new Integer(rank).compareTo(hs.rank);
 	}
 
 }
