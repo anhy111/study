@@ -83,8 +83,8 @@ class HorseRacing extends Thread implements Comparable<HorseRacing>{
 					return;
 				}
 				
-				// 100 ~ 300사이 랜덤 sleep
-				Thread.sleep((int)(Math.random()*(SLEEP)));
+				// 0 ~ 300사이 랜덤 sleep
+				Thread.sleep((int)(Math.random()*SLEEP));
 			} catch (InterruptedException e) {}
 		}
 	}

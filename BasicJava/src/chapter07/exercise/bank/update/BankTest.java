@@ -31,8 +31,8 @@ public class BankTest {
                 minBalanceCustomer = account;
             }
         }
-        System.out.printf("잔고가 가장 많은 사람\n\s",maxBalanceCustomer);
-        System.out.printf("잔고가 가장 적은 사람\n\s",minBalanceCustomer);
+        System.out.printf("잔고가 가장 많은 사람\n%s",maxBalanceCustomer);
+        System.out.printf("잔고가 가장 적은 사람\n%s",minBalanceCustomer);
         if (maxBalanceCustomer.getAccount().transfer(max / 2, minBalanceCustomer.getAccount())) {
             System.out.println(maxBalanceCustomer.getFirstName() + "가 " + minBalanceCustomer.getFirstName() + "에게 잔고의 반을 송금");
         } else {
