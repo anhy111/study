@@ -1,2 +1,0 @@
-module SP_mj {
-}
