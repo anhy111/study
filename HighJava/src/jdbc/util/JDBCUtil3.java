@@ -6,13 +6,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
-public class JDBCUtil {
+
+/**
+ * properties파일의 내용으로 DB정보를 설정하는 방법
+ * 방법2) ResourceBundle 객체 이용하기
+ * @author PC-18
+ *
+ */
+public class JDBCUtil3 {
+	
+	static ResourceBundle bundle;	// Properties 객체변수 선언
+	
+	
 	static {
+		
+		bundle = ResourceBundle.getBundle("db");
+		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-		} catch(ClassNotFoundException e) {	}
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName(bundle.getString("driver"));
+			System.out.println("드라이버 로딩 성공!");
+			
+		} catch(ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패!!");
+		}
+		
 	}
 	
 	/**
@@ -22,8 +43,9 @@ public class JDBCUtil {
 	public static Connection getConnetion() {
 		try {
 			return DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:xe",
-					"pc18", "java");
+					bundle.getString("url"),
+					bundle.getString("username"),
+					bundle.getString("password"));
 		} catch(SQLException e) {
 			System.out.println("DB 연결 실패!!");
 			e.printStackTrace();
