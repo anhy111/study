@@ -2,6 +2,7 @@ package mvc.member;
 
 import java.util.List;
 
+
 /**
  * Service 객체는 DAO에 설정된 메서드를 원하는 작업에 맞게 호출하여 결과를 받아오고
  * 받아온 데이터를 Controller에게 보내주는 역할을 수행한다. 
@@ -45,5 +46,11 @@ public interface IMemberService {
 	 */
 	public List<MemberVO> getAllMemberList();
 	
+	/**
+	 * 검색할 회원 정보를 담은 MemberVO객체를 이용하여 회원정보를 조회하는 메서드
+	 * @param mv 검색할 회원 정보를 담은 MemberVO객체
+	 * @return 검색된 회원정보를 담은 List객체
+	 */
+	public List<MemberVO> SearchMemberList(MemberVO mv);
 	
 }

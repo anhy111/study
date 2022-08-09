@@ -19,6 +19,9 @@ public class MemberVO {
 	private String memAddr;
 	private Date regDate;
 	
+	public MemberVO() {
+	}
+	
 	public MemberVO(String memId, String memName, String memTel, String memAddr) {
 		this.memId = memId;
 		this.memName = memName;

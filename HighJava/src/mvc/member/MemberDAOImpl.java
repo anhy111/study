@@ -10,6 +10,7 @@ import java.util.List;
 
 import mvc.util.JDBCUtil3;
 
+
 public class MemberDAOImpl implements IMemberDAO{
 	private Connection conn;
 	private Statement stmt;
@@ -188,5 +189,62 @@ public class MemberDAOImpl implements IMemberDAO{
 		return memList;
 	}
 	
-	
+	@Override
+	public List<MemberVO> SearchMemberList(MemberVO mv) {
+		
+		List<MemberVO> memList = new ArrayList<>();
+		try {
+			conn = JDBCUtil3.getConnetion();
+			StringBuilder builder = new StringBuilder();
+			builder.append("select * from mymember where 1=1");
+			
+			if(mv.getMemId() != null && !mv.getMemId().equals("")) {
+				builder.append(" and mem_id = ?");
+			}
+			if(mv.getMemName() != null && !mv.getMemName().equals("")) {
+				builder.append(" and mem_name = ?");
+			}
+			if(mv.getMemTel() != null && !mv.getMemTel().equals("")) {
+				builder.append(" and mem_tel = ?");
+			}
+			if(mv.getMemAddr() != null && !mv.getMemAddr().equals("")) {
+				builder.append(" and mem_addr like '%' || ? || '%' ");
+			}
+			
+			String sql = builder.toString();
+			pstmt = conn.prepareStatement(sql);
+			
+			int index = 1;
+			
+			if(mv.getMemId() != null && !mv.getMemId().equals("")) {
+				pstmt.setString(index++, mv.getMemId());
+			}
+			if(mv.getMemName() != null && !mv.getMemName().equals("")) {
+				pstmt.setString(index++, mv.getMemName());
+			}
+			if(mv.getMemTel() != null && !mv.getMemTel().equals("")) {
+				pstmt.setString(index++, mv.getMemTel());
+			}
+			if(mv.getMemAddr() != null && !mv.getMemAddr().equals("")) {
+				pstmt.setString(index++, mv.getMemAddr()); 
+			}
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberVO mv2 = new MemberVO();
+				mv2.setMemId(rs.getString("mem_id"));
+				mv2.setMemName(rs.getString("mem_name"));
+				mv2.setMemTel(rs.getString("mem_tel"));
+				mv2.setMemAddr(rs.getString("mem_addr"));
+				memList.add(mv2);
+			}
+			
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
+		}
+		return memList;
+	}
 }

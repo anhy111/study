@@ -2,6 +2,7 @@ package mvc.member;
 
 import java.util.List;
 
+
 /**
  * 실제 DB와 연결해서 SQL문을 수행하여 결과를 받아와 서비스에 전달하는 
  * DAO의 인터페이스
@@ -44,6 +45,13 @@ public interface IMemberDAO {
 	 * @return MemberVO객체를 담고 있는 List객체 
 	 */
 	public List<MemberVO> getAllMemberList();
+	
+	/**
+	 * 검색할 회원 정보를 담은 MemberVO객체를 이용하여  
+	 * @param mv
+	 * @return
+	 */
+	public List<MemberVO> SearchMemberList(MemberVO mv);
 	
 	
 }
