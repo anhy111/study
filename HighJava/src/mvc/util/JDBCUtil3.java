@@ -40,7 +40,7 @@ public class JDBCUtil3 {
 	 * 커넥션 객체 생성하기
 	 * @return
 	 */
-	public static Connection getConnetion() {
+	public static Connection getConnection() {
 		try {
 			return DriverManager.getConnection(
 					bundle.getString("url"),

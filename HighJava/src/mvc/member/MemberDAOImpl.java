@@ -23,7 +23,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		int result = 0;
 		
 		try {
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			
 			StringBuilder builder = new StringBuilder();
 			builder.append(" INSERT INTO mymember (");
@@ -62,7 +62,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		boolean chk = false;
 		
 		try {
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			
 			StringBuilder builder = new StringBuilder();
 			builder.append(" SELECT");
@@ -98,7 +98,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		int result = 0;
 		
 		try {
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			
 			StringBuilder builder = new StringBuilder();
 			builder.append(" UPDATE mymember");
@@ -134,7 +134,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		
 		try {
 			
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			
 			StringBuilder builder = new StringBuilder();
 			builder.append(" DELETE FROM mymember WHERE");
@@ -162,7 +162,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		List<MemberVO> memList = new ArrayList<MemberVO>();
 		
 		try {
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql = "select * from mymember";
 			
@@ -194,7 +194,7 @@ public class MemberDAOImpl implements IMemberDAO{
 		
 		List<MemberVO> memList = new ArrayList<>();
 		try {
-			conn = JDBCUtil3.getConnetion();
+			conn = JDBCUtil3.getConnection();
 			StringBuilder builder = new StringBuilder();
 			builder.append("select * from mymember where 1=1");
 			
