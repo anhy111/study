@@ -19,6 +19,7 @@ public class MyBatisTest {
 		
 		SqlSession sqlSession = null;
 		
+		
 		try {
 			
 			// 1-1. xml설정문서 읽어오기
