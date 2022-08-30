@@ -114,7 +114,7 @@ public class T05ServletCookieTest extends HttpServlet {
 				out.println("<hr>");
 			}
 		} else {
-			out.println("h2>쿠키정보가 없습니다.</h2>");
+			out.println("<h2>쿠키정보가 없습니다.</h2>");
 		}
 		out.println("</body>");
 		out.println("</html>");

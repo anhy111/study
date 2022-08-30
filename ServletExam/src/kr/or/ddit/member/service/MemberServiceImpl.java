@@ -4,7 +4,6 @@ import java.util.List;
 
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.member.dao.MemberDAOImpl;
-import kr.or.ddit.member.dao.MemberDAOImplForJDBC;
 import kr.or.ddit.member.vo.MemberVO;
 
 public class MemberServiceImpl implements IMemberService {
@@ -62,6 +61,11 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public List<MemberVO> SearchMemberList(MemberVO mv) {
 		return memDao.SearchMemberList(mv);
+	}
+	
+	@Override
+	public MemberVO getMember(String memId) {
+		return memDao.getMember(memId);
 	}
 	
 }
