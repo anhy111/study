@@ -20,7 +20,7 @@
 							(보통 VO클래스, 자바의 자료형이름 등이 사용된다.)
 	4) resultMap속성 : 결과 레코드 컬럼명과 VO객체의 property명이 다를 경우에 적절한
 						매핑을 위해 사용된다.
- -->	
+ -->
 <!-- insert 연습 -->
 	<insert id="insertMember" parameterType="kr.or.ddit.member.vo.MemberVO">
 		INSERT INTO mymember 
