@@ -4,7 +4,7 @@
 	
 	<insert id="insertAtchFile">
 		
-		<selectKey keyProperty="atchFileId" resultType="long">
+		<selectKey order="BEFORE" keyProperty="atchFileId" resultType="long">
 			select ATCH_FILE_SEQ.nextval from dual
 		</selectKey>
 		
@@ -29,7 +29,7 @@
 		)
 		values
 		(
-			,#{atchFileId}
+			#{atchFileId}
 			,(select nvl(max(file_sn),0) + 1
 			  from atch_file_detail
 			  where atch_file_id = #{atchFileId} )

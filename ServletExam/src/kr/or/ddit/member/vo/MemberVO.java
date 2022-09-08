@@ -18,7 +18,7 @@ public class MemberVO {
 	private String memTel;
 	private String memAddr;
 	private Date regDate;
-	
+	private long atchFileId = -1; 	// 첨부파일ID
 	public MemberVO() {
 	}
 	
@@ -61,6 +61,14 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return String.format("MemberVO [memId=%s, memName=%s, memTel=%s, memAddr=%s]", memId, memName, memTel, memAddr);
+	}
+
+	public long getAtchFileId() {
+		return atchFileId;
+	}
+
+	public void setAtchFileId(long atchFileId) {
+		this.atchFileId = atchFileId;
 	}
 	
 	

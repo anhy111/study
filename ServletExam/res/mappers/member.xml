@@ -24,8 +24,8 @@
 <!-- insert 연습 -->
 	<insert id="insertMember" parameterType="kr.or.ddit.member.vo.MemberVO">
 		INSERT INTO mymember 
-		(mem_id, mem_name, mem_tel, mem_addr, reg_dt)
-		 VALUES ( #{memId}, #{memName}, #{memTel}, #{memAddr}, sysdate)       
+		(mem_id, mem_name, mem_tel, mem_addr, reg_dt, atch_file_id)
+		 VALUES ( #{memId}, #{memName}, #{memTel}, #{memAddr}, sysdate, #{atchFileId})       
 	</insert>
 	
 	<update id="updateMember" parameterType="kr.or.ddit.member.vo.MemberVO">
@@ -33,6 +33,7 @@
     		SET mem_name = #{memName}
     		, mem_tel = #{memTel}
     		, mem_addr = #{memAddr}
+    		, atch_file_id = #{atchFileId}
 		WHERE             
     		mem_id = #{memId}    
 	</update>
@@ -48,6 +49,7 @@
 		<result property="memTel" column="mem_tel" />
 		<result property="memAddr" column="mem_addr" />
 		<result property="regDate" column="reg_dt" />
+		<result property="atchFileId" column="atch_file_id" />
 	</resultMap>
 	
 	<select id="memberAllList" resultMap="memMap">
