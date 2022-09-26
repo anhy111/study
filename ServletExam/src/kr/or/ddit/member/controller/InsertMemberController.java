@@ -78,6 +78,5 @@ public class InsertMemberController extends HttpServlet {
 		
 		resp.sendRedirect(redirectUrl);
 		
-		
 	}
 }
