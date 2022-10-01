@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>study</name>
+	<name>LambdaTest</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
-		<buileCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
-		</buildSpec>
+		</buildCommand>
+	</buildSpec>
 	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 </projectDescription>
